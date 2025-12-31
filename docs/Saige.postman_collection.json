@@ -182,6 +182,47 @@
 			"response": []
 		},
 		{
+			"name": "Convert files",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/convertfiles?from=PDF&to=PNG",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"convertfiles"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "PDF"
+						},
+						{
+							"key": "to",
+							"value": "PNG"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Add company",
 			"request": {
 				"method": "POST",
@@ -448,7 +489,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:8443/getcompany?companyid=cf1f14f9657e4ee6a94095163a1e23f4&sessionid=1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false",
+					"raw": "https://localhost:8443/getcompany?companyid=plume-company&sessionid=1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -460,7 +501,7 @@
 					"query": [
 						{
 							"key": "companyid",
-							"value": "cf1f14f9657e4ee6a94095163a1e23f4"
+							"value": "plume-company"
 						},
 						{
 							"key": "sessionid",
@@ -925,7 +966,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:8443/createonesheets?companyid=plume-company&userid=U-LisaId&sessionid=cfecefe1658839deb86af50090b48a260e09d0070270b089-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0&userid=U-TomId",
+					"raw": "https://localhost:8443/createonesheets?companyid=plume-company&userid=92f697988c32494dbf35bf79f62b369c&sessionid=1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false&userid=e159dcc3c50942a0a6d659928ec30d82",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -941,15 +982,15 @@
 						},
 						{
 							"key": "userid",
-							"value": "U-LisaId"
+							"value": "92f697988c32494dbf35bf79f62b369c"
 						},
 						{
 							"key": "sessionid",
-							"value": "cfecefe1658839deb86af50090b48a260e09d0070270b089-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0"
+							"value": "1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false"
 						},
 						{
 							"key": "userid",
-							"value": "U-TomId"
+							"value": "e159dcc3c50942a0a6d659928ec30d82"
 						}
 					]
 				}
