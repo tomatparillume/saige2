@@ -1,0 +1,29 @@
+<!-- Team Insights page: Team-member checkboxes to filter insights by team members -->
+<div>
+    <div id="teamMembersInsightsSelection" class="w3-show">
+
+        {{teamMembersInsightsSelection}} 
+
+        <span class="grid-centered fontsize-90" style="color:grey;margin-bottom:10px;margin-left:10px;">    
+            <table style="text-align:left;width:100%;"><tr/>                                            
+                <td style="vertical-align:middle;">
+                    <i class="fa fa-download fa-lg" aria-hidden="true"></i>&nbsp;<strong>DOWNLOAD</strong> 
+                     <a href="javascript:onclick=generateOneSheets('onesheetsbtn');" 
+                       class="link-unemphasized">
+                    one-sheets</a> or 
+                    <a href="javascript:onclick=generateTeamChart('teamchartsbtn');" 
+                       class="link-unemphasized">
+                    team chart</a> for selected team members
+                </td>  
+            </tr></table>
+        </span>    
+
+        <hr/> 
+<!--
+        <span class="teamspan fontsize-115" style="width:100%;margin-top:20px;margin-left:30px;color:#722b90;">
+            <a href="javascript:submitInsightsQuery(true);"><strong>View insights</strong></a>&nbsp;
+            <span class="fontsize-80" style="color:black">about selected team members.</span>
+        </span><p/>                        -->
+
+    </div>  
+</div>

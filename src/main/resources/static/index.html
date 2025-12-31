@@ -1,0 +1,2120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" /> 
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100">        
+        <link rel="stylesheet" 
+              href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/6.2.5/css/tabulator.min.css" 
+              integrity="sha512-RYFH4FFdhD/FdA+OVEbFVqd5ifR+Dnx2M7eWcmkcMexlIoxNgm89ieeVyHYb8xChuYBtbrasMTlo02cLnidjtQ==" 
+              crossorigin="anonymous" 
+              referrerpolicy="no-referrer" />        
+        
+        <!-- For downloading insights table as image -->
+        <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+        <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+                        
+        <!-- For downloading insights table as PDF -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="/webjars/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" 
+                src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/6.2.5/js/tabulator.min.js" 
+                integrity="sha512-orG5sHJgUiyGjeUBBK56+piLmrCEP7r5Tz9efhJ/C7F1Hdi8O33gQxqZThRb/PSAg9T5seRewR2pw5lTaZPTMQ==" 
+                crossorigin="anonymous" 
+                referrerpolicy="no-referrer">                    
+        </script>       
+        
+        <script src="js/globalvariables.js"></script>
+        <script src="js/controller.js?v=2"></script>            
+        <script src="js/util.js?v=2"></script>         
+        <script src="js/assessmentfilters.js"></script>  
+        <script src="js/companyparser.js"></script>  
+        <script src="js/insightstable.js"></script>  
+        <script src="js/myprofileassessmentoptions.js"></script>  
+        <script src="js/sessioncache.js"></script>
+       
+        <!-- Display functions -->
+        <script type="text/javascript">            
+            function fadeInBody(ms) {
+                $('body').css('display', 'none');
+                $('body').fadeIn(ms);     
+            }
+            function fadeInSection(id, ms) {
+                $("#"+id).css('display', 'none');
+                $("#"+id).fadeIn(ms);     
+            }  
+            /**
+             * Team Insights page: When filtering by assessment insights, this
+             * method determines the selection status ("All|Some|None selected") 
+             * that appears under each assessment-type button.
+             */
+            function displayAssessmentSelectionStatus() {
+                
+                var assessmentButtons = $('.assessments-btn');
+ 
+                var index = 0;
+                assessmentButtons.each( function() {
+                    var assessmentClass = (++index) + '_class';
+                    
+                    var checkedCount = 0;
+                    var assessmentCheckboxes = $('.' + assessmentClass);
+                    assessmentCheckboxes.each( function() {
+                        var isChecked = $(this).is(':checked');
+                        if(isChecked)
+                            checkedCount++;
+                    });
+                    
+                    var checkedStatus = 'None';
+                    if(checkedCount === assessmentCheckboxes.length)
+                        checkedStatus = 'All';
+                    else if(checkedCount > 0)
+                        checkedStatus = 'Some';
+                                
+                    // The accordionBtnId is also the class of the button's selectionStatus display
+                    var selectionStatusClass = this.id;
+                    $("." + selectionStatusClass).html(checkedStatus + ' selected');
+                });              
+            }  
+            /**
+             * Controls the login-status message in the upper-right corner of
+             * each page: "You are logged in as...", etc.
+             */
+            function updateLoginStatus() {
+                var isProxyLogin = getCachedProxyingAdminLoginDTO() !== '';
+                var statusHTML = "You are " + (isProxyLogin ? "<strong>proxied</strong>" : "logged") + 
+                                 " in as <br/>" + 
+                                 ( isAdmin() ? 
+                                   getCachedLoggedInCompanyName() :
+                                   getCachedUsername() );
+                if(isProxyLogin) {
+                    statusHTML += "<br/><a href='javascript:unproxyLogin();'>Log out of proxied user</a>";
+                }
+                $(".login-status").html(statusHTML);                
+            }            
+        </script>
+        
+        <!-- Initialization -->
+        <script type="text/javascript">      
+            function initForms() {
+                var loginForm = document.getElementById('loginform');
+                loginForm.addEventListener('submit', (event) => {
+                    event.preventDefault(); // Prevent default form submission
+
+                    if( !$('#username').val() ||
+                        !$('#password').val() ) {
+                        alert('Please enter username and password.');
+                        return false;
+                    }
+                            
+                    if(!getCachedMaxMultisheetsCount() || !getCachedTeamchartsCount()) {
+                        _callEndpoint('GET', 'getmaxsheetcounts',
+                                      processMaxSheetCounts); 
+                    }
+                                 
+                    _callEndpoint('POST', 'login', processLogin, 
+                                  '{"username": "' + $('#username').val() + '", ' +
+                                  ' "password": "' + $('#password').val() + '"}'
+                                 );                      
+                });
+            }            
+            function alertAndInitialize(alertMsgJSON) {
+                if(alertMsgJSON) 
+                    alert( $.parseJSON(alertMsgJSON).message );
+                
+                initialize();
+            }
+            function initialize() {  
+                fadeInBody(750);    
+
+                if(isLoggingOut())
+                    clearLoggingOut();
+                
+                var sessionId = getCachedSessionId();
+                if(sessionId) {                                      
+                    initializeLoggedIn();
+                    
+                } else { ////// NO SESSION ID       
+                    $("#insightstable").hide();
+                    
+                    $('#username').val(''); // Clear the loginform values...
+                    $('#password').val('');
+                    
+                    cacheDestinationPageId('logindiv');                     
+//                    window.removeEventListener('beforeunload', _onloadListener, false); 
+                }
+                
+                loadDestinationPage();               
+            }
+            function initializeLoggedIn() {
+                var sessionId = getCachedSessionId();
+                
+                $('#adminactionsdiv').hide();
+                $('#parillume-company-buttons').hide();
+                
+                // Currently, ONLY the 'plume-company' Admin can log in as Admin;
+                // eventually we may allow other companies to log in as Admin.
+                if(isAdmin()) {
+                    $('#adminactionsdiv').show();
+                    
+                    // The 'if' statement is currently redundant, since ONLY
+                    // 'plume-company' can currently log in as Admin.
+                    if('plume-company' === getCachedLoggedInCompanyId())
+                        $('#parillume-company-buttons').show();
+                    
+                    var managedCompanyReferences = getCachedManagedCompanyReferences();
+                    if(managedCompanyReferences.size > 0) {   
+                        var html = "<ul>";
+                        for(var[companyId,companyUsernameAndName] of managedCompanyReferences) {
+                            var [[companyUsername, companyName]] = Object.entries(companyUsernameAndName);
+                            
+                            var checked = (companyId === getCachedManagedCompanyId()) ? 'checked' : '';
+                            html += "<input type='radio' name='managedCompanyId' id='managedCompanyId' " +
+                                       "data-companyusername='"+companyUsername+"' " +
+                                       "data-companyname='"+companyName+"' " +
+                                       "onchange='loadCompany()' " +
+                                       "value='" + companyId + "' " + checked + ">&nbsp;" +
+                                       companyName + "&nbsp;&nbsp;&nbsp;";                                
+                        }                         
+                        html += "</ul>";                    
+                        $('#managecompanyselectiondiv').html( html );
+                    }
+                }   
+
+                if(!hasCachedCompanyData()) {
+                    var managedCompanyIdParam = getCachedManagedCompanyId() ?
+                                                '&managedcompanyid=' + getCachedManagedCompanyId() :
+                                                '';
+                    _callEndpoint('GET', 'getcompanydto?' +
+                                        'sessionid=' + sessionId + 
+                                        // May be empty; may be the company associated with the session; may be a different company:
+                                        managedCompanyIdParam, 
+                                   populateCompanyData);  
+                }
+
+                if(!getCachedAssessmentFiltersDisplay()) {
+                    // A full model of assessments, categories, subcategories...
+                    _callEndpoint('GET', 'getassessments?' +
+                                        'sessionid=' + sessionId +
+                                        '&corpusversion=1.0',
+                                   cacheAssessmentFilters); 
+                }
+
+                // A simple list of assessment results (e.g. INTJ, 3)
+                // grouped by assessment type (e.g. Myers-Briggs, Enneagram)
+                if(!hasCachedMyProfileDisplay()) {
+                    _callEndpoint('GET', 'getassessmentresults?' +
+                                        'sessionid=' + sessionId +
+                                        '&corpusversion=1.0',
+                                   cacheMyProfileAssessmentOptions); 
+                }
+
+                if(!getCachedGlossaryDisplay()) {
+                    _callEndpoint('GET', 'getmodelglossary?' +
+                                         'companyid=' + getCachedManagedCompanyId() +
+                                         '&sessionid=' + sessionId,
+                                  populateModelGlossary); 
+                }
+                
+                if(!getCachedNewUserTemplate()) {
+                    _callEndpoint('GET', 'getnewusertemplate', populateNewUserTemplate); 
+                }
+
+                writeUserFormFields();          
+                writeTeamInsightsFilterDiv();
+        
+                $('#assessments_filterdiv').html(getCachedAssessmentFiltersDisplay());  
+                
+                $('#userprofilelinksdiv').html(getCachedUserProfileLinks());
+                $('#deleteuserslist').html(getCachedUserDeletionLinks());                  
+                $('#myprofile_assessmentspan').html(getCachedAssmtMyProfileSelectionDisplay());
+                $('#myprofile_supspan').html(getCachedSupMyProfileSelectionDisplay());
+                $('#myprofile_krypspan').html(getCachedKrypMyProfileSelectionDisplay());   
+                $('#myprofile_teamspan').html(getCachedTeamMembershipMyProfileDisplay());   
+                $('#myprofile_chattargetsspan').html(getTeamChatTargetsDiv());
+                // Kinda dumb - superceded by editing of company JSON 
+                //$("#updatecompanyteamsselection").html(getCachedCompanyTeamsSelection()); 
+                
+                $(".modelglossary").html(getCachedGlossaryDisplay());  
+                $('#insightsSuffix').text(_teamResultsSuffix);              
+
+                // Team Insights page - filtering by assessment results:
+                // Clicking any assessment checkbox updates the assessment selection status:
+                var assessmentCheckboxes = document.getElementsByClassName("assessment-checkbox");
+                for (var i=0; i<assessmentCheckboxes.length; i++) {
+                    assessmentCheckboxes[i].addEventListener("click", function(){ 
+                        displayAssessmentSelectionStatus(); 
+                    });
+                }            
+                
+                clearInsightsTable();
+
+                // On page reload, we need to reload the company logo:
+                clearCachedLogoCompanyId();
+                loadCompanyLogo();
+
+                // Display initial selection status ('All selected') for insights-table assessment buttons
+                displayAssessmentSelectionStatus(); 
+                
+                toggleAdminEditingDisplay();
+
+                // We show the 'by team members' insights display by default
+                toggleInsightsDisplay(true);
+
+                initializeMyProfileSupKrypFromCheckboxes('MB-assessment');
+                initializeMyProfileSupKrypFromCheckboxes('EN-assessment');
+                initializeMyProfileSupKrypFromNumberDropdowns(); 
+            } 
+            
+            function initializeMyProfileSupKrypFromCheckboxes(assessmentTypeId) {
+                var assessmentCheckboxes = $(".myprofile_assessmentcheckbox_" + assessmentTypeId);
+                $.each(assessmentCheckboxes, function(index,checkbox) {
+                    var checkboxId = checkbox.id;
+                    
+                    var thisSuperpowersDiv = $("#sup-div-" + checkboxId);
+                    thisSuperpowersDiv.removeClass("w3-show").addClass("w3-hide"); 
+
+                    var thisKryptoniteDiv = $("#kryp-div-" + checkboxId);
+                    thisKryptoniteDiv.removeClass("w3-show").addClass("w3-hide");     
+                    
+                    if(checkbox.checked) {
+                        thisSuperpowersDiv.removeClass("w3-hide").addClass("w3-show");
+                        thisKryptoniteDiv.removeClass("w3-hide").addClass("w3-show");                         
+                    }                    
+                });
+            }            
+            function initializeMyProfileSupKrypFromNumberDropdowns() {
+                var csNumberedSelections = $(".csnumberedinput_myprofile");
+                $.each(csNumberedSelections, function(index,selection) {
+                    var dropdownId = selection.id; 
+                    
+                    var thisSuperpowersDiv = $("#sup-div-" + dropdownId);
+                    thisSuperpowersDiv.removeClass("w3-show").addClass("w3-hide"); 
+
+                    var thisKryptoniteDiv = $("#kryp-div-" + dropdownId);
+                    thisKryptoniteDiv.removeClass("w3-show").addClass("w3-hide");  
+                    
+                    var selectedVal = $("#"+dropdownId).val();
+                    if(selectedVal) {
+                        thisSuperpowersDiv.removeClass("w3-hide").addClass("w3-show");
+                        thisKryptoniteDiv.removeClass("w3-hide").addClass("w3-show");   
+                    }
+                });
+            }            
+        </script>
+        
+        <!-- Endpoint functions -->
+        <script type="text/javascript"> 
+            function handleEndpointError(error) {
+                alert(error);
+                // Because an error occurred, we don't want to continue to the
+                // intended destination page; we replace that intended destination
+                // with our current page so we stay on this current page:
+                cacheDestinationPageId(getCachedCurrentPageId());
+                
+                validateSession();
+                initialize();
+            }
+            
+            function logOut() {
+                $('#username').val("");
+                $('#password').val("");
+
+                cacheSessionId('');
+                cacheManagedCompanyId('');
+                cacheLoggedInCompanyName('');
+                cacheLoggedInCompanyId('');
+                
+                cacheClickedAdminEditLink('');
+                cacheLoggedInUserId('');
+                cacheManagedCompanyReferences('');
+                
+                cacheDestinationPageId('logindiv');
+                cacheLoggingOut();
+                
+                clearCachedProxyingAdminLoginDTO();
+                clearCachedLoggedInUserJSON();
+                clearCachedCompanyData();
+                clearCachedCompanyJSON();
+                clearInsightsTable();
+                clearCachedMyProfileDisplay();
+                clearCachedGlossaryDisplay();
+                clearCachedLogoCompanyId();
+                
+                _callEndpoint('GET', 'logout?' +
+                                     'sessionid=' + getCachedSessionId(),
+                             initialize);                               
+            }                
+            function updateCompanyCredentials() {
+                var username = $("#newcompanyemail").val();
+                if(!username) {
+                    alert('Please enter acompany email address (username)');
+                    return;
+                }
+                
+                var newPassword1 = $("#newcompanypassword1").val();
+                var newPassword2 = $("#newcompanypassword2").val();
+                
+                var passwordError = verifyNewPassword(newPassword1, newPassword2);
+                if(passwordError) {
+                    alert(passwordError);
+                    return;
+                }
+                
+                _callEndpoint('POST', 'changecompanycredentials?' +
+                                      '&companyid=' + getCachedManagedCompanyId() +
+                                      '&corpusversion=1.0' +
+                                      '&sessionid=' + getCachedSessionId(),
+                              updateCompanyCredentials_success, 
+                              '{"username": "' + username + '", ' +
+                              ' "password": "' + newPassword1 + '"}'); 
+            }
+            function updateCompanyCredentials_success(sessionIdJSON) {                              
+                alert('This company\'s credentials have been updated');
+                var sessionJSON = $.parseJSON(sessionIdJSON).message;
+                if(sessionJSON) {
+                    clearCachedCompanyData();
+                    processNewSession(sessionJSON);  
+                    initialize();      
+                }
+            }
+            function submitInsightsQuery(filterByTeamMembers) {  
+                var formId = getInsightsFormId(filterByTeamMembers);
+                var insightsFormQueryArray = $('#'+formId).serializeArray();
+                var insightsFormQueryStr = JSON.stringify(insightsFormQueryArray); 
+           
+                var selectionAlert = '';
+
+                var selectedColumns = [];
+                $($('#'+formId+' :not(:disabled).column')).each(function() {      
+                    var columnValue = $(this).val();
+                    selectedColumns.push(columnValue);
+                });
+                if(selectedColumns.length == 0) {
+                    selectionAlert += 'Please select at least one column to display.\n';
+                }
+
+                if(selectionAlert) {
+                    alert(selectionAlert);
+                    revertProcessingButton();
+                    return false;
+                }
+
+                var filteredUsersArray = filterInsights($.parseJSON(getCachedCompanyJSON()), insightsFormQueryArray);
+                populateInsightsTable(filteredUsersArray);            
+            }
+            function submitMyProfile() {
+                var errors = [];
+                
+                var csNumberedSelections = $(".csnumberedinput_myprofile");
+                var csOrderTotal = Number(0);
+                $.each(csNumberedSelections, function(index,selection) {
+                    if(selection.value)
+                        csOrderTotal += Number(selection.value);
+                });
+                if(csOrderTotal != 15) {
+                    errors.push('Please select your top 5 CliftonStrengths® scores');
+                }
+                
+                var mbTotal = Number(0);
+                var mbCheckboxes = $(".myprofile_assessmentcheckbox_MB-assessment");
+                $.each(mbCheckboxes, function(index,checkbox) {
+                    if(checkbox.checked)
+                        mbTotal += Number(1);
+                });
+              
+                var enTotal = Number(0);
+                var enCheckboxes = $(".myprofile_assessmentcheckbox_EN-assessment");
+                $.each(enCheckboxes, function(index,checkbox) {
+                    if(checkbox.checked)
+                        enTotal += Number(1);
+                });
+                if(mbTotal != 1 || enTotal != 1) {
+                    errors.push('Please select one Myers-Briggs® and one Enneagram score');
+                }
+     
+                var firstName = $("#firstname").val();
+                var lastName = $("#lastname").val();
+                var email = $("#email").val();
+                if(!firstName || !firstName.trim() ||
+                   !lastName || !lastName.trim() ||
+                   !email || !email.trim()) {
+                    errors.push('Please enter first name, last name, and email address');
+                }
+                
+                var passwordError = verifyNewPassword( $("#newpassword1").val(), $("#newpassword2").val() );
+                if(passwordError)
+                    errors.push(passwordError);
+                
+                var checkedSuperpowers = 0;
+                $.each($(".supcheckbox"), function(index,supCheckbox) {
+                    if(supCheckbox.checked)
+                        checkedSuperpowers++;
+                });       
+                
+                var checkedKryptonite = 0;
+                $.each($(".krypcheckbox"), function(index,krypCheckbox) {
+                    if(krypCheckbox.checked)
+                        checkedKryptonite++;
+                });
+
+//                if( checkedSuperpowers < 1 || checkedKryptonite < 1 ) {
+//                    errors.push('Select at least 1 superpower and 1 kryptonite');
+//                }                    
+                
+                if(errors.length > 0) {
+                    alert(errors.join('\n'));
+                    return false;
+                }
+                
+                // A user's data may have changed:
+                clearCachedCompanyData();
+                clearCachedGlossaryDisplay();
+                
+                var jsonStr = JSON.stringify($('#myprofileform').serializeArray());               
+                _callEndpoint('POST', 'updateself?' +
+                                      'companyid=' + getCachedManagedCompanyId() +
+                                      '&corpusversion=1.0' +
+                                      '&sessionid=' + getCachedSessionId(),
+                              submitMyProfile_success, jsonStr); 
+                              
+                // Altering one's profile potentially alters the contents of
+                // the insights table; clear that table here so we don't display
+                // obsolete insights:
+                clearInsightsTable();
+            }
+            function submitMyProfile_success(json) {                 
+                alert('Your profile has been updated');  
+                
+                var messageJSON = $.parseJSON(json).message;
+                processNewSession( messageJSON.sessionDTO );
+                populateMyProfileUI( messageJSON.user );
+            }
+            function verifyNewPassword(newPassword1, newPassword2) {
+                if(newPassword1)
+                    newPassword1 = newPassword1.trim();
+                if(newPassword2)
+                    newPassword2 = newPassword2.trim();
+                return ( newPassword1 !== newPassword2) ?
+                        'Passwords in both fields must match' :
+                        '';
+            }
+
+            function adminUpdateCompany() {
+                var companyJSONStr = $("#adminupdatecompanytextarea").val();
+                if(!companyJSONStr) {
+                    alert('Please provide a company definition');
+                    return;
+                }   
+                
+                var companyJSON;
+                try {
+                    companyJSON = $.parseJSON(companyJSONStr);
+                } catch(error) {
+                    alert('The data submitted is invalid\n' + error);
+                    return;
+                }            
+                
+                clearCachedCompanyData();
+                clearCachedGlossaryDisplay();
+                clearInsightsTable();                
+                
+                _callEndpoint('POST', 'updatecompany?' +
+                                      '&corpusversion=1.0' +
+                                      '&sessionid=' + getCachedSessionId(),
+                              initialize, companyJSONStr);                
+                alert('Company updated')
+            }   
+            
+            function adminSubmitUser() {
+                var userJSONStr = $("#adminupsertusertextarea").val();
+                if(!userJSONStr) {
+                    alert('Please provide a team member definition');
+                    return;
+                }   
+
+                var userJSON;
+                try {
+                    userJSON = $.parseJSON(userJSONStr);
+                } catch(error) {
+                    alert('The data submitted is invalid\n' + error);
+                    return;
+                }
+                var hasId = userJSON.id && userJSON.id.trim();
+                if(getCachedClickedAdminEditLink() == 'admineditlink-newuser') {
+                    if(hasId) {                    
+                        alert('Please remove the "id" from the new team member\'s data');
+                        return;
+                    }
+                } else if(!hasId) {                 
+                    alert('Please include the existing team member\'s "id" in the data');
+                    return;
+                }
+                
+                // A user's data may have changed:
+                clearCachedCompanyData();
+                clearCachedGlossaryDisplay();
+                clearInsightsTable();                
+                
+                _callEndpoint('POST', 'upsertusers?' +
+                                     'companyid=' + getCachedManagedCompanyId() +
+                                     '&corpusversion=1.0' +
+                                     '&sessionid=' + getCachedSessionId(),
+                              alertAndInitialize, '['+userJSONStr+']');
+            }
+            function uploadLogo() {
+                _uploadFile("logoupload", 
+                            "upsertimage?" +
+                                "companyid=" + getCachedManagedCompanyId() +
+                                "&imagetype=LOGO" +
+                                "&sessionid=" + getCachedSessionId(),        
+                            alertAndInitialize);                  
+            }
+            function uploadUserWorksheet() {
+                // A user's data may have changed:
+                clearCachedCompanyData();
+                clearCachedGlossaryDisplay();
+                clearInsightsTable();  
+                
+                _uploadFile("userworksheetupload", 
+                            "uploadusers?" +
+                                "companyid=" + getCachedManagedCompanyId() +
+                                "&sessionid=" + getCachedSessionId(),        
+                            alertAndInitialize);                  
+            }
+            function editTeams() {
+                var postBody = {};
+                
+                var newTeamName = $("#newteam").val();
+                if(newTeamName) {
+                    postBody['newTeamName'] = newTeamName;
+                }
+                
+                var teamIdToName = {};
+                $("input[id^='nameteam_']").each( function() {
+                    var teamId = $(this).attr('id');    
+                    teamIdToName[ teamId.replace('nameteam_', '') ] = $(this).val();
+                });
+                postBody.teamIdToName = teamIdToName;
+                
+                var teamIdsToDelete = [];
+                $('input[id^="deleteteam_"]:checked').each(function() {
+                    var teamId = $(this).attr('id');                   
+                    teamIdsToDelete.push( teamId.replace('deleteteam_', '') );
+                });  
+                postBody.teamIdsToDelete = teamIdsToDelete; 
+                
+                _callEndpoint('POST', 'upsertteams?' +
+                                      'companyid=' + getCachedManagedCompanyId() +
+                                      '&corpusversion=1.0' +
+                                      '&sessionid=' + getCachedSessionId(),
+                                      alertAndInitialize, JSON.stringify(postBody));                  
+                                      
+                // Force reloading of this company's data:
+                clearCachedManagedCompanyId();                                      
+                loadCompany();                                      
+            }
+            
+            function deleteUsers() {
+                var userIdsToDelete = [];
+                var userCheckboxes = $(".deleteusersclass");
+                userCheckboxes.each( function() {
+                    if( $(this).is(':checked') )
+                        userIdsToDelete.push( ($(this).prop('id')) );
+                });         
+                
+                if(userIdsToDelete.length == 0) {
+                    alert('Please select team member(s) to delete');
+                    return;
+                }
+                
+                if( !confirm('Are you sure you want to delete ' +userIdsToDelete.length + ' user(s)?') )
+                    return;
+                
+                clearCachedCompanyData();
+                clearCachedGlossaryDisplay();
+                clearInsightsTable();
+                
+                _callEndpoint('GET', 'deleteusers?' +
+                                     'userid=' + userIdsToDelete +
+                                     '&companyid=' + getCachedManagedCompanyId() +
+                                     '&sessionid=' + getCachedSessionId(),
+                              alertAndInitialize );  
+            }
+            function generateOneSheets(clickedSpanId) {                  
+                var selectedUsers = getSelectedUsers(_teamInsightsNameSuffix);
+                if(!selectedUsers || selectedUsers.length == 0) {
+                    alert('Please select at least one team member.');
+                    return false;
+                }            
+                
+                if(selectedUsers.length > getCachedMaxMultisheetsCount()) {
+                    alert('Currently, only ' + getCachedMaxMultisheetsCount() + ' one-sheets can be generated at once.');
+                    return false;
+                } 
+                
+                callOneSheetsEndpoint(selectedUsers); 
+            }
+            function callOneSheetsEndpoint(userIds, newBrowserTab) { 
+                setTimeout(function() {
+                    _callEndpoint('GET', 'getmultisheetbytes?' +
+                                 'companyid=' + getCachedManagedCompanyId() +
+                                 '&userid=' + userIds +
+                                 '&sessionid=' + getCachedSessionId(),
+                                 newBrowserTab ? displayMultisheets : downloadMultisheets); 
+                }, 250); 
+            }
+            function generateTeamChart(clickedSpanId) {                   
+                var selectedUsers = getSelectedUsers(_teamInsightsNameSuffix);
+                if(selectedUsers.length < 2) {
+                    alert('Please select at least two team members to include.');
+                    return false;
+                }
+                
+                if(selectedUsers.length > getCachedTeamchartsCount()) {
+                    alert('Currently, only ' + getCachedTeamchartsCount() + ' users can be included in a single team chart.');
+                    return false;
+                }
+                
+                var customTeamName = window.prompt('Enter custom team name.'); 
+                if(customTeamName === null)
+                    return;
+                
+                if(!customTeamName) {
+                    customTeamName = '';
+                }
+                
+                _callEndpoint('GET', 'getteamchartbytes?' +
+                             'companyid=' + getCachedManagedCompanyId() +
+                             '&teamname=' + encodeURIComponent(customTeamName) +
+                             '&userid=' + selectedUsers +
+                             '&sessionid=' + getCachedSessionId(),
+                             downloadTeamChart); 
+            }   
+            function loadCompanyLogo() {
+                if( !getCachedLogoCompanyId() ||
+                    getCachedLogoCompanyId() !== getCachedManagedCompanyId() ) {
+                    _callEndpoint('GET', 'getimage?' +
+                                  'companyid=' + getCachedManagedCompanyId() +
+                                  '&imagetype=LOGO',
+                                  displayCompanyLogo); 
+                                  
+                    cacheLogoCompanyId(getCachedManagedCompanyId());
+                }
+            }
+            function displayCompanyLogo(base64ImageBytesJSON) {
+                var json = $.parseJSON(base64ImageBytesJSON);
+                var base64ImageBytesStr = json.message; 
+                
+                var imgElement = $('.clientlogoimg');
+                if(base64ImageBytesStr) 
+                    imgElement.prop('src', 'data:image/png;base64,' + base64ImageBytesStr);                
+                else
+                    imgElement.prop('src', ''); 
+            }        
+            function loadCompany() {
+                var checkedCompanyElmt = $('input[name="managedCompanyId"]:checked');
+                var managedCompanyId = checkedCompanyElmt.val();
+                var managedCompanyName = checkedCompanyElmt.attr("data-companyname");
+                var managedCompanyUsername = checkedCompanyElmt.attr("data-companyusername");
+
+                if(managedCompanyId !== getCachedManagedCompanyId()) {
+                    cacheManagedCompanyId(managedCompanyId);
+                    cacheManagedCompanyUsername(managedCompanyUsername);
+                    cacheCompanyName(managedCompanyName);
+                    
+                    clearCachedCompanyData();
+                    clearCachedCompanyJSON();
+                    clearInsightsTable();
+                    
+                    // We force reload of the glossary so that other data associated
+                    // with glossary retrieval is reloaded:
+                    clearCachedGlossaryDisplay();
+                }
+                
+                initialize();
+            }
+            function createCompany() {
+                var newCompanyName = window.prompt('Enter new company name'); 
+                if(newCompanyName === null)
+                    return;
+
+                if(!newCompanyName) {
+                    alert('Please enter a new company name.');
+                    createCompany();
+                }    
+                                
+                _callEndpoint('GET', 'createcompany?' +
+                                     'companyname=' + newCompanyName +
+                                     '&sessionid=' + getCachedSessionId(),
+                              createCompany_success);  
+            }
+            function deleteCompany() {
+                if('plume-company' === getCachedManagedCompanyId()) {
+                    alert("The Parillume company cannot be deleted");
+                    return;
+                }
+                if( !window.confirm('Do you want to delete company ' + getCachedCompanyName() + '?') )
+                    return;
+                                
+                _callEndpoint('GET', 'deletecompany?' +
+                                     'companyid=' + getCachedManagedCompanyId() +
+                                     '&sessionid=' + getCachedSessionId(),
+                              deleteCompany_success);  
+            }
+            function createCompany_success(sessionIdJSON) {                          
+                alert('Company created');           
+                clearCachedCompanyData();
+                processNewSession($.parseJSON(sessionIdJSON).message);  
+                initialize();   
+            }
+            function deleteCompany_success(sessionIdJSON) {                          
+                alert('Company deleted');           
+                clearCachedCompanyData();
+                clearCachedGlossaryDisplay();
+                processNewSession($.parseJSON(sessionIdJSON).message);                
+                initialize();
+            }
+        </script>
+        
+        <!-- General functions -->
+        <script type="text/javascript">     
+            function booleanEquals(var1, var2) {
+                return (var1!==undefined || var2!==undefined) ?
+                        var1.toString() == var2.toString() :
+                        false;
+            }
+            function getColumnWidths(columns) {  
+                var columnWidths = new Map();
+                
+                if(columns.length == 1) {
+                    columnWidths.set(columns[0], 100);
+                    return columnWidths;
+                }
+                
+                var displayedRatios = 0;
+                var totalRatios = 0;
+                for(var [col,ratio] of _columnWidthRatios) {
+                    if(columns.includes(col)) {
+                        displayedRatios += ratio;            
+                    }
+                    // Because we purposefully extend the table past 100%,
+                    // totalRatios may be morethan 100%:
+                    totalRatios += ratio;    
+                }
+                
+                // e.g. 85/110 if some columns are not displayed
+                var adjustment = displayedRatios/totalRatios;
+                
+                for(var [col,ratio] of _columnWidthRatios) {                
+                    var adjustedPercentage = ratio/adjustment;
+                    columnWidths.set(col, adjustedPercentage);
+                }                 
+                
+                return columnWidths;
+            }
+                    
+            function loadDestinationPage() {
+                var currentPageDivId = getCachedDestinationPageId();
+
+                var hideAllOtherPageLinks = false;
+                for( var[divId, linkJSONStr] of _pages) {                         
+                    if(divId == currentPageDivId) {
+                        $('#' + divId).show();
+                        $(".title").html(_titles.get(divId)); 
+                        
+                        if(linkJSONStr) {
+                            var linkJSON = $.parseJSON(linkJSONStr);
+                            if(linkJSON.hideAllOtherPageLinks) 
+                                hideAllOtherPageLinks = linkJSON.hideAllOtherPageLinks;
+                        }  
+                        
+                    } else {
+                        $('#' + divId).hide();
+                    }              
+                }
+                
+                var linksContent = '';
+                for( var[divId, linkJSONStr] of _pages) {
+                    var linkName = _titles.get(divId);
+                    var extraFx = '';
+                    var inactive = false;
+                    var adminPage; // true=show only to admin; false=show only to user; undefined=show to all
+                    if(linkJSONStr) {
+                        var linkJSON = $.parseJSON(linkJSONStr);  
+                        if(linkJSON.name) linkName = linkJSON.name;
+                        if(linkJSON.extraFx) extraFx = linkJSON.extraFx;
+                        if(linkJSON.inactive) inactive = linkJSON.inactive;
+                        if(linkJSON.adminPage) adminPage = linkJSON.adminPage;
+                    }    
+                    
+                    var showLink = (adminPage===undefined || booleanEquals(isAdmin(), adminPage)); 
+                    if(divId !== currentPageDivId && !inactive && !hideAllOtherPageLinks && 
+                       // showLink may be a string or a boolean:
+                       (showLink.toString()=='true') ) {
+                        linksContent += '<a href="javascript:cacheDestinationPageId(\''+divId+'\');initialize();'+extraFx+'" ' +
+                                           'class="headerlink">' + linkName + '</a>' +
+                                           '&nbsp;&nbsp;&nbsp;&nbsp;';                         
+                    }               
+                }
+                
+                var pageLinksDiv = $(".headerlink-"+currentPageDivId);
+                if(pageLinksDiv)
+                    pageLinksDiv.html(linksContent);             
+                
+                updateLoginStatus();
+                                  
+                cacheDestinationPageId(currentPageDivId);
+                
+                // Display company name on Admin company-management page 
+                $(".companyName").text(getCachedCompanyName());         
+                // Display company credentials on Admin company-management page     
+                $("#newcompanyname").val(getCachedCompanyName());
+                $("#newcompanyemail").val(getCachedManagedCompanyUsername());
+                $("#newcompanypassword1").val("");
+                $("#newcompanypassword2").val("");         
+            }
+        </script> 
+        
+        <!-- _callEndpoint callbacks -->
+        <script type="text/javascript"> 
+            function processValidateSession(json) {
+                var sessionValidationJSON = $.parseJSON(json);
+                if( !sessionValidationJSON || 
+                    sessionValidationJSON.length === 0 ||
+                    sessionValidationJSON.message === 'false' ) {                
+                    logOut();
+                }                
+            }         
+            function processNewSession(sessionIdJSON) { 
+                cacheSessionId(sessionIdJSON.sessionId);
+                cacheUsername(sessionIdJSON.username);
+                cacheManagedCompanyUsername(sessionIdJSON.username);
+                cacheManagedCompanyId(sessionIdJSON.companyId);
+                cacheCompanyName(sessionIdJSON.companyName);
+                cacheManagedCompanyReferences(sessionIdJSON.managedCompanyReferences); 
+                clearCachedSkippedColumns();
+                return sessionIdJSON;
+            }
+            function processLogin(loginDTOJSON) {           
+                var jsonObject = $.parseJSON(loginDTOJSON);
+                if(jsonObject.hasOwnProperty("message"))
+                    jsonObject = jsonObject.message;
+                
+                var sessionJSON = jsonObject.sessionDTO;
+                var userJSON = jsonObject.user;
+                
+                var json = processNewSession(sessionJSON);
+                
+                if(json.userCredentials == true) {
+                    cacheLoggedInUserId(json.actorId);
+                } else {
+                    cacheLoggedInUserId('');
+                }                
+                
+                cacheLoggedInCompanyName(json.companyName);
+                cacheLoggedInCompanyId(json.companyId);
+                cacheLoggedInUserJSON(userJSON);
+                cacheDestinationPageId(isAdmin() ? 'manageteamsdiv' : 'editmyprofilediv');                
+
+                initialize();
+            }              
+            // An admin can log in as a different "proxy" user:
+            function proxyLogin(userId) {
+                _callEndpoint('GET', 'proxylogin?' +
+                                     'targetuserid=' + userId +
+                                     '&sessionid=' + getCachedSessionId(),
+                              processProxyLogin);
+            }
+            // An admin can log out of the proxied user and log back in as themself:
+            function unproxyLogin() {
+                var adminLoginDTO = getCachedProxyingAdminLoginDTO();        
+                var managedCompanyId = getCachedManagedCompanyId();
+                
+                clearCachedProxyingAdminLoginDTO();
+                processLogin(adminLoginDTO);
+                
+                // Click the company radio button that we are managing. This
+                // will load that company into the 'Manage company' UI.
+                $('input[type="radio"][name="managedCompanyId"]').each(function() {
+                    if ($(this).val() === managedCompanyId) {
+                        $(this).prop('checked', true);
+                    }
+                });      
+                loadCompany();
+            }
+            function processProxyLogin(proxyingAdminSessionDTO) {
+                var loginDTOArray = $.parseJSON(proxyingAdminSessionDTO).message;
+                
+                // sessionArray[0] is the proxying admin's session data
+                cacheProxyingAdminLoginDTO(JSON.stringify(loginDTOArray[0]));
+                
+                // sessionArray[1] is the proxied user's session data
+                processLogin(JSON.stringify(loginDTOArray[1]));
+            }            
+            function processMaxSheetCounts(sheetCountsJSON) {
+                var processToSheetCount = $.parseJSON(sheetCountsJSON).message;   
+
+                // process corresponds to ProcessArg.java 
+                $.each(processToSheetCount, function(process,sheetCount) {      
+                    if('multisheets' === process)
+                        cacheMaxMultisheetsCount(sheetCount);
+                    else if('teamcharts' === process)
+                        cacheMaxTeamchartsCount(sheetCount);
+                });
+            }  
+            function getTeamChatTargetsDiv() { 
+                var selectionHTML = $('<div>' + getCachedTeamChatTargetsSelection() + '</div>');                
+                // Remove the logged-in user from the chat targets:
+                selectionHTML.find('ul[id^="'+getCachedUsername()+'"]').remove();             
+                return selectionHTML.prop('outerHTML');            
+            }  
+            function writeTeamInsightsFilterDiv() { 
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", 'teamInsightsFilterDiv.html', false);
+                xhr.send();
+
+                if (xhr.status === 200) {
+                    var html = xhr.responseText.replace('{{teamMembersInsightsSelection}}', 
+                                                        getCachedTeamMembersInsightsSelection());
+                    $('#teammembers_insightsfilter_span').html(html);  
+                } else {
+                    console.error("Error loading HTML for team insights filter", xhr.status, xhr.statusText);
+                }                  
+            }                   
+            function writeUserFormFields() {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", 'userFormFields.html', false);
+                xhr.send();
+
+                if (xhr.status === 200) {
+                    $('.user-formfields').html(xhr.responseText)
+                } else {
+                    console.error("Error loading HTML for user formfields", xhr.status, xhr.statusText);
+                }
+            }
+            function populateMyProfileUI(userJSON) {//TJMTJM
+                if(!userJSON) 
+                    return;
+
+                $("#firstname").val(userJSON.nameFirst);
+                $("#lastname").val(userJSON.nameLast);
+                $("#email").val(userJSON.emailAddress);
+                $("#phone").val(userJSON.phoneNumber);
+                
+                // Uncheck all userid_chattargets checkboxes that represent excluded users
+                $('input[name="userid'+_chatTargetsNameSuffix+'"]').each(function() {
+                    // We avoid duplicate element ids and reference the element value -
+                    // which is ALSO the user id (e.g. 'tomID', 'russID'...)
+                    if( userJSON.excludedChatUserIds.includes($(this).attr('value')) ) {
+                        $(this).prop('checked', false);
+                    } else {
+                        $(this).prop('checked', false);
+                    }
+                });               
+                
+                var latestPercentSuperpowers = '';
+                var percentSuperpowersHistory = userJSON.percentageInSuperpowersHistory; 
+                
+                if(percentSuperpowersHistory &&
+                   percentSuperpowersHistory !== null &&
+                   Object.keys(percentSuperpowersHistory).length > 0) {
+                    var latestEpochTime = 0;
+                    $.each(percentSuperpowersHistory, function(epochTime, percentage) {
+                        if(epochTime > latestEpochTime)
+                            latestEpochTime = epochTime;
+                    });
+                    latestPercentSuperpowers = percentSuperpowersHistory[latestEpochTime];
+                }
+                $("#percentagesup").val(latestPercentSuperpowers);
+
+                var teamIdToRoleId = userJSON.teamIdToRoleId;
+                $.each(teamIdToRoleId, function(teamId, roleId) {
+                    var teamMembershipSelect = $("#"+teamId);
+                    if(teamMembershipSelect) {
+                        if(!roleId) roleId = 'no_role';
+                        teamMembershipSelect.val(roleId);
+                        // TODO: Remove the following when team roles matter:
+                        teamMembershipSelect.prop('checked', true);
+                    }
+                });
+
+                var pfps = '';
+                $.each(userJSON.playfullPractices, function(index,practice) {   
+                    pfps += practice;
+                    if(index < (userJSON.playfullPractices.length-1))
+                        pfps += '\n';
+                });
+                $("#playfullpractices").val(pfps);
+                
+                var csStrengthOrder = 1;
+                $.each(userJSON.assessmentResultIds, function(index, resultId) {
+                    var isCSAssessment = (resultId.startsWith('CS-'));
+                    if(isCSAssessment) {
+                        $("#"+resultId).val(csStrengthOrder++);
+                        $("#label_"+resultId).css("font-weight", "bold");
+                        $("#label_"+resultId).css("font-size", "110%");
+                    } else {
+                        $("#"+resultId).prop('checked', true);
+                    }
+                });
+                
+                // Users uploaded from worksheets adopopt sup/krypt from EVERY assessment result.
+                // We will display a warning in these cases.
+                var supkrypCount = 0;
+                // Check the user's superpowers and kryptonite checkboxes
+                $.each(userJSON.superpowerAssessmentResultIds, function(index, supAssessmentResultId) {
+                    $("#sup-" + supAssessmentResultId).prop("checked", true);
+                    supkrypCount++;
+                });
+                $.each(userJSON.kryptoniteAssessmentResultIds, function(index, krypAssessmentResultId) {
+                    $("#kryp-" + krypAssessmentResultId).prop("checked", true);
+                    supkrypCount++;
+                });
+                cacheUserSupKrypCount(supkrypCount);
+                updateLoginStatus(); // supkrypCount affects the status display
+            }
+            function populateCompanyData(json) {                
+                var companyJSON = $.parseJSON(json).message;
+                cacheCompanyJSON(companyJSON.companyModel);
+
+                var teamsJSON = parseTeams(companyJSON.companyModel);
+
+                var teamMembersInsightsSelection = "";
+                var adminTeamMembersList = "";
+                var teamDeletionsEditingList = "";
+                
+                // Used by an admin's 'Edit company teams' section
+                var companyTeamsSelection = "<ul><li>" +
+                                            "<input type='text' size='40' name='newteam' id='newteam' placeholder='Enter new team name'></input>" +
+                                            "</li></ul>";                
+                var t = 0;        
+                var uniqueUserIds = [];    
+                $.each(teamsJSON, function(index,team) {                       
+                    var teamElementId = 'teamid_' + (t++);
+                    if('no-team' !== team.id) {
+                        companyTeamsSelection += "<ul><li>" +
+                                                 "<input type='text' size='40' " +
+                                                       "name='nameteam_"+team.id+"' " +
+                                                       "id='nameteam_"+team.id+"' " +
+                                                       "value='"+escapeHTML(team.name)+"'/>" +
+                                                 "&nbsp;<input type='checkbox' " +
+                                                       "name='deleteteam_"+team.id+"' " +
+                                                       "id='deleteteam_"+team.id+"'>&nbsp;Delete" +
+                                                 "</li></ul>";
+                    }
+                        
+                    teamMembersInsightsSelection += "<span class='teamspan'>"; 
+                    if(team.users.length > 0) {                     
+                        var teamClass = team.id + '-class';  
+                        
+                        // adminTeamMembersList does not include team checkboxes
+                                          
+                        teamMembersInsightsSelection += "<ul><li>" +
+                                                "<input type='checkbox' " +
+                                                       "name='"+teamElementId+"' " +
+                                                       "id='"+teamElementId+_teamInsightsNameSuffix+"' value='"+team.id+"' " +
+                                                       "onclick=unCheckGroup('"+teamElementId+_teamInsightsNameSuffix+"','"+teamClass+"') " +
+                                                       "onchange='submitInsightsQuery(true);'>" +
+                                                       "&nbsp;"+team.name;  
+                                        
+                        for(var i = 0; i < team.users.length; i++) {
+                            var user = team.users[i];
+                            var userElementId = "userid";
+                            var userName = user.nameFirst+"&nbsp;"+user.nameLast;
+                            
+                            // getTeamChartTargetsDiv() uses this id to find and
+                            // remove the current user from this checkbox list:
+                            var ulId = user.emailAddress + "_" + i;                            
+                            teamMembersInsightsSelection += "<ul id='"+ulId+"'><li>" +
+                                                       "<input type='checkbox' class='"+teamClass+"' " +
+                                                              "name='"+userElementId+_teamInsightsNameSuffix+"' " +
+                                                              "value='"+user.id+"' " +
+                                                              "onchange='submitInsightsQuery(true);'>" +
+                                                              "&nbsp;" + userName + 
+                                                    "</li></ul>";
+                                                
+                            if(!uniqueUserIds.includes(user.id)) {
+                                adminTeamMembersList += "<li>" +
+                                                                "<a href='javascript:toggleAdminEditingDisplay(\""+user.id+"\", \"upsertuserdiv\")' " +
+                                                                  "class='admineditlink' id='"+user.id+"'>" + 
+                                                                    userName + 
+                                                               "</a>&nbsp;" +
+                                                                "<a href='javascript:proxyLogin(\""+user.id+"\");'>" +
+                                                                    "<i class='fa fa-arrow-circle-o-right' aria-hidden='true'></i>" + 
+                                                                "</a>" +                                                                
+                                                            "</li>";
+
+                                teamDeletionsEditingList += "<li><input type=checkbox name='"+user.id+"' id='"+user.id+"' " +
+                                                                       "class='deleteusersclass'>" +
+                                                                 "&nbsp;"+userName + 
+                                                            "</li>";                                       
+                            }
+                            uniqueUserIds.push(user.id);                
+                        }                        
+                        
+                        teamMembersInsightsSelection += "</li></ul>";
+                        
+                    } else {                     
+                        teamMembersInsightsSelection += "<ul><li>&nbsp;" + team.name +
+                                                        "<br/>&nbsp;&nbsp;&nbsp;&nbsp;No team members</li></ul>";
+                    }
+                    
+                    teamMembersInsightsSelection += "</span>";
+                });  
+                
+                cacheTeamsJSON(teamsJSON);
+                cacheTeamMembersInsightsSelection(teamMembersInsightsSelection);
+
+                // Team chat-targets selection uses different ids for its checkboxes; hence the 'replace' call:
+                var regex = new RegExp(_teamInsightsNameSuffix, "g");
+                cacheTeamChatTargetsSelection( teamMembersInsightsSelection.replace(regex, _chatTargetsNameSuffix) );
+                
+                companyTeamsSelection += "</span>";
+                cacheCompanyTeamsSelection(companyTeamsSelection);
+                
+                cacheUserProfileLinks( (adminTeamMembersList ?
+                                        "<ul class='ul-columns'>" + adminTeamMembersList + "</ul>" :
+                                        "<br/>No team members are available") 
+                                      );
+                
+                var userDeletionLinks = (teamDeletionsEditingList ?
+                                         "<ul class='ul-columns'>" + teamDeletionsEditingList + "</ul>" 
+                                        :
+                                        "<br/>No team members are available");   
+                cacheUserDeletionLinks(userDeletionLinks);
+            }    
+            function cacheMyProfileAssessmentOptions(assessmentsJSONStr) {
+                var optionsArray = generateMyProfileAssessmentOptionsHTML(assessmentsJSONStr);
+                cacheAssmtMyProfileSelectionDisplay(optionsArray[0]);
+                cacheSupMyProfileSelectionDisplay(optionsArray[1]);
+                cacheKrypMyProfileSelectionDisplay(optionsArray[2]);
+            }            
+            // Caches options for the main Team Insights page, and also calls
+            // cacheAssessmentData(assessmentId, assessmentJSON) so the My Profile
+            // page can use this cached assessmentJSON to create its own options.
+            function cacheAssessmentFilters(assessmentsJSONStr) {
+                var assessmentFiltersHTML = generateAssessmentFiltersHTML(assessmentsJSONStr);
+                cacheAssessmentFiltersDisplay(assessmentFiltersHTML);
+            }                 
+            function parseAndPopulateInsightsTable(tableJSONStr) {
+                var tableJSONMessage = $.parseJSON(tableJSONStr).message; 
+                cacheInsightsTableJSON(tableJSONMessage)
+                populateInsightsTable(tableJSONMessage);
+            }
+            function populateInsightsTable(tableJSONMessage) {
+                showInsightsTable(tableJSONMessage);
+            }                    
+            function populateNewUserTemplate(jsonStr) {
+                cacheNewUserTemplate(jsonStr);
+            }    
+            function populateModelGlossary(json) {
+                var glossaryJSON = $.parseJSON(json).message;   
+
+                ////// For the My Profile page:
+                var roleIdToName = new Map();
+                var teamIdToName = new Map();
+                
+                var glossaryDisplay = "<h5><strong>Glossary</strong></h5>";                        
+                glossaryDisplay +=
+                    populateModelGlossarySection('assessments', 'Assessments', glossaryJSON.assessmentToDescriptors);            
+                glossaryDisplay +=
+                    populateModelGlossarySection('roles', 'Company Roles', glossaryJSON.companyRoleDescriptors, roleIdToName);          
+                glossaryDisplay +=
+                    populateModelGlossarySection('teams', 'Company Teams', glossaryJSON.companyTeamDescriptors, teamIdToName);
+                glossaryDisplay +=
+                    populateModelGlossarySection('users', 'Company Users', glossaryJSON.companyUserDescriptors);                                   
+                
+                cacheGlossaryDisplay(glossaryDisplay);
+
+                ////// For selecting 'My team membership' on the My Profile page:
+                var teamMembershipMyProfileDisplay = "<br/><span class='teamspan link-togglable'>";           
+                for(const[teamId, teamName] of teamIdToName) {
+                    teamMembershipMyProfileDisplay += "<input type='checkbox' id='"+teamId+"' name='"+teamId+"' value='no_role'> " +
+                                                    teamName + "<br/>";    
+//TODO: Delete the above line and implement the following when team roles matter:                     
+//                    teamMembershipMyProfileDisplay += teamName + ": <em>My role is...</em><br/>";
+//                    
+//                    teamMembershipMyProfileDisplay += "<select class='formfield' id='"+teamId+"' name='"+teamId+"'>";
+//                    teamMembershipMyProfileDisplay += "<option value=''> --- </option>";
+//                    teamMembershipMyProfileDisplay += "<option value='no_role'>[Member: no role]</option>";
+//                    for(const[roleId, roleName] of roleIdToName) {
+//                        teamMembershipMyProfileDisplay += "<option value='"+roleId+"'>" + roleName + "</option>";
+//                    }
+//                    teamMembershipMyProfileDisplay += "</select>";
+                }
+                teamMembershipMyProfileDisplay += "</span>";
+                
+                cacheTeamMembershipMyProfileDisplay(teamMembershipMyProfileDisplay);
+            }
+            
+            function populateModelGlossarySection(section, title, descriptors, teamMyProfileMap) {
+                var glossaryDisplay = "<span onclick=toggleGlossarySection('"+section+"GlossarySection');>" +
+                                      "<h6><u>"+title+"</u></h6></span>" +
+                                      "<span id='"+section+"GlossarySection' class='w3-container w3-hide'>" +                                        
+                                      "<ul class='ul-glossary'>";
+
+                $.each(descriptors, function(parentDescriptor,sectionDescriptors) {
+                    var parentSection = '';
+                    try {
+                        var parentDescriptorJSON = $.parseJSON(parentDescriptor);
+                        var companyId = Object.keys(parentDescriptorJSON)[0];                        
+                        var companyName = parentDescriptorJSON[companyId];
+                        parentSection = companyName + ": " +companyId;
+                    } catch(error) {
+                        parentSection = parentDescriptor;
+                    }
+                    glossaryDisplay += "<li><em><strong>" + parentSection + "</strong></em><ul class='ul-glossary'>";
+
+                    // descriptorJSON: {[id], [label]}
+                    $.each(sectionDescriptors, function(index,descriptorJSON) {
+                        var id = Object.keys(descriptorJSON)[0];
+                        var name = descriptorJSON[id];
+                        glossaryDisplay += "<li>" + name + ": " + id + "</li>";
+                        if(teamMyProfileMap && companyId == getCachedManagedCompanyId()) {
+                            teamMyProfileMap.set(id, name);
+                        }
+                    });      
+                    
+                    glossaryDisplay += "</ul></li>";
+                });
+                glossaryDisplay += "</ul></span>";  
+                
+                return glossaryDisplay;
+            }          
+            function displayMultisheets(base64JSON) {
+                downloadFiles(base64JSON, '_onesheet', 'application/pdf', '.pdf',
+                              true);
+            }          
+            function downloadMultisheets(base64JSON) {
+                downloadFiles(base64JSON, '_onesheet', 'application/pdf', '.pdf');
+            }          
+            function downloadTeamChart(base64JSON) {
+                downloadFiles(base64JSON, '_teamchart', 'application/pdf', '.pdf');
+            }
+            function downloadWorksheetTemplate() {
+                _callEndpoint('GET', 'getresourcefilebytes?' +
+                              'sessionid=' + getCachedSessionId() +
+                              '&resourceid=WORKSHEET_TEMPLATE',
+                              downloadExcel);             
+            }
+            function downloadExcel(base64JSON) {
+                downloadFiles(base64JSON, '', 'text/plain', '');
+            }
+            function downloadFiles(base64JSON, fileNameSuffix, fileType, fileSuffix,
+                                   // If true, display in new tab rather than downloading:
+                                   newBrowserTab) {  
+                var namedBase64Strings = $.parseJSON(base64JSON).message;   
+
+                var downloadedFileNames = [];
+                $.each(namedBase64Strings, function(fileName,base64Str) {  
+                    fileName += fileNameSuffix;
+                    downloadedFileNames.push(fileName + fileSuffix);
+
+                    var decodedString = atob(base64Str);
+                    var byteArray = new Uint8Array(decodedString.length);
+                    for (var i = 0; i < decodedString.length; i++) {
+                      byteArray[i] = decodedString.charCodeAt(i);
+                    }    
+
+                    var blob = new Blob([byteArray], {type: fileType});
+                    var blobURL = window.URL.createObjectURL(blob);
+
+                    // Insecure; also, doesn't allow multiple opens if popups are blocked:
+                    //window.open(link, '', 'height=650,width=1000');
+
+                    var link = document.createElement("a");
+                    // Set link's href to point to the Blob URL
+                    link.href = blobURL;
+                    if(newBrowserTab)
+                        link.target = "_blank";
+                    else
+                        link.download = fileName;  
+
+                    // Append link to the body
+                    document.body.appendChild(link);
+
+                    // Dispatch click event on the link, triggering the download
+                    // This is necessary as link.click() does not work on all Firefox versions
+                    link.dispatchEvent(
+                      new MouseEvent('click', { 
+                        bubbles: true, 
+                        cancelable: true, 
+                        view: window 
+                      })
+                    );
+
+                    // Remove link from body
+                    document.body.removeChild(link);     
+                });  
+                
+                if(!newBrowserTab) {
+                    setTimeout(function() {
+                        alert( (downloadedFileNames.length > 1 ? 'Files' :'File') + 
+                                ' downloaded:\n' + downloadedFileNames.join('\n') );
+                        }, 250);
+                }
+                
+                revertProcessingButton(); 
+            }
+            
+            // See https://tabulator.info/docs/6.3/download#csv
+            function downloadTableCSV() {
+                var csvFilename = window.prompt('Enter download-file name.'); 
+
+                if(csvFilename === null)
+                    return;
+
+                if(!csvFilename) {
+                    alert('Please enter a download-file name.');
+                    downloadTableCSV();
+                }    
+
+                _csvResultsTable.download("csv", csvFilename + ".csv", {delimiter:",", bom:true}); 
+            }
+        /****** Fails because column data is too tall ******/
+        //    function downloadTableAsPDF() {  
+        //        _insightsTable.download("pdf", "data.pdf", {
+        //            orientation:"portrait", //set page orientation to portrait
+        //            title:"Some title", //add title to report
+        //            jsPDF:{
+        //                unit:"in", //set units to inches
+        //            },
+        //            autoTable:{ //advanced table styling
+        //                styles: {
+        //                    fillColor: [100, 255, 255]
+        //                },
+        //                columnStyles: {
+        //                    id: {fillColor: 255}
+        //                },
+        //                margin: {top: 60},
+        //            },
+        //            documentProcessing:function(doc){
+        //                //carry out an action on the doc object
+        //            }
+        //        });
+        //    }
+
+            function downloadTableScreenshot() {
+                var tableImgName = window.prompt('Enter image-file name.'); 
+                if(tableImgName === null)
+                    return;
+
+                if(!tableImgName) {
+                    alert('Please enter an image-file name.');
+                    downloadTableScreenshot();
+                }    
+
+                html2canvas(document.querySelector("#insightstable")).then((canvas) => {
+                    const dataURL = canvas.toDataURL();
+
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = dataURL;
+                    downloadLink.download = tableImgName + '.png';
+                    downloadLink.click();
+                });      
+            }            
+        </script>        
+
+        <!-- Toggles -->
+        <script type="text/javascript"> 
+            function revertProcessingButton() {
+                var cachedButtonAttrs = getCachedId('processingButtonAttrs');
+                if(!cachedButtonAttrs)
+                    return;
+                
+                var cachedButtonAttrsJSON = $.parseJSON(cachedButtonAttrs); 
+                
+                var clickedSpan = $("#" + cachedButtonAttrsJSON.id);
+                var origLabelHTML = cachedButtonAttrsJSON.label_html;
+                var origBackgroundColor = cachedButtonAttrsJSON.background_color;
+                
+                clickedSpan.children("label:first").html(origLabelHTML);
+                clickedSpan.css("background-color", origBackgroundColor);
+                
+                cacheId('processingButtonAttrs', '');                
+            }
+            
+            function toggleViewPassword(passwordFieldId, eyeSpanId) {
+                // We must use DOM to support changing the type of the input field:
+                var passwordField = document.getElementById(passwordFieldId);
+                var eyeSpan = $("#"+eyeSpanId);
+                
+                if(passwordField.type === "password") {                      
+                    passwordField.type = "text";
+                    eyeSpan.addClass('fa-eye-slash')             
+                           .removeClass('fa-eye');  
+                 } else {
+                    passwordField.type = "password";
+                    eyeSpan.addClass('fa-eye')             
+                           .removeClass('fa-eye-slash'); 
+                }   
+            }
+            function toggleViewResultsPhraseOperatorText(operatorText) {
+                $('.viewresultsoperator').text(operatorText);
+                clearInsightsTable();
+            }
+            function toggleAdminEditingDisplay(clickedAdminEditLink, divToDisplayId,
+                                               optionalJSON) { 
+                // If no clickedAdminEditLink is submitted, use the id of the logged-in team member:
+                if(!clickedAdminEditLink) 
+                    clickedAdminEditLink = getCachedLoggedInUserId();                
+                cacheClickedAdminEditLink(clickedAdminEditLink);
+
+                $(".admineditlink").addClass('link-standard')             
+                                   .removeClass('link-emphasized')
+                                   .removeClass('link-unemphasized');                      
+                // All clicks initially hide all admineditdivs and adminedittextareas:
+                $(".admineditdiv").hide();    
+                $(".adminedittextarea").hide();  
+                
+                if(clickedAdminEditLink) {
+                    $("#"+divToDisplayId).show();
+                    fadeInSection(divToDisplayId, 350);
+                }
+                        
+                $('.admineditlink').each(function(index, element) {
+                    handleProfileLinkClick(element.id, clickedAdminEditLink, divToDisplayId, optionalJSON);
+                });
+
+                var teamsJSON = getCachedTeamsJSON();
+                $.each(teamsJSON, function(index,team) {                   
+                    for(var i = 0; i < team.users.length; i++) {
+                        var user = team.users[i];  
+                        handleProfileLinkClick(user.id, clickedAdminEditLink, divToDisplayId, user);   
+                    }
+                } );    
+            }
+            function handleProfileLinkClick(thisLinkRef, clickedLinkId, divToDisplayId, optionalJSON) {  
+                var thisLink = $("#"+thisLinkRef);
+                
+                ////// This is the clicked link
+                if(clickedLinkId && clickedLinkId.startsWith(thisLinkRef)) {                
+                    // An admin is editing:
+                    if(isAdmin()) {               
+                        var jsonStr = '';
+                        if(optionalJSON) {
+                            jsonStr = (typeof optionalJSON === "string") ?
+                                      optionalJSON :
+                                      JSON.stringify(optionalJSON,null,2);
+                        }
+               
+                        var textarea = $('#'+divToDisplayId).find('textarea.adminedittextarea');
+                        textarea.show();
+                        textarea.val(jsonStr);                      
+                                     
+                    // A user is editing My Profile:
+                    } else {                       
+                        populateMyProfileUI(optionalJSON);
+                    }
+
+                    thisLink.addClass('link-emphasized')
+                            .removeClass('link-standard')
+                            .removeClass('link-unemphasized');
+
+                ////// This is an unclicked link
+                // The clicked link is not being re-clicked 
+                } else {              
+                    thisLink.addClass('link-unemphasized')
+                            .removeClass('link-emphasized')
+                            .removeClass('link-standard');
+                }      
+                // else the click link is being re-clicked, and 
+                // unclicked links maintain their neutral state
+            }   
+            
+            function toggleAccordionLink(accordionContentDivId, accordionLinkId, openCloseSpanId) {                
+                var accordionContentDiv = $('#'+accordionContentDivId);    
+                if(accordionContentDiv.hasClass("w3-show")) {
+                    hideAccordionLink(accordionContentDivId, accordionLinkId, openCloseSpanId);
+                } else {
+                    showAccordionLink(accordionContentDivId, accordionLinkId, openCloseSpanId);
+                }
+            }
+            function showAccordionLink(accordionContentDivId, accordionLinkId, openCloseSpanId) {
+                fadeInSection(accordionContentDivId, 350);
+                showHideAccordionLink(accordionContentDivId, accordionLinkId, openCloseSpanId,
+                                      true);               
+            }
+            function hideAccordionLink(accordionContentDivId, accordionLinkId, openCloseSpanId) {
+                showHideAccordionLink(accordionContentDivId, accordionLinkId, openCloseSpanId,
+                                      false);
+            }
+            function showHideAccordionLink(accordionContentDivId, accordionLinkId, openCloseSpanId,
+                                           show) {
+                var accordionContentDiv = $('#'+accordionContentDivId);                    
+                accordionContentDiv.removeClass( show==true ? "w3-hide" : "w3-show");
+                accordionContentDiv.addClass( show==true ? "w3-show" : "w3-hide");
+                
+                var accordionLink = document.getElementById(accordionLinkId); 
+                accordionLink.style.color = show==true ? "#722b90" : "grey";
+                
+                var openCloseSpan = document.getElementById(openCloseSpanId);
+                openCloseSpan.classList.replace(show==true ? "fa-caret-up" : "fa-caret-down",
+                                                show==true ? "fa-caret-down" : "fa-caret-up");                  
+            }
+            
+            function toggleGlossarySection(sectionDivId) {
+                var glossarySectionDiv = document.getElementById(sectionDivId);  
+                if(glossarySectionDiv.className.indexOf("w3-show") == -1) {
+                    glossarySectionDiv.className = glossarySectionDiv.className.replace(" w3-hide", " w3-show");  
+                } else {
+                    glossarySectionDiv.className = glossarySectionDiv.className.replace(" w3-show", " w3-hide");  
+                }                
+            }
+            
+            function toggleAssessmentAccordion(accordionContentId, accordionToggleId) {  
+                fadeInSection(accordionContentId, 350);
+                
+                var clickedAccordionToggle = $("#"+accordionToggleId);
+                // The accordionBtnId is also a classname of a button's selection-status
+                var selectionStatusClass = $("."+accordionToggleId);
+                var categoryDisplayClass = $("."+accordionToggleId+'-assessmentCategoryDisplay');     
+                
+                // Color all the accordion buttons grey; re-color the clicked button below
+                $(".assessments-btn").css("background-color", "grey");
+                // Color all the subdisplays black; re-color the subdisplays below
+                $(".selection-status").css("color", "black");
+                // Color all category displays grey; re-color below
+                $("[class$='-assessmentCategoryDisplay']").css("color", "grey");
+                    
+                var accordionIsClosing = false;
+                $.each($(".assessment-accordion-content"), function(index,accordionContentDiv) { 
+                    if(accordionContentDiv.id === accordionContentId) {
+                        if(accordionContentDiv.className.indexOf("w3-show") == -1) {
+                            accordionContentDiv.className += " w3-show";
+                            clickedAccordionToggle.css("background-color", "#722b90");
+                            selectionStatusClass.css("color", "#722b90");
+                            categoryDisplayClass.css("color", "#722b90");
+                        } else { 
+                            accordionContentDiv.className = accordionContentDiv.className.replace(" w3-show", "");
+                            accordionIsClosing = true;
+                        }   
+                        
+                    // Close all accordions that were not clicked
+                    } else {
+                        accordionContentDiv.className = accordionContentDiv.className.replace(" w3-show", "");
+                    }
+                });
+                
+                if(accordionIsClosing==true) {
+                    // Color all the accordion buttons purple again
+                    $(".assessments-btn").css("background-color", "#722b90");
+                }
+            }
+            
+            function toggleActiveColumn(columnId) {
+                fadeInBody(250); 
+                
+                var hiddenColumnField = $("#"+columnId);
+                var hiddenValue = hiddenColumnField.val();       
+                if(hiddenValue && hiddenValue.length > 0) {
+                    // No value for this column will be submitted:
+                    hiddenColumnField.val('');
+                    
+                    var columnLink = $("#" + columnId + "_columnLink");
+                    columnLink.css('color','lightgrey');
+                    cacheSkippedColumn(columnId);
+                    
+                } else {
+                    resetInsightsTableColumn(columnId);
+                    clearCachedSkippedColumn(columnId);
+                }
+                
+                var insightsTableJSON = getCachedInsightsTableJSON(isFilterByTeamMembers());
+                populateInsightsTable(insightsTableJSON);                
+            }            
+            function toggleMyProfileAssessmentCheckboxes(checkedBoxId, assessmentTypeId) {                
+                var selections = $(".myprofile_assessmentcheckbox_"+assessmentTypeId);
+                
+                $.each(selections, function(index,selection) {
+                    var thisId = selection.id;
+                    var isCheckedBox = (thisId === checkedBoxId);
+                    if(!isCheckedBox) {
+                        $("#"+thisId).prop('checked', false);
+                    }
+                    // Un|check the superpower and kryptonite checkboxes
+                    $("#sup-"+thisId).prop("checked", isCheckedBox);
+                    $("#kryp-"+thisId).prop("checked", isCheckedBox);
+                });
+                
+                initializeMyProfileSupKrypFromCheckboxes(assessmentTypeId);
+            }
+            
+            function toggleMyProfileNumberDropdowns(toggledSelection) {
+                var toggledId = toggledSelection.id;
+                var newToggledValue = toggledSelection.value;
+                    
+                var csNumberedSelections = $(".csnumberedinput_myprofile");
+                $.each(csNumberedSelections, function(index,selection) {
+                    var id = selection.id;                    
+                    var isToggledSelection = (toggledId === id);
+                    // Clear the previously-selected value
+                    if(!isToggledSelection && selection.value === newToggledValue) {
+                        $("#"+id).val(''); 
+                        $("#label_"+id).css( {"font-weight": "normal", "font-size": "100%"} );
+                        // Uncheck the superpower and kryptonite checkboxes
+                        $("#sup-"+id).prop("checked", false);
+                        $("#kryp-"+id).prop("checked", false);                        
+                        
+                    // Highlight the newly-selected value
+                    } else if(isToggledSelection) {
+                        // Check the superpower and kryptonite checkboxes
+                        var nonEmptyValue = (newToggledValue != '');
+                        $("#sup-"+id).prop("checked", nonEmptyValue);
+                        $("#kryp-"+id).prop("checked", nonEmptyValue);
+                        
+                        // If selection is empty rather than a number, font weight is "normal"
+                        var fontWeight = newToggledValue ? "bold" : "normal";
+                        $("#label_"+id).css( {"font-weight": fontWeight, "font-size": "110%"} );
+                    }    
+                });
+                
+                initializeMyProfileSupKrypFromNumberDropdowns();
+            }
+        </script>
+
+        <!-- Utility -->
+        <script type="text/javascript">
+            function isAdmin(userId) {
+                return userId ?
+                       getCachedLoggedInUserId() != userId :
+                       !getCachedLoggedInUserId();
+            }
+            function isFilterByTeamMembers() {
+                return $("#teamMembersInsightsSelection").hasClass("w3-show"); 
+            }
+            function getInsightsFormId(filterByTeamMembers) {
+                return filterByTeamMembers ? 'teammembersinsightsform' : 'assessmentsinsightsform'; 
+            }       
+            function validateSession() {
+                _callEndpoint('GET', 'validatesession?' +
+                                     'sessionid=' + getCachedSessionId(),
+                              processValidateSession);                  
+            }            
+            function getSelectedUsers(userNameSuffix) {
+                var selectedUsers = [];
+                $('input[name="userid'+userNameSuffix+'"]:checked').each(function() {
+                    var userId = $(this).val();
+                    if(!selectedUsers.includes(userId))
+                        selectedUsers.push(userId);
+                });
+                return selectedUsers;                   
+            }         
+            <!-- Formats HTML as text and wraps that text in its cell -->
+            function tabulatorCellFormatter(cell, formatterParams, onRendered){
+                cell.getElement().style.whiteSpace = "pre-wrap";
+                return this.emptyToSpace(cell.getValue());
+            }           
+            function parseCellContent(contentJSON, csv) {
+                var linesArrays = contentJSON.lines;
+
+                var lines = '';                
+                var len = linesArrays.length;                
+                $.each(linesArrays, function(index,line) {
+                    /**
+                     * label represents an internal header within cell-row text:
+                     *      {label:8, text:Heroic leadership}
+                     * 
+                     * See DisplayService.getTermValues:new TableCellLineDTO
+                     */
+                    var label = line.label;
+                    if(label) {
+                        // CSV text: "8: Heroic leadership"
+                        // Table text: "8<br/>Heroic leadership"
+                        lines += csv ? 
+                                 label + ": " : // e.g. The internal header "8"
+                                 ('<span class="fontsize-80"><em>'+label+'</em></span><br/>');
+                    }
+                    
+                    lines += (line.text) ? line.text.trim() : '';
+
+                    if(index < (len-1))
+                        lines += csv ? '\n' : '<br/>';
+                });
+
+                return lines;
+            }            
+            function unCheckGroup(groupCheckboxId, groupCheckboxClass) {
+                var isChecked = $('#'+groupCheckboxId).is(':checked');
+
+                // Loop through the checkboxes for this group
+                var groupCheckboxes = $('.'+groupCheckboxClass);
+                groupCheckboxes.each( function() {
+                    $(this).prop('checked', isChecked);
+                    
+/* OBSOLETE: For team checkbox groups: *****************************************                  
+                   // un|check ALL of this user's checkboxes among all teams
+                   // this.value is the user's ID; e.g. value='SomeUserId'
+                   var thisUsersCheckboxes = $("[value="+this.value+"]");
+                   thisUsersCheckboxes.each( function() {
+                       $(this).prop('checked', isChecked);
+                   })
+********************************************************************************/                   
+                }); 
+            }     
+        </script> 
+    </head>
+           
+    <!-- For some reason, using a class instead of "style=" messes up the page formatting: -->
+    <body style="display:none;padding-left:20px;" 
+          onload="initForms();validateSession();initialize();">       
+
+        <!-- ============== LOGIN SECTION ================== -->
+        <form id="loginform">
+            <div id="logindiv" class="parentdiv"> 
+
+                <span class="headerlink-logindiv"></span>
+                
+                <div style="width:45%;margin: 0 auto;padding-bottom:50px;">
+                    <div class="titlebar-gradient">
+                        <span class="title"></span>
+                    </div>
+                </div>
+                
+                <p/>
+
+                <table style="margin: auto;" class="transparent">
+                    <!-- Username -->
+                    <tr>
+                        <td class="align-right emphasized transparent">
+                            Username:
+                        </td>
+                        <td class="align-left transparent">
+                            <input type="text" id="username"/>
+                        </td>
+                    </tr>
+                    
+                    <!-- Password -->
+                    <tr>
+                        <td class="align-right emphasized transparent">
+                            Password:
+                        </td>
+                        <td class="align-left transparent">
+                            <input type="password" id="password"/>      
+                            <span class="password-toggle-icon"
+                                  onclick="toggleViewPassword('password', 'toggleLoginPassword');">
+                                <i id="toggleLoginPassword" class="fa fa-eye"></i>
+                            </span>                 
+                        </td>
+                    </tr>
+                    
+                    <!-- Login button -->
+                    <tr>
+                        <td colspan="2" class="align-center transparent">
+                            <input type="submit" class="btn-purple" id="loginbutton" value="Log in"/>
+                        </td>
+                    </tr>
+                </table>
+                            
+                <div>
+                    <img id="saigelogo_login" src="/images_copied/saige_logo.png" 
+                         style="z-index:-1;opacity:0.15;display:block;margin:auto;width:45%;
+                                position:relative;top:-170px;"/>
+                </div>
+            </div>
+        </form>
+        
+        <!-- ============== SELF-EDITING SECTION ================== -->
+        <form id="myprofileform">
+            <div id="editmyprofilediv" class="parentdiv">   
+                <span class="login-status"></span>
+                <br/>
+                <span><img class="clientlogoimg"/></span> 
+                <span class="headerlink-editmyprofilediv"></span> 
+                
+                <div class="titlebar-gradient">
+                    <span class="title"></span>
+                    <span class="subtitle">
+                        <a class="link-staticcolor" href="javascript:callOneSheetsEndpoint(getCachedLoggedInUserId(), true);">View my one-sheet</a>
+                    </span>
+                </div>                
+
+                <br/>
+                <span class="editing-span user-formfields"></span>
+
+            </div>
+        </form>
+        
+        <!-- ============== PROFILES-MANAGEMENT SECTION ================== -->
+        <div id="manageteamsdiv" class="parentdiv">   
+            <span class="login-status"></span> 
+            <br/>
+            <span><img class="clientlogoimg"/></span> 
+            <span class="headerlink-manageteamsdiv"></span>
+
+            <div id="adminactionsdiv" class="rectangle-rounded-purple" style="margin-top:10px;">
+                <!-- Holds radio buttons to select a company to manage: -->
+                <span id="managecompanyselectiondiv"></span>
+
+                <!-- Available to the plume-company Admin only ------------- -->
+                <span id="parillume-company-buttons">
+                    <input class='btn-purple-small' type='submit' value='Create company'
+                           onclick='createCompany()'/>
+                    <input class='btn-purple-small' type='submit' value='Delete company'
+                           onclick='deleteCompany()'/>
+                </span>
+                <!-- ------------------------------------------------------- -->
+            </div>    
+
+            <div class="titlebar-gradient">
+                <span class="title"></span>
+                <span class="subtitle companyName"></span>
+            </div>        
+
+            <div class="adminbutton-top">
+                <label for="logoupload" class="file-upload">Update company logo</label>  
+                <!-- We set this.value=null onclick to ensure each click is fresh -->
+                <input type="file" id="logoupload"
+                       onclick="this.value=null;" onchange="uploadLogo()"/>
+                &nbsp;&nbsp;&nbsp;
+                <span>
+                    <label for="userworksheetupload" class="file-upload">Upload user worksheets</label>  
+                    <!-- We set this.value=null onclick to ensure each click is fresh -->
+                    <input type="file" id="userworksheetupload" multiple
+                           onclick="this.value=null;" 
+                           onchange="uploadUserWorksheet()" />
+                </span>
+                &nbsp;&nbsp;&nbsp;
+                <span class="fontsize-80">
+                    <a href="javascript:downloadWorksheetTemplate();">Download worksheet template</a>
+                </span>
+            </div> 
+
+            <div style="height:20px;"></div>
+            
+            <div class="parentdiv">                
+                <div id="managecompanydiv" style="margin-top:10px;">
+                    <div id="userprofilelinksdiv"></div>    
+                    
+                    <div id="admineditlinksdiv">
+                        <a href="javascript:toggleAdminEditingDisplay('admineditlink-newuser', 'upsertuserdiv', getCachedNewUserTemplate())" 
+                           class="admineditlink" id="admineditlink-newuser">
+                            Create a team member
+                        </a>
+                        &nbsp;&nbsp;
+                        <a href="javascript:toggleAdminEditingDisplay('admineditlink-deleteusers', 'deleteusersdiv')" 
+                           class="admineditlink" id="admineditlink-deleteusers">           
+                            Delete team members
+                        </a>  
+                        &nbsp;&nbsp;
+                        <a href="javascript:toggleAdminEditingDisplay('admineditlink-changecompanycredentials', 'changecompanycredentialsdiv')" 
+                           class="admineditlink" id="admineditlink-changecompanycredentials">           
+                            Change company credentials
+                        </a> 
+                        &nbsp;&nbsp;
+                        <span style="text-align:left;">
+                            <a href="javascript:toggleAdminEditingDisplay('admineditlink-updatecompany', 'updatecompanydiv', getCachedCompanyJSON());" 
+                               class="admineditlink" id="admineditlink-updatecompany">            
+                                Edit company
+                            </a>
+                        </span> 
+<!--                    Kinda dumb - superceded by editing of company JSON, above   
+                        &nbsp;&nbsp;
+                        <a href="javascript:toggleAdminEditingDisplay('admineditlink-updatecompanyteams', 'updatecompanyteamsdiv');" 
+                           class=" admineditlink" id="admineditlink-updatecompanyteams">           
+                            Manage team names
+                        </a> --> 
+                        <p/>
+                    </div>   
+                </div>
+            
+                <span class='modelglossary'></span>
+                
+                <span class="editing-span">
+                        
+                    <div class="admineditdiv" id="changecompanycredentialsdiv" 
+                         style="max-width:540px;display:none">
+                        <span class="emptyspan rectangle-rounded-grey" style="width:100%">
+                            <span class="formfield-label">Company email address (username):</span>
+                            <input type="email" id="newcompanyemail" name="newcompanyemail"
+                                   class="formfield" placeholder="New company email address (username)"/>
+                            
+                            <span class="formfield-label">New password:</span>
+                            <span class="password-toggle-icon"
+                                  onclick="toggleViewPassword('newcompanypassword1', 'toggleCompanyPasswordIcon1');">
+                                <i id="toggleCompanyPasswordIcon1" class="fa fa-eye"></i>
+                            </span>
+                            <input type="password" id="newcompanypassword1" name="newcompanypassword1"
+                                   class="formfield" placeholder="New company password"
+                                   autocomplete="new-password" />
+
+                            <span class="formfield-label">Re-enter new company password:</span>
+                            <span class="password-toggle-icon"
+                                  onclick="toggleViewPassword('newcompanypassword2', 'toggleCompanyPasswordIcon2');">
+                                <i id="toggleCompanyPasswordIcon2" class="fa fa-eye"></i>
+                            </span>    
+                            <input type="password" id="newcompanypassword2" name="newcompanypassword2"
+                                   class="formfield" placeholder="Re-enter new company password"
+                                   autocomplete="new-password" />  
+                        </span>    
+                        <br/>   
+
+                        <span class="span-centered">
+                            <input class="btn-purple"
+                               type="button" value="Submit"
+                               onclick="updateCompanyCredentials();document.getElementById('admineditlink-changecompanycredentials').click();"/>
+                        </span>
+                    </div>
+                    
+                    <div class="admineditdiv" id="deleteusersdiv" style="display:none">
+                        <input type="checkbox" name="deleteallusers" id="deleteallusers" 
+                               onclick="unCheckGroup('deleteallusers', 'deleteusersclass')">
+                        &nbsp;<span class='fontsize-90' style='color:dimgray'>SELECT ALL</span>
+                        <span id="deleteuserslist" name="deleteuserslist"></span>
+                        <span class="span-centered">
+                            <input class='btn-purple' type='button' value='Submit'
+                                   onclick='deleteUsers();document.getElementById("admineditlink-deleteusers").click();'/>
+                        </span>
+                    </div> 
+                                        
+                    <div class="admineditdiv" id="upsertuserdiv" 
+                         style="max-width:540px;display:none">
+                        <textarea id='adminupsertusertextarea' class='adminedittextarea'></textarea>
+                        <br/>       
+                        <span class='span-centered'>
+                        <input class='btn-purple' type='button' value='Submit' 
+                               onclick='adminSubmitUser();'/>
+                        </span>                        
+                    </div>  
+
+                    <div class="admineditdiv" id="updatecompanydiv" 
+                         style="max-width:540px;display:none">
+                        <textarea id='adminupdatecompanytextarea' class='adminedittextarea'></textarea>
+                        <br/>       
+                        <span class='span-centered'>
+                        <input class='btn-purple' type='button' value='Submit' 
+                               onclick='adminUpdateCompany();'/>
+                        </span>                        
+                    </div> 
+<!--                Kinda dumb - superceded by editing of company JSON, above
+                    <div class="admineditdiv" id="updatecompanyteamsdiv" style="display:none">
+                        <span class="teamspan" id="updatecompanyteamsselection" name="updatecompanyteamsselection"></span>
+                        <span class="span-centered">
+                            <input class='btn-purple' type='button' value='Edit teams'
+                                   onclick='editTeams();document.getElementById("admineditlink-updatecompanyteams").click();'/>
+                        </span>
+                    </div> -->                  
+                </span>             
+            </div>
+        </div>
+        
+        <!-- ============== MAIN-PAGE SECTION ================== -->    
+        <div id="teaminsightsdiv" class="parentdiv">     
+            <span class="login-status"></span>  
+            <br/>  
+            <span><img class="clientlogoimg"/></span> 
+            <span class="headerlink-teaminsightsdiv"></span> 
+            
+            <div class="titlebar-gradient">
+                <span class="title"></span>
+                <span class="subtitle companyName"></span>
+            </div>
+            
+                
+            <div>
+                <br/>
+
+                <div class="numberedheaderdiv">
+                    <div class="numberedheader_bg">
+<!--                        1-->
+                    </div>
+                    <div class="numberedheader_fg">
+                        <span class="link-togglable fontsize-115" style="color:#722b90;display:inline-block;">
+                            <strong>Filter insights...</strong>
+                        </span>
+
+                        <span class="link-togglable" style="display:inline-block;"> 
+                            <div onclick="$('#insightsSuffix').text(_teamResultsSuffix);toggleInsightsDisplay(true);">
+                                <span id="link_team_members" style="color:#722b90;">
+                                    <i id="openclose_team_members" class="fa fa-caret-down openclose-icon" aria-hidden="true"></i>
+                                    &nbsp;by team members<span style="margin-left:0;padding-left:0;" class='fontsize-90 field-tip field-text'>
+                                    <i class="fa fa-question-circle-o fa-xs help-button-grey" aria-hidden="true"></i>
+                                    <span class='tip-content'>View and download insights about selected team members.<br/>
+                                                              Download one-sheets and team charts.</span>
+                                    </span>
+                                </span>
+                            </div>     
+                        </span> 
+
+                        <span class="link-togglable" style="display:inline-block;"> 
+                            <div onclick="$('#insightsSuffix').text(_assessmentsResultsSuffix);toggleInsightsDisplay(false);">
+                                <span id="link_assessments" style="color:grey;">
+                                    <i id="openclose_assessments" class="fa fa-caret-up openclose-icon" aria-hidden="true"></i>
+                                    &nbsp;by assessment results<span style="margin-left:0;padding-left:0;" class='fontsize-90 field-tip field-text'>
+                                    <i class="fa fa-question-circle-o fa-xs help-button-grey" aria-hidden="true"></i>
+                                    <span class='tip-content'>View and download insights about team members who have any of the selected assessment results.</span>
+                                    </span>
+                                </span>
+                            </div>      
+                        </span> 
+                    </div>
+                </div>
+
+                <div style="margin-top:20px"></div>
+
+                <form id="teammembersinsightsform">
+                    <input type="hidden" name="sessionid"/>
+                    <input type="hidden" name="companyid"/>
+                    <input type="hidden" name="managedcompanyreferences"/>
+
+                    <input type="hidden" class="column" id="name" name="name" value="name"/>
+                    <input type="hidden" class="column" id="cliftonstrengths" name="cliftonstrengths" value="cliftonstrengths" hidden/> 
+                    <input type="hidden" class="column" id="myersbriggs" name="myersbriggs" value="myersbriggs"/> 
+                    <input type="hidden" class="column" id="enneagram" name="enneagram" value="enneagram"/> 
+                    <input type="hidden" class="column" id="superpowers" name="superpowers" value="superpowers"/> 
+                    <input type="hidden" class="column" id="kryptonite" name="kryptonite" value="kryptonite"/> 
+                    <input type="hidden" class="column" id="pfps" name="pfps" value="pfps"/> 
+
+
+                    <div class="numberedheaderdiv">
+                        <div class="numberedheader_bg">
+<!--                            2-->
+                        </div>
+                        <div class="numberedheader_fg">
+                            <span id="teammembers_insightsfilter_span" class="w3-show" style="display:inline-block;"></span> 
+                        </div>
+                    </div>
+                </form>
+
+                <form id="assessmentsinsightsform" disabled>
+                    <input type="hidden" name="sessionid"/>
+                    <input type="hidden" name="companyid"/>
+                    <input type="hidden" name="managedcompanyreferences"/>
+
+                    <input type="hidden" class="column" name="name" value="name"/> 
+                    <input type="hidden" class="column" name="cliftonstrengths" value="cliftonstrengths"/> 
+                    <input type="hidden" class="column" name="myersbriggs" value="myersbriggs"/> 
+                    <input type="hidden" class="column" name="enneagram" value="enneagram"/> 
+                    <input type="hidden" class="column" name="superpowers" value="superpowers"/> 
+                    <input type="hidden" class="column" name="kryptonite" value="kryptonite"/> 
+                    <input type="hidden" class="column" name="pfps" value="pfps"/> 
+
+                    <span id="assessments_filterdiv" class="w3-show"></span>
+                </form>
+            </div>
+            
+            <div style="margin-left:25px">
+                <div name="insightstable" id="insightstable"></div>
+                <div name="csvinsightstable" id="csvinsightstable" style="display:none"></div>
+                <p/>
+            </div> 
+            
+        </div>     
+
+        <span class="footer-element footer-element-left">
+            <img id="saigelogo" src="/images_copied/saige_logo.png"/>
+        </span> 
+        <span class="footer-element footer-element-center">
+            &copy;2024 Parillume All rights reserved
+        </span>
+        <span class="footer-element footer-element-right">
+            <img id="parillumelogo" src="/images_copied/parillume_logo.png"/> 
+        </span> 
+        
+    </body>
+</html>

@@ -1,0 +1,434 @@
+
+<!-- saved from url=(0070)file:///Users/lisafoster/Downloads/onesheet_boxcontent_tool%20(1).html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><script type="text/javascript">
+        var enneagramSuperpowers = new Map();//TJMTJM Missing 2 Enneagrams
+        enneagramSuperpowers.set("1", "Consistent excellence; optimizing systems; growth mindset"); 
+        enneagramSuperpowers.set("2", "Generous, supportive, kind; community-builder"); 
+        enneagramSuperpowers.set("3", "Goal-driven; public face; people skills"); 
+        enneagramSuperpowers.set("4", "Emotional intelligence; unique insight; creativity");
+        enneagramSuperpowers.set("5", "Innovative, pioneering, studious, masterful");
+        enneagramSuperpowers.set("6", "Healthy skepticism; supportive leadership");
+        enneagramSuperpowers.set("7", "Fun, positive energy; inventive, adventurous");
+        enneagramSuperpowers.set("8", "Heroic leadership; efficient resolution; stands up for others");
+        enneagramSuperpowers.set("9", "Grounded leadership; mediation; holistic perspective");
+        
+        var enneagramKryptonite = new Map();
+        enneagramKryptonite.set("1", "Mistakes; mediocrity; lack of integrity & accountability"); 
+        enneagramKryptonite.set("2", "Criticism; feeling overwhelmed by expectations");
+        enneagramKryptonite.set("3", "Criticism; looking bad; conflict; lack of goals; failure");
+        enneagramKryptonite.set("4", "Cog in the machine; inauthenticity; lack of aesthetics");
+        enneagramKryptonite.set("5", "Improvisation, risk-taking; violation of personal space/time");
+        enneagramKryptonite.set("6", "Risk, instability; lack of clear expectations");
+        enneagramKryptonite.set("7", "Routine, restriction, micro-management; boredom");
+        enneagramKryptonite.set("8", "Indirectness; inefficiency; injustice; irresponsibility");
+        enneagramKryptonite.set("9", "Conflict, disconnection; being put on the spot");
+        
+        var enneagramPFPs = new Map();
+        enneagramPFPs.set("1", "Be forgiving & accept mistakes; progress, not perfection");
+        enneagramPFPs.set("2", "Self-nurture and set boundaries; ask for help");
+        enneagramPFPs.set("3", "Be authentic & know my worth apart from work");
+        enneagramPFPs.set("4", "Be ordinary & join the club; pracitce presence");
+        enneagramPFPs.set("5", "Engage & take risks; ask for space instead of ghosting");
+        enneagramPFPs.set("6", "Be confident & break the mold; identify fears & plan responses");
+        enneagramPFPs.set("7", "Be content; stop & smell the roses; stay the course");
+        enneagramPFPs.set("8", "Be vulnerable, relax & let go; share what’s under the anger");
+        enneagramPFPs.set("9", "Engage honestly & allow discord; value and share my real perspective");      
+        
+        var myersbriggsSuperpowers = new Map();
+        myersbriggsSuperpowers.set("ISTJ", "Hardworking, dutiful; jack-of-all-trades; strategic planning");
+        myersbriggsSuperpowers.set("ISTP", "Creative, practical & mechanical; calm in a crisis");
+        myersbriggsSuperpowers.set("ISFJ", "Kind, helpful, loyal; high standards; consistent systems");
+        myersbriggsSuperpowers.set("ISFP", "Artistic & imaginative; charming and sensitive");
+        myersbriggsSuperpowers.set("INTJ", "Creative & imaginative; strategic problem-solving");
+        myersbriggsSuperpowers.set("INTP", "Imaginative & original; open-minded & analytical");
+        myersbriggsSuperpowers.set("INFJ", "Creative, insightful; kind, loyal, altruistic");      
+        myersbriggsSuperpowers.set("INFP", "Creative collaboration; clear beliefs, values & decisions");
+        myersbriggsSuperpowers.set("ESTJ", "Strong, loyal leadership; organization; strategic planning");
+        myersbriggsSuperpowers.set("ESTP", "Entrepreneurial; out-of-the-box thinking & problem-solving");
+        myersbriggsSuperpowers.set("ESFJ", "Warm & friendly; planning & administration");
+        myersbriggsSuperpowers.set("ESFP", "People skills; clear beliefs, core values & decisions");
+        myersbriggsSuperpowers.set("ENTJ", "Strong, charismatic leadership; strategic; creative");
+        myersbriggsSuperpowers.set("ENTP", "Creative communication; devil’s advocate; strategic");
+        myersbriggsSuperpowers.set("ENFJ", "Leadership, social skills; creativity; organization");
+        myersbriggsSuperpowers.set("ENFP", "Creative communication; brainstorming; clear values & beliefs");
+
+        var myersbriggsKryptonite = new Map();
+        myersbriggsKryptonite.set("ISTJ", "Thinking creatively on the spot; unconventional situations");
+        myersbriggsKryptonite.set("ISTP", "Emotional processing; adhering to social norms");
+        myersbriggsKryptonite.set("ISFJ", "Requesting what I need; improvisation; breaking the rules"); 
+        myersbriggsKryptonite.set("ISFP", "Too much time management; long-term planning");
+        myersbriggsKryptonite.set("INTJ", "Cog in the machine; too much outside world");
+        myersbriggsKryptonite.set("INTP", "Micromanagement; emotional processing");
+        myersbriggsKryptonite.set("INFJ", "Sensory overload; conflict; negativity; lack of planning");
+        myersbriggsKryptonite.set("INFP", "Too much structure & time management; conflict");
+        myersbriggsKryptonite.set("ESTJ", "People drama; constant customization");
+        myersbriggsKryptonite.set("ESTP", "Long-term planning; too much structure");
+        myersbriggsKryptonite.set("ESFJ", "Impersonal reasoning; conflict, negativity; lack of planning");
+        myersbriggsKryptonite.set("ESFP", "Long-term planning; conflict");
+        myersbriggsKryptonite.set("ENTJ", "Vulnerability; lack of clear vision & direction");
+        myersbriggsKryptonite.set("ENTP", "Practical matters; boredom");
+        myersbriggsKryptonite.set("ENFJ", "Conflict, negativity; lack of planning");
+        myersbriggsKryptonite.set("ENFP", "Administrative details; micromanagement"); 
+        
+        var myersbriggsPFPs = new Map();//TJMTJM Missing 8 M-Bs
+        myersbriggsPFPs.set("ISTJ", "TODO");
+        myersbriggsPFPs.set("ISTP", "TODO");
+        myersbriggsPFPs.set("ISFJ", "TODO");
+        myersbriggsPFPs.set("ISFP", "TODO");
+        myersbriggsPFPs.set("INTJ", "TODO");
+        myersbriggsPFPs.set("INTP", "TODO");
+        myersbriggsPFPs.set("INFJ", "TODO");
+        myersbriggsPFPs.set("INFP", "TODO");
+        myersbriggsPFPs.set("ESTJ", "TODO");
+        myersbriggsPFPs.set("ESTP", "TODO");
+        myersbriggsPFPs.set("ESFJ", "TODO");
+        myersbriggsPFPs.set("ESFP", "TODO");
+        myersbriggsPFPs.set("ENTJ", "TODO");
+        myersbriggsPFPs.set("ENTP", "TODO");
+        myersbriggsPFPs.set("ENFJ", "TODO");
+        myersbriggsPFPs.set("ENFP", "TODO");
+        
+        var cliftonSuperpowers = new Map();
+        cliftonSuperpowers.set("Achiever", "Hard work & stamina to achieve goals efficiently"); 
+        cliftonSuperpowers.set("Activator", "Turning thoughts into action and momentum");
+        cliftonSuperpowers.set("Adaptability", "Calm in a crisis; flexible & supportive");
+        cliftonSuperpowers.set("Analytical", "Poking holes in ideas & strategies");
+        cliftonSuperpowers.set("Arranger", "Organizing resources for max productivity");
+        cliftonSuperpowers.set("Belief", "Living by core values; altruistic & trustworthy");
+        cliftonSuperpowers.set("Command", "Boldness and decisiveness");
+        cliftonSuperpowers.set("Communication", "Clear, memorable use of language; storytelling");
+        cliftonSuperpowers.set("Competition", "Works hard to win, every time");
+        cliftonSuperpowers.set("Connectedness", "Holistic view; connecting people");
+        cliftonSuperpowers.set("Consistency", "Creating & sticking to SOPs; fair practices");
+        cliftonSuperpowers.set("Context", "Post-mortems & using the past to inform the present");
+        cliftonSuperpowers.set("Deliberative", "Conscientious, rational decision-making");
+        cliftonSuperpowers.set("Developer", "Nurturing potential in others");
+        cliftonSuperpowers.set("Discipline", "Structuring and managing projects");
+        cliftonSuperpowers.set("Empathy", "Creating a safe space for all to express themselves");
+        cliftonSuperpowers.set("Focus", "Ability to prioritize and commit to goals");
+        cliftonSuperpowers.set("Futuristic", "Forecasts; envisioning a better future in detail");
+        cliftonSuperpowers.set("Harmony", "Bridging different perspectives"); 
+        cliftonSuperpowers.set("Ideation", "Creative brainstorming; innovative solutions");
+        cliftonSuperpowers.set("Includer", "Embracing & promoting inclusion");
+        cliftonSuperpowers.set("Individualization", "Customizing solutions for people & projects");
+        cliftonSuperpowers.set("Input", "Expertise through research; collecting info & resources");
+        cliftonSuperpowers.set("Intellection", "Thinking deeply about an issue or strategy");
+        cliftonSuperpowers.set("Learner", "Hunger for knowledge & new frontiers");
+        cliftonSuperpowers.set("Maximizer", "Turning good to great & pursuing perfection");
+        cliftonSuperpowers.set("Positivity", "Contagious enthusiasm & encouragement");    
+        cliftonSuperpowers.set("Relator", "Deep, authentic personal connection");
+        cliftonSuperpowers.set("Responsibility", "Dependability; loyalty; teamwork");
+        cliftonSuperpowers.set("Restorative", "Getting to the root of problems & solving them");
+        cliftonSuperpowers.set("Self-Assurance", "Confident risk-taking & self-management"); 
+        cliftonSuperpowers.set("Significance", "Natural performer and contributor");
+        cliftonSuperpowers.set("Strategic", "Finding the path forward regardless of obstacles");
+        cliftonSuperpowers.set("Woo", "Creating rapport and positive energy");        
+        
+        var cliftonKryptonite = new Map();
+        cliftonKryptonite.set("Achiever", "Others’ lack of diligence; lack of forward movement"); 
+        cliftonKryptonite.set("Activator", "All talk, no action");
+        cliftonKryptonite.set("Adaptability", "A static, predictable  environment");
+        cliftonKryptonite.set("Analytical", "Lack of data & facts; emotional decisions");
+        cliftonKryptonite.set("Arranger", "Static environment & others’ resistance to change");
+        cliftonKryptonite.set("Belief", "Lacking or compromising values"); 
+        cliftonKryptonite.set("Command", "Passivity; lack of clear leadership");
+        cliftonKryptonite.set("Communication", "No audience &; poor communication by others");
+        cliftonKryptonite.set("Competition", "Losing the game; no game to play");
+        cliftonKryptonite.set("Connectedness", "An 'us vs them' or short-sighted mentality");
+        cliftonKryptonite.set("Consistency", "Broken rules; excessive customization");
+        cliftonKryptonite.set("Context", "Ignorance of, or dismissal of, lessons of the past");
+        cliftonKryptonite.set("Deliberative", "Cavalier & last-minute decision-making");
+        cliftonKryptonite.set("Developer", "Unfulfilled potential left unaddressed");
+        cliftonKryptonite.set("Discipline", "Last-minute chaos & not respecting a plan");
+        cliftonKryptonite.set("Empathy", "Taking on others’ feelings; feelings being ignored");
+        cliftonKryptonite.set("Focus", "Tangents; lack of clear goals");
+        cliftonKryptonite.set("Futuristic", "The status quo; when others don’t get my vision");
+        cliftonKryptonite.set("Harmony", "Conflict; lack of collaboration");
+        cliftonKryptonite.set("Ideation", "The status quo & lack of innovation");
+        cliftonKryptonite.set("Includer", "Cliques, hierarchy, injustice");
+        cliftonKryptonite.set("Individualization", "One-size-fits-all approaches for people & projects");
+        cliftonKryptonite.set("Input", "Losing resources collected; lack of relevant expertise");
+        cliftonKryptonite.set("Intellection", "A thoughtless approach; anxious rumination");
+        cliftonKryptonite.set("Learner", "Boredom; lack of learning opportunities");
+        cliftonKryptonite.set("Maximizer", "Mediocrity; accepting less than the best");
+        cliftonKryptonite.set("Positivity", "Debbie Downers; no space for joy & celebration");
+        cliftonKryptonite.set("Relator", "Superficial small talk; impersonal hierarchy");
+        cliftonKryptonite.set("Responsibility", "Disappointing others; others’ lack of integrity");
+        cliftonKryptonite.set("Restorative", "Ignoring or dismissing problems"); 
+        cliftonKryptonite.set("Self-Assurance", "Lack of autonomy; hesitancy in others"); 
+        cliftonKryptonite.set("Significance", "Cog in the machine; lack of recognition");
+        cliftonKryptonite.set("Strategic", "One-way-only thinking; outdated systems");
+        cliftonKryptonite.set("Woo", "Being unliked; a shrinking network");
+
+        var cliftonPFPs = new Map();
+        cliftonPFPs.set("Achiever Hack", "Practice daily care for self & relationships (Achiever)");
+        cliftonPFPs.set("Achiever Activate", "Offer to work on stalled projects (Achiever)");
+        cliftonPFPs.set("Activator Hack", "Conclude meetings with an action plan (Activator)");
+        cliftonPFPs.set("Activator Activate", "Help stalled projects make action plans (Activator)");
+        cliftonPFPs.set("Adaptability Hack", "Focus on my needs, goals & tasks (Adaptability)");
+        cliftonPFPs.set("Adaptability Activate", "Create days that let me go with the flow (Adaptability)");
+        cliftonPFPs.set("Analytical Hack", "Check in before poking holes (Analytical)");
+        cliftonPFPs.set("Analytical Activate", "Create simple solutions to complex situations (Analytical)");
+        cliftonPFPs.set("Arranger Hack", "Explain why I’m rearranging resources (Arranger)");
+        cliftonPFPs.set("Arranger Activate", "Align people’s superpowers with actions (Arranger)");
+        cliftonPFPs.set("Belief Hack", "Share how a choice is out of alignment (Belief)");
+        cliftonPFPs.set("Belief Activate", "Help others apply core values in decision-making (Belief)");
+        cliftonPFPs.set("Command Hack", "Invite others into the conversation (Command)");
+        cliftonPFPs.set("Command Activate", "Address the elephant in the room (Command)"); 
+        cliftonPFPs.set("Communication Hack", "Journal and/or find people to process with (Communication)");
+        cliftonPFPs.set("Communication Activate", "Help others express their vision (Communication)"); 
+        cliftonPFPs.set("Competition Hack", "Make it clear I compete against myself, not you (Competition)");
+        cliftonPFPs.set("Competition Activate", "Gamify everything (Competition)");
+        cliftonPFPs.set("Connectedness Hack", "Explain the connections I see (Connectedness)");
+        cliftonPFPs.set("Connectedness Activate", "Create cross-functional connections (Connectedness)");
+        cliftonPFPs.set("Consistency Hack", "Recognize how customization increases fairness (Consistency)");
+        cliftonPFPs.set("Consistency Activate", "Help document SOPs (Consistency)");
+        cliftonPFPs.set("Context Hack", "Meet with others to gather information (Context)");
+        cliftonPFPs.set("Context Activate", "Manage post-mortems (Context)");
+        cliftonPFPs.set("Deliberative Hack", "Set a deadline for making a decision (Deliberative)");
+        cliftonPFPs.set("Deliberative Activate", "Share my pros & cons list with others (Deliberative)");
+        cliftonPFPs.set("Developer Hack", "Make sure mentees do the work to grow (Developer)");
+        cliftonPFPs.set("Developer Activate", "Look for opportunities to mentor (Developer)"); 
+        cliftonPFPs.set("Discipline Hack", "Adjust deadlines to allow last-minute changes (Discipline)");
+        cliftonPFPs.set("Discipline Activate", "Help others plan projects (Discipline)");
+        cliftonPFPs.set("Empathy Hack", "Consciously release others’ emotions (Empathy)");
+        cliftonPFPs.set("Empathy Activate", "Facilitate open conversations; apply my intuition (Empathy)");
+        cliftonPFPs.set("Focus Hack", "Relax & reset between tasks (Focus)");
+        cliftonPFPs.set("Focus Activate", "Clarify & prioritize goals for others (Focus)");
+        cliftonPFPs.set("Futuristic Hack", "Get support in communicating my vision (Futuristic)");
+        cliftonPFPs.set("Futuristic Activate", "Create an action plan to fulfill my vision (Futuristic)");
+        cliftonPFPs.set("Harmony Hack", "Focus on the next action all can agree on (Harmony)");
+        cliftonPFPs.set("Harmony Activate", "Invite everyone to share their viewpoints  (Harmony)"); 
+        cliftonPFPs.set("Ideation Hack", "Clarify that I don’t need action on every idea (Ideation)");
+        cliftonPFPs.set("Ideation Activate", "Find others to brainstorm with (Ideation)"); 
+        cliftonPFPs.set("Includer Hack", "Create group connection opportunities (Includer)");
+        cliftonPFPs.set("Includer Activate", "Facilitate inclusive activities (Includer)");
+        cliftonPFPs.set("Individualization Hack", "Explain the ROI on  a customized approach (Individualization)");
+        cliftonPFPs.set("Individualization Activate", "Create solutions that leverage superpowers (Individualization)"); 
+        cliftonPFPs.set("Input Hack", "Create a system to keep information (Input)");
+        cliftonPFPs.set("Input Activate", "Research before starting a project or attending a meeting (Input)");
+        cliftonPFPs.set("Intellection Hack", "Give myself a 'thinking' deadline (Intellection)");
+        cliftonPFPs.set("Intellection Activate", "Share my wisdom; engage in intellectual discussions (Intellection)");
+        cliftonPFPs.set("Learner Hack", "Communicate what I want to learn next (Learner)");
+        cliftonPFPs.set("Learner Activate", "Offer to teach others what I learned (Learner)");
+        cliftonPFPs.set("Maximizer Hack", "Acknowledge existing quality (Maximizer)");
+        cliftonPFPs.set("Maximizer Activate", "Focus on areas with the greatest ROI (Maximizer)");
+        cliftonPFPs.set("Positivity Hack", "Process difficult situations (e.g. journaling) (Positivity)");
+        cliftonPFPs.set("Positivity Activate", "Create fun experiences for others (Positivity)");
+        cliftonPFPs.set("Relator Hack", "Prep a unique question when meeting someone new (Relator)");
+        cliftonPFPs.set("Relator Activate", "Get to know a team member (Relator)");
+        cliftonPFPs.set("Responsibility Hack", "Wait 2-24 hours before saying 'Yes' (Responsibility)");
+        cliftonPFPs.set("Responsibility Activate", "Commit publicly to tasks you’ve avoided (Responsibility)");
+        cliftonPFPs.set("Restorative Hack", "Help solve problems for others (Restorative)");
+        cliftonPFPs.set("Restorative Activate", "Get to the root cause before fixing (Restorative)");
+        cliftonPFPs.set("Self-Assurance Hack", "Help others grow in confidence (Self-Assurance)");
+        cliftonPFPs.set("Self-Assurance Activate", "Anticipate risks so they can be overcome (Self-Assurance)");
+        cliftonPFPs.set("Significance Hack", "Get grounded & ask for what I need (Significance)");
+        cliftonPFPs.set("Significance Activate", "Take on larger-than-life initiatives (Significance)");
+        cliftonPFPs.set("Strategic Hack", "Communicate the 'Why' behind new ideas (Strategic)");
+        cliftonPFPs.set("Strategic Activate", "Create plans B and C as backups (Strategic)");
+        cliftonPFPs.set("Woo Hack", "Nurture existing network (Woo)");
+        cliftonPFPs.set("Woo Activate", "Join new groups & attend new events (Woo)");
+
+        window.onload=loadAllDropdowns;
+        
+        function loadAllDropdowns() {     
+            loadOneDropdown(enneagramPFPs, "enneagram");
+            loadOneDropdown(myersbriggsPFPs, "myersbriggs");
+            loadOneDropdown(cliftonPFPs, "clifton1", true);
+            loadOneDropdown(cliftonPFPs, "clifton2", true);
+            loadOneDropdown(cliftonPFPs, "clifton3", true);
+            loadOneDropdown(cliftonPFPs, "clifton4", true);
+            loadOneDropdown(cliftonPFPs, "clifton5", true);
+        }
+        
+        function loadOneDropdown(pfpMap, elementId, isClifton) {
+            var selectElmt = document.getElementById(elementId);
+            for (let [key, value] of  pfpMap.entries()) {
+                var optionElmt = document.createElement("option");
+                
+                if(isClifton) {
+                    // Skip 'xxx Hack' keys; convert 'xxx Activate' keys into 'xxx'
+                    if(key.endsWith('Hack')) continue;
+                    var index = key.indexOf(' Activate');
+                    key = key.substring(0, index); // 'Woo Activate' becomes 'Woo'
+                }
+                
+                optionElmt.value = key;
+                optionElmt.text = key;
+                selectElmt.appendChild(optionElmt);
+            }             
+        }
+        
+        function filter() {
+            var enneagram = document.getElementById('enneagram').value;
+            var myersbriggs = document.getElementById('myersbriggs').value;
+            var clifton1 = document.getElementById('clifton1').value;
+            var clifton2 = document.getElementById('clifton2').value;
+            var clifton3 = document.getElementById('clifton3').value;
+            var clifton4 = document.getElementById('clifton4').value;
+            var clifton5 = document.getElementById('clifton5').value;
+
+            var output = 'Click the checkboxes next to the phrases you want.<br/>' +
+                         'Click \"View Checked\" to hide all other phrases; then copy-and-paste the phrases (incl. bullet points) into the PowerPoint.<br/>' +
+                         'Click \"View All\" to see all the phrases again.<p/>' +
+                         '<input type="checkbox" id="toggler" onchange="toggleAll()">&nbsp;<strong>Toggle all checkboxes</strong>' +
+                         '<br/><input type=\"button\" value=\"View Checked\" onclick="keepOnlyChecked()"/>' +
+                         '&nbsp;<input type=\"button\" value=\"View All\" onclick="displayAll()"/>' +
+                         '&nbsp;<input type=\"button\" value=\"Back\" onclick="location.reload()"/><hr/>' +                         
+                         
+                'SUPERPOWERS:' +
+                         '<br/>' +
+                         '<span id="0"><li><input type="checkbox" id="keep_0">' +
+                         cliftonSuperpowers.get(clifton1) + ' (' + clifton1 + ')' +
+                         '</li></span>' +
+                         '<span id="1"><li><input type="checkbox" id="keep_1">' +
+                         cliftonSuperpowers.get(clifton2) + ' (' + clifton2 + ')' +
+                         '</li></span>' +
+                         '<span id="2"><li><input type="checkbox" id="keep_2">' +
+                         cliftonSuperpowers.get(clifton3) + ' (' + clifton3 + ')' +
+                         '</li></span>' +
+                         '<span id="3"><li><input type="checkbox" id="keep_3">' +
+                         cliftonSuperpowers.get(clifton4) + ' (' + clifton4 + ')' +
+                         '</li></span>' +
+                         '<span id="4"><li><input type="checkbox" id="keep_4">' +
+                         cliftonSuperpowers.get(clifton5) + ' (' + clifton5 + ')' +
+                         '</li></span>' +
+                         '<span id="5"><li><input type="checkbox" id="keep_5">' +
+                         myersbriggsSuperpowers.get(myersbriggs) + ' (' + myersbriggs + ')' +
+                         '</li></span>' +
+                         '<span id="6"><li><input type="checkbox" id="keep_6">' +
+                         enneagramSuperpowers.get(enneagram) + ' (Type ' + enneagram + ')' +
+                         '</li></span>' +
+                         
+                         'KRYPTONITE' +
+                         '<br/>' +
+                         '<span id="7"><li><input type="checkbox" id="keep_7">' +
+                         cliftonKryptonite.get(clifton1) + ' (' + clifton1 + ')' +
+                         '</li></span>' +
+                         '<span id="8"><li><input type="checkbox" id="keep_8">' +
+                         cliftonKryptonite.get(clifton2) + ' (' + clifton2 + ')' +
+                         '</li></span>' +
+                         '<span id="9"><li><input type="checkbox" id="keep_9">' +
+                         cliftonKryptonite.get(clifton3) + ' (' + clifton3 + ')' +
+                         '</li></span>' +
+                         '<span id="10"><li><input type="checkbox" id="keep_10">' +
+                         cliftonKryptonite.get(clifton4) + ' (' + clifton4 + ')' +
+                         '</li></span>' +
+                         '<span id="11"><li><input type="checkbox" id="keep_11">' +
+                         cliftonKryptonite.get(clifton5) + ' (' + clifton5 + ')' +
+                         '</li></span>' +
+                         '<span id="12"><li><input type="checkbox" id="keep_12">' +
+                         myersbriggsKryptonite.get(myersbriggs) + ' (' + myersbriggs + ')' +
+                         '</li></span>' +
+                         '<span id="13"><li><input type="checkbox" id="keep_13">' +
+                         enneagramKryptonite.get(enneagram) + ' (Type ' + enneagram + ')' +
+                         '</li></span>' +
+                         
+                         'PFPs' +
+                         '<br/>' +
+                         '<span id="14"><li><input type="checkbox" id="keep_14">' +
+                         cliftonPFPs.get(clifton1 + ' Hack') + 
+                         '</li></span>' +
+                         '<span id="15"><li><input type="checkbox" id="keep_15">' +
+                         cliftonPFPs.get(clifton1 + ' Activate') + 
+                         '</li></span>' +
+                         '<span id="16"><li><input type="checkbox" id="keep_16">' +
+                         cliftonPFPs.get(clifton2 + ' Hack') +
+                         '</li></span>' +
+                         '<span id="17"><li><input type="checkbox" id="keep_17">' +
+                         cliftonPFPs.get(clifton2 + ' Activate') +
+                         '</li></span>' +
+                         '<span id="18"><li><input type="checkbox" id="keep_18">' +
+                         cliftonPFPs.get(clifton3 + ' Hack') +
+                         '</li></span>' +
+                         '<span id="19"><li><input type="checkbox" id="keep_19">' +
+                         cliftonPFPs.get(clifton3 + ' Activate') +
+                         '</li></span>' +
+                         '<span id="20"><li><input type="checkbox" id="keep_20">' +
+                         cliftonPFPs.get(clifton4 + ' Hack') +
+                         '</li></span>' +
+                         '<span id="21"><li><input type="checkbox" id="keep_21">' +
+                         cliftonPFPs.get(clifton4 + ' Activate') +
+                         '</li></span>' +
+                         '<span id="22"><li><input type="checkbox" id="keep_22">' +
+                         cliftonPFPs.get(clifton5 + ' Hack') +
+                         '</li></span>' +
+                         '<span id="23"><li><input type="checkbox" id="keep_23">' +
+                         cliftonPFPs.get(clifton5 + ' Activate') +
+                         '</li></span>' +
+//TODO:                         
+//                         '<span id="24"><li><input type="checkbox" id="keep_24">' +
+//                         myersbriggsPFPs.get(myersbriggs) + ' (' + myersbriggs + ')' +
+//                         '</li></span>' +
+                         '<span id="24"><li><input type="checkbox" id="keep_24">' +
+                         enneagramPFPs.get(enneagram) + ' (Type ' + enneagram + ')' +
+                         '</li></span>';
+                 
+            document.write(output);
+        }
+        
+        function keepOnlyChecked() {
+            var keepCheckboxes = document.querySelectorAll('[id^="keep_"]');
+            for(var i=0; i < keepCheckboxes.length; i++) {
+                var checkboxElmt = keepCheckboxes[i];
+                var keep = checkboxElmt.checked;
+                if(!keep) {
+                    document.getElementById(i).style.display = "none";
+                } else {
+                    checkboxElmt.style.display = "none";
+                }
+            }
+        }
+        
+        function displayAll() {
+            var keepCheckboxes = document.querySelectorAll('[id^="keep_"]');
+            for(var i=0; i < keepCheckboxes.length; i++) {
+                document.getElementById(i).style.display = "block";
+                document.getElementById(i).style.visibility = "visible";
+                keepCheckboxes[i].style.display = "";
+            }            
+        }
+        
+        function toggleAll() {
+            var selectAll = document.getElementById('toggler').checked;
+
+            var keepCheckboxes = document.querySelectorAll('[id^="keep_"]');
+            for(var i=0; i < keepCheckboxes.length; i++) {
+                keepCheckboxes[i].checked = selectAll;
+            }            
+        }
+        
+    </script> 
+    
+    </head><body><form>
+        Enneagram:<br>
+        <select name="enneagram" id="enneagram">
+        <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+        
+        <p>
+        
+        Myers-Briggs:<br>
+        <select name="myersbriggs" id="myersbriggs">
+        <option value="ISTJ">ISTJ</option><option value="ISTP">ISTP</option><option value="ISFJ">ISFJ</option><option value="ISFP">ISFP</option><option value="INTJ">INTJ</option><option value="INTP">INTP</option><option value="INFJ">INFJ</option><option value="INFP">INFP</option><option value="ESTJ">ESTJ</option><option value="ESTP">ESTP</option><option value="ESFJ">ESFJ</option><option value="ESFP">ESFP</option><option value="ENTJ">ENTJ</option><option value="ENTP">ENTP</option><option value="ENFJ">ENFJ</option><option value="ENFP">ENFP</option></select>
+        
+        </p><p>
+        
+        CliftonStrengths:<br>
+        <select name="clifton1" id="clifton1">
+        <option value="Achiever">Achiever</option><option value="Activator">Activator</option><option value="Adaptability">Adaptability</option><option value="Analytical">Analytical</option><option value="Arranger">Arranger</option><option value="Belief">Belief</option><option value="Command">Command</option><option value="Communication">Communication</option><option value="Competition">Competition</option><option value="Connectedness">Connectedness</option><option value="Consistency">Consistency</option><option value="Context">Context</option><option value="Deliberative">Deliberative</option><option value="Developer">Developer</option><option value="Discipline">Discipline</option><option value="Empathy">Empathy</option><option value="Focus">Focus</option><option value="Futuristic">Futuristic</option><option value="Harmony">Harmony</option><option value="Ideation">Ideation</option><option value="Includer">Includer</option><option value="Individualization">Individualization</option><option value="Input">Input</option><option value="Intellection">Intellection</option><option value="Learner">Learner</option><option value="Maximizer">Maximizer</option><option value="Positivity">Positivity</option><option value="Relator">Relator</option><option value="Responsibility">Responsibility</option><option value="Restorative">Restorative</option><option value="Self-Assurance">Self-Assurance</option><option value="Significance">Significance</option><option value="Strategic">Strategic</option><option value="Woo">Woo</option></select><br>
+        <select name="clifton2" id="clifton2">
+        <option value="Achiever">Achiever</option><option value="Activator">Activator</option><option value="Adaptability">Adaptability</option><option value="Analytical">Analytical</option><option value="Arranger">Arranger</option><option value="Belief">Belief</option><option value="Command">Command</option><option value="Communication">Communication</option><option value="Competition">Competition</option><option value="Connectedness">Connectedness</option><option value="Consistency">Consistency</option><option value="Context">Context</option><option value="Deliberative">Deliberative</option><option value="Developer">Developer</option><option value="Discipline">Discipline</option><option value="Empathy">Empathy</option><option value="Focus">Focus</option><option value="Futuristic">Futuristic</option><option value="Harmony">Harmony</option><option value="Ideation">Ideation</option><option value="Includer">Includer</option><option value="Individualization">Individualization</option><option value="Input">Input</option><option value="Intellection">Intellection</option><option value="Learner">Learner</option><option value="Maximizer">Maximizer</option><option value="Positivity">Positivity</option><option value="Relator">Relator</option><option value="Responsibility">Responsibility</option><option value="Restorative">Restorative</option><option value="Self-Assurance">Self-Assurance</option><option value="Significance">Significance</option><option value="Strategic">Strategic</option><option value="Woo">Woo</option></select><br>
+        <select name="clifton3" id="clifton3">
+        <option value="Achiever">Achiever</option><option value="Activator">Activator</option><option value="Adaptability">Adaptability</option><option value="Analytical">Analytical</option><option value="Arranger">Arranger</option><option value="Belief">Belief</option><option value="Command">Command</option><option value="Communication">Communication</option><option value="Competition">Competition</option><option value="Connectedness">Connectedness</option><option value="Consistency">Consistency</option><option value="Context">Context</option><option value="Deliberative">Deliberative</option><option value="Developer">Developer</option><option value="Discipline">Discipline</option><option value="Empathy">Empathy</option><option value="Focus">Focus</option><option value="Futuristic">Futuristic</option><option value="Harmony">Harmony</option><option value="Ideation">Ideation</option><option value="Includer">Includer</option><option value="Individualization">Individualization</option><option value="Input">Input</option><option value="Intellection">Intellection</option><option value="Learner">Learner</option><option value="Maximizer">Maximizer</option><option value="Positivity">Positivity</option><option value="Relator">Relator</option><option value="Responsibility">Responsibility</option><option value="Restorative">Restorative</option><option value="Self-Assurance">Self-Assurance</option><option value="Significance">Significance</option><option value="Strategic">Strategic</option><option value="Woo">Woo</option></select><br>
+        <select name="clifton4" id="clifton4">
+        <option value="Achiever">Achiever</option><option value="Activator">Activator</option><option value="Adaptability">Adaptability</option><option value="Analytical">Analytical</option><option value="Arranger">Arranger</option><option value="Belief">Belief</option><option value="Command">Command</option><option value="Communication">Communication</option><option value="Competition">Competition</option><option value="Connectedness">Connectedness</option><option value="Consistency">Consistency</option><option value="Context">Context</option><option value="Deliberative">Deliberative</option><option value="Developer">Developer</option><option value="Discipline">Discipline</option><option value="Empathy">Empathy</option><option value="Focus">Focus</option><option value="Futuristic">Futuristic</option><option value="Harmony">Harmony</option><option value="Ideation">Ideation</option><option value="Includer">Includer</option><option value="Individualization">Individualization</option><option value="Input">Input</option><option value="Intellection">Intellection</option><option value="Learner">Learner</option><option value="Maximizer">Maximizer</option><option value="Positivity">Positivity</option><option value="Relator">Relator</option><option value="Responsibility">Responsibility</option><option value="Restorative">Restorative</option><option value="Self-Assurance">Self-Assurance</option><option value="Significance">Significance</option><option value="Strategic">Strategic</option><option value="Woo">Woo</option></select><br>
+        <select name="clifton5" id="clifton5">
+        <option value="Achiever">Achiever</option><option value="Activator">Activator</option><option value="Adaptability">Adaptability</option><option value="Analytical">Analytical</option><option value="Arranger">Arranger</option><option value="Belief">Belief</option><option value="Command">Command</option><option value="Communication">Communication</option><option value="Competition">Competition</option><option value="Connectedness">Connectedness</option><option value="Consistency">Consistency</option><option value="Context">Context</option><option value="Deliberative">Deliberative</option><option value="Developer">Developer</option><option value="Discipline">Discipline</option><option value="Empathy">Empathy</option><option value="Focus">Focus</option><option value="Futuristic">Futuristic</option><option value="Harmony">Harmony</option><option value="Ideation">Ideation</option><option value="Includer">Includer</option><option value="Individualization">Individualization</option><option value="Input">Input</option><option value="Intellection">Intellection</option><option value="Learner">Learner</option><option value="Maximizer">Maximizer</option><option value="Positivity">Positivity</option><option value="Relator">Relator</option><option value="Responsibility">Responsibility</option><option value="Restorative">Restorative</option><option value="Self-Assurance">Self-Assurance</option><option value="Significance">Significance</option><option value="Strategic">Strategic</option><option value="Woo">Woo</option></select>
+        
+        </p><p>
+        
+        <input type="button" value="Go" onclick="filter()">
+    </p></form>
+
+</body></html>

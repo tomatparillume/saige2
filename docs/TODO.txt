@@ -1,0 +1,45 @@
+AWS
+- Update application.properties:spring.datasource.*
+- Update application.properties:server.ssl.key-store*
+- DiskImage.getImage: image required in /tmp dir is trouble for AWS deployment?
+    We need to use getResourceAsStream for AWS; we do so in DiskImage.getImageStream(..)
+
+Lisa's Vision
+    Laptop and Phone
+    Access all Plume resources - get rid of Kajabi?
+    Survey results and team-growth analyses
+    Emails include PFP reminders
+        - Send PFP reminders by text also
+    Calendar reminders w/communication tips
+    Ask Chat through the website? (No: Too expensive?)
+    
+Chat
+    - COMPARE ChatGPT with Google Copilot
+    - ChatGPT: https://platform.openai.com/settings/organization/api-keys:  tmargolis@gmail.com / Google account password: -_*(]
+    - ChatService.chat() should read the message from the returned JSON response
+
+controller.js
+    - Replace with async ajax but use Promises to await
+
+Allow visualization/download of survey history
+Display charts on page, as well as download
+
+Format emails! See autoemail_template.html
+
+***********************
+Create GROWTH, PRODUCTIVITY, and CULTURE questions
+***********************
+
+% in superpowers history: Show a little graph
+
+Default PFPs
+- Reduce # of existing default PFPs in Lisa's script w/Lisa
+- Populate default PFPs by default in UI
+
+Add assessment-site links
+
+Use classes, not style=
+Categories need descriptions
+Test on other browsers
+-------------------
+Downloadables in the Kajabi Dashboard should be generated using the corpus (e.g. see the CliftonStrengths downloadables)

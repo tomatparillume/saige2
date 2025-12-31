@@ -1,0 +1,98 @@
+<!-- Team Insights page: Team-member checkboxes to filter insights by team members -->
+<span class="formfield-label">First name:&nbsp;<span style="color:red">*</span></span> 
+<input type="text" id="firstname" name="firstname" 
+       class="formfield" placeholder="First name"/> 
+<br/> 
+<span class="formfield-label">Last name:&nbsp;<span style="color:red">*</span></span> 
+<input type="text" id="lastname" name="lastname" 
+       class="formfield" placeholder="Last name"/> 
+<br/> 
+<span class="formfield-label">Email address:&nbsp;<span style="color:red">*</span></span> 
+<em>This also serves as your login username.</em> 
+<input type="text" id="email" name="email"  
+       class="formfield" placeholder="Email address"/> 
+<br/> 
+<span class="formfield-label">Phone number:</span> 
+<input type="text" id="phone" name="phone" 
+       class="formfield" placeholder="Phone number"/> 
+<p/> 
+
+<span class="formfield-label">My team membership:</span> 
+<span id="myprofile_teamspan"></span> 
+<p/> 
+
+<span class="formfield-label-left">My email subjects:&nbsp; 
+    <span class="field-tip field-text"> 
+        <i class="fa fa-question-circle-o fa help-button-grey" aria-hidden="true"></i> 
+        <span class="tip-content">Auto-generated emails you receive will provide insights about one of the selected team members</span> 
+    </span> 
+</span> 
+<span id="myprofile_chattargetsspan"></span> 
+
+<!-- "CS-assessment", "MB-assessment", and "EN-assessment" correspond to an assessment IDs in the corpus model --> 
+<span class="formfield-label-left"> 
+    My assessment results:&nbsp;<span style="color:red">*</span>&nbsp; 
+    <span class="field-tip field-text"> 
+        <i class="fa fa-question-circle-o fa help-button-grey" aria-hidden="true"></i> 
+        <span class="tip-content">These affect your superpowers and kryptonite options, below</span> 
+    </span> 
+</span> 
+<span id="myprofile_assessmentspan"></span> 
+
+<div class="titlebar-gradient" style="margin-bottom:20px;"><h4>Edit the fields below after your individual session</h4></div>  
+
+<span class="formfield-label">% in Superpowers:</span>&nbsp; 
+<span class=field-tip field-text id="pfpTooltip"> 
+    <i class="fa fa-question-circle-o fa help-button-black" aria-hidden="true"></i> 
+    <span class="tip-content">Currently, what percentage of the time are you in your superpowers at work?</span> 
+</span>&nbsp; 
+<input type="number" step="10" min="0" max="100" id="percentagesup" name="percentagesup"> 
+<p/> 
+
+<span class="formfield-label">Play-full Practices:</span>&nbsp; 
+<span class=field-tip field-text id="pfpTooltip"> 
+    <i class="fa fa-question-circle-o fa help-button-black" aria-hidden="true"></i> 
+    <span class="tip-content">Enter each Play-full Practice on its own line.</span> 
+</span>  
+<br/>                 
+<textarea id="playfullpractices" name="playfullpractices" 
+          class="formfield" placeholder="Play-full practices"></textarea> 
+<br/> 
+
+<div> 
+    <span class="formfield-label-left">My superpowers:&nbsp;<span style="color:red">*</span>  
+    </span>                         
+    <span id="myprofile_supspan"></span> 
+</div> 
+<p/> 
+<div> 
+    <span class="formfield-label-left">My kryptonite:&nbsp;<span style="color:red">*</span> 
+    </span> 
+    <span id="myprofile_krypspan"></span> 
+</div> 
+<br/> 
+<span class="emptyspan rectangle-rounded-grey" style="width:100%"> 
+    <h4>Change password:</h4> 
+    <span class="formfield-label">New password:</span> 
+    &nbsp;<span class="password-toggle-icon" 
+        onclick="toggleViewPassword('newpassword1', 'togglePasswordIcon1');"> 
+        <i id="togglePasswordIcon1" class="fa fa-eye"></i> 
+    </span> 
+    <input type="password" id="newpassword1" name="newpassword1" 
+           class="formfield" placeholder="New password" 
+           autocomplete="new-password" /> 
+
+    <span class="formfield-label">Re-enter new password:</span> 
+    &nbsp;<span class="password-toggle-icon" 
+          onclick="toggleViewPassword('newpassword2', 'togglePasswordIcon2');"> 
+        <i id="togglePasswordIcon2" class="fa fa-eye"></i> 
+    </span>     
+    <input type="password" id="newpassword2" name="newpassword2" 
+           class="formfield" placeholder="Re-enter new password" 
+           autocomplete="new-password" />   
+</span> 
+
+<div class=align-center > 
+    <input class=btn-purple type=button value=Submit  
+           onclick=submitMyProfile()> 
+</div>
