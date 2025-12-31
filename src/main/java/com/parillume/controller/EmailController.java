@@ -3,24 +3,15 @@
  */
 package com.parillume.controller;
 
-import com.parillume.external.chat.model.ChatTopic;
-import com.parillume.model.CompanyModel;
-import com.parillume.model.CorpusModel;
 import com.parillume.external.email.service.EmailService;
 import com.parillume.print.display.DiskImage;
 import com.parillume.print.display.ImageIF;
 import com.parillume.security.service.SessionService;
 import com.parillume.template.TemplateService.Template;
-import com.parillume.util.StringUtil;
-import java.io.ByteArrayInputStream;
 import java.util.Base64;
-import java.util.List;
 import java.util.Map;
-import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
