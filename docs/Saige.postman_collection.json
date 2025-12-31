@@ -1,0 +1,1258 @@
+{
+	"info": {
+		"_postman_id": "138cfdfa-d4ce-4c26-bf61-4bc771f0cbd6",
+		"name": "Saige",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "67318"
+	},
+	"item": [
+		{
+			"name": "Command line",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/commandline?arg=process=multisheets",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"commandline"
+					],
+					"query": [
+						{
+							"key": "arg",
+							"value": "process=multisheets"
+						},
+						{
+							"key": "arg",
+							"value": "teamname='Some Team Name'",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create survey bar graphs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/createbargraphs",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"createbargraphs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate session",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/validatesession?sessionid=lkjasd",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"validatesession"
+					],
+					"query": [
+						{
+							"key": "sessionid",
+							"value": "lkjasd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Log in",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"info@parillume.com\", \"password\":\"LSFAbundance\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Log out",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/logout?sessionid=496fbd8af52e67fc7aaa53e5480ac0b093140114e8a384d1-__-1b28503f04da6410-__-6a5efb90dba9c41e1801df056a0d6bfb-__-true",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"logout"
+					],
+					"query": [
+						{
+							"key": "sessionid",
+							"value": "496fbd8af52e67fc7aaa53e5480ac0b093140114e8a384d1-__-1b28503f04da6410-__-6a5efb90dba9c41e1801df056a0d6bfb-__-true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add company",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company\": {\r\n        \"id\": \"plume-company\",\r\n        \"name\": \"Parillume\",\r\n        \"chatsPerMonth\": 1000,\r\n        \"googleFolderURL\": \"TJMTJM Google folder URL\",\r\n        \"username\": \"info@parillume.com\",\r\n        \"password\": \"e75cb7ef5f021467f676d93564dee10a\",\r\n        \"active\": true\r\n    },\r\n    \"managedCompanyIds\": [],\r\n    \"teams\": [\r\n        {\r\n            \"id\": \"plume-devteam\",\r\n            \"name\": \"Development\",\r\n            \"description\": \"Parillume Dev Team description goes here TJMTJM\",\r\n            \"companyIds\": [\r\n                \"plume-company\"\r\n            ],\r\n            \"active\": true\r\n        },\r\n        {\r\n            \"id\": \"plume-opsteam\",\r\n            \"name\": \"Operations\",\r\n            \"description\": \"Parillume Operations Team description goes here TJMTJM\",\r\n            \"companyIds\": [\r\n                \"plume-company\"\r\n            ],\r\n            \"active\": true\r\n        }\r\n    ],\r\n    \"roles\": [\r\n        {\r\n            \"id\": \"plume-fndr-role\",\r\n            \"name\": \"Founder\",\r\n            \"description\": \"Founder description goes here TJMTJM\",\r\n            \"roleTypeId\": \"rt-executive\",\r\n            \"active\": true\r\n        },\r\n        {\r\n            \"id\": \"plume-ed-role\",\r\n            \"name\": \"Educational Designer\",\r\n            \"description\": \"Educational Designer description goes here TJMTJM\",\r\n            \"roleTypeId\": \"rt-indivcontributor\",\r\n            \"active\": true\r\n        },\r\n        {\r\n            \"id\": \"plume-opsmgr-role\",\r\n            \"name\": \"Operations Manager\",\r\n            \"description\": \"Operations Manager description goes here TJMTJM\",\r\n            \"roleTypeId\": \"rt-indivcontributor\",\r\n            \"active\": true\r\n        }\r\n    ],\r\n    \"users\": [\r\n        {\r\n            \"id\": \"10f3a9d8ffb64c4cab68767931b76fd8\",\r\n            \"nameFirst\": \"Ren\",\r\n            \"nameLast\": \"Margolis\",\r\n            \"emailAddress\": \"avid.inventor@gmail.com\",\r\n            \"phoneNumber\": null,\r\n            \"calendarType\": \"GOOGLE\",\r\n            \"emailSchedule\": \"WEEKDAYS\",\r\n            \"password\": \"8e7b947c70c6d89f\",\r\n            \"percentageInSuperpowersHistory\": {},\r\n            \"excludedChatUserIds\": [],\r\n            \"teamIdToRoleId\": {\r\n                \"plume-opsteam\": \"\",\r\n                \"plume-devteam\": \"\"\r\n            },\r\n            \"teamIdToManagerId\": {\r\n                \"plume-devteam\": \"U-LisaId\"\r\n            },\r\n            \"assessmentResultIds\": [\r\n                \"MB-intp\",\r\n                \"EN-5\",\r\n                \"CS-individualization\",\r\n                \"CS-ideation\",\r\n                \"CS-relator\",\r\n                \"CS-deliberative\",\r\n                \"CS-strategic\"\r\n            ],\r\n            \"superpowers\": [\r\n                \"Creative brainstorming and innovative solutions (Ideation)\",\r\n                \"Deep, authentic personal connection (Relator)\",\r\n                \"Innovative, pioneering, studious, and masterful (5: Investigator)\"\r\n            ],\r\n            \"kryptonite\": [\r\n                \"One-size-fits-all approaches for people and projects (Individualization)\",\r\n                \"Superficial small talk; impersonal hierarchy (Relator)\"\r\n            ],\r\n            \"superpowerAssessmentResultIds\": [\r\n                \"CS-ideation\",\r\n                \"CS-relator\",\r\n                \"EN-5\"\r\n            ],\r\n            \"kryptoniteAssessmentResultIds\": [\r\n                \"CS-individualization\",\r\n                \"CS-relator\"\r\n            ],\r\n            \"playfullPractices\": [],\r\n            \"active\": true\r\n        },\r\n        {\r\n            \"id\": \"U-ReneeId\",\r\n            \"nameFirst\": \"Renee\",\r\n            \"nameLast\": \"Marino\",\r\n            \"emailAddress\": \"renee@parillume.com\",\r\n            \"phoneNumber\": \"123-456-7890\",\r\n            \"calendarType\": \"MICROSOFT\",\r\n            \"emailSchedule\": \"NEVER\",\r\n            \"password\": \"c208ff4980fbef7b\",\r\n            \"percentageInSuperpowersHistory\": {\r\n                \"1736521052647\": 75,\r\n                \"1736721292355\": 75,\r\n                \"1737377237231\": 75,\r\n                \"1749045384706\": 75\r\n            },\r\n            \"excludedChatUserIds\": [\r\n                \"10f3a9d8ffb64c4cab68767931b76fd8\",\r\n                \"U-LisaId\",\r\n                \"U-TomId\"\r\n            ],\r\n            \"teamIdToRoleId\": {\r\n                \"plume-opsteam\": \"plume-opsmgr-role\",\r\n                \"plume-devteam\": \"\"\r\n            },\r\n            \"teamIdToManagerId\": {\r\n                \"plume-opsteam\": \"U-LisaId\"\r\n            },\r\n            \"assessmentResultIds\": [\r\n                \"MB-infj\",\r\n                \"EN-6\",\r\n                \"CS-achiever\",\r\n                \"CS-activator\",\r\n                \"CS-adaptability\",\r\n                \"CS-analytical\",\r\n                \"CS-arranger\"\r\n            ],\r\n            \"superpowers\": [\r\n                \"Calm in a crisis; flexible and readily supportive (Adaptability)\",\r\n                \"Healthy skepticism; team cohesion; supportive leadership (6: Loyalist)\"\r\n            ],\r\n            \"kryptonite\": [\r\n                \"Risk, instability, and neglect; lack of clear expectations (6: Loyalist)\",\r\n                \"Static environment; others' resistance to change (Arranger)\",\r\n                \"Too much outside world; dry data and facts; conflict, negativity, and lack of planning (INFJ: Wolf)\"\r\n            ],\r\n            \"superpowerAssessmentResultIds\": [\r\n                \"CS-adaptability\",\r\n                \"EN-6\"\r\n            ],\r\n            \"kryptoniteAssessmentResultIds\": [\r\n                \"EN-6\",\r\n                \"CS-arranger\",\r\n                \"MB-infj\"\r\n            ],\r\n            \"playfullPractices\": [\r\n                \"Listen more and speak less\",\r\n                \"Take notes during meetings\"\r\n            ],\r\n            \"active\": true\r\n        },\r\n        {\r\n            \"id\": \"U-LisaId\",\r\n            \"nameFirst\": \"Lisa\",\r\n            \"nameLast\": \"Foster\",\r\n            \"emailAddress\": \"lisa@parillume.com\",\r\n            \"phoneNumber\": \"720-481-8505\",\r\n            \"calendarType\": \"GOOGLE\",\r\n            \"emailSchedule\": \"WEEKLY\",\r\n            \"password\": \"e75cb7ef5f021467f676d93564dee10a\",\r\n            \"percentageInSuperpowersHistory\": {},\r\n            \"excludedChatUserIds\": [\r\n                \"10f3a9d8ffb64c4cab68767931b76fd8\",\r\n                \"U-TomId\",\r\n                \"U-ReneeId\"\r\n            ],\r\n            \"teamIdToRoleId\": {\r\n                \"plume-opsteam\": \"plume-fndr-role\"\r\n            },\r\n            \"teamIdToManagerId\": {},\r\n            \"assessmentResultIds\": [\r\n                \"MB-enfj\",\r\n                \"EN-3\",\r\n                \"CS-empathy\",\r\n                \"CS-maximizer\",\r\n                \"CS-woo\",\r\n                \"CS-positivity\",\r\n                \"CS-ideation\"\r\n            ],\r\n            \"superpowers\": [\r\n                \"Contagious enthusiasm and encouragement (Positivity)\",\r\n                \"Creating rapport and positive energy (Woo)\",\r\n                \"Creative brainstorming and innovative solutions (Ideation)\"\r\n            ],\r\n            \"kryptonite\": [\r\n                \"Being unliked; a shrinking network (Woo)\",\r\n                \"Debbie Downers; no space for joy and celebration (Positivity)\",\r\n                \"Status quo; lack of innovation (Ideation)\"\r\n            ],\r\n            \"superpowerAssessmentResultIds\": [\r\n                \"CS-positivity\",\r\n                \"CS-woo\",\r\n                \"CS-ideation\"\r\n            ],\r\n            \"kryptoniteAssessmentResultIds\": [\r\n                \"CS-woo\",\r\n                \"CS-positivity\",\r\n                \"CS-ideation\"\r\n            ],\r\n            \"playfullPractices\": [\r\n                \"Work out regularly\",\r\n                \"Put less food on plate\"\r\n            ],\r\n            \"active\": true\r\n        },\r\n        {\r\n            \"id\": \"U-TomId\",\r\n            \"nameFirst\": \"Tom\",\r\n            \"nameLast\": \"Margolis\",\r\n            \"emailAddress\": \"tom@parillume.com\",\r\n            \"phoneNumber\": \"720-346-4897\",\r\n            \"calendarType\": \"GOOGLE\",\r\n            \"emailSchedule\": \"WEEKDAYS\",\r\n            \"password\": \"8d4b7ff76566346251c264ccf3af75a7\",\r\n            \"percentageInSuperpowersHistory\": {\r\n                \"1736470875002\": 80,\r\n                \"1736712464657\": 80,\r\n                \"1736958736779\": 80,\r\n                \"1737126882515\": 100,\r\n                \"1737802641468\": 100,\r\n                \"1738959934368\": 100,\r\n                \"1739114246855\": 90,\r\n                \"1739882999265\": 90,\r\n                \"1749045373335\": 90,\r\n                \"1752159450246\": 80\r\n            },\r\n            \"excludedChatUserIds\": [\r\n                \"U-ReneeId\"\r\n            ],\r\n            \"teamIdToRoleId\": {\r\n                \"plume-devteam\": \"plume-ed-role\"\r\n            },\r\n            \"teamIdToManagerId\": {\r\n                \"plume-devteam\": \"U-LisaId\"\r\n            },\r\n            \"assessmentResultIds\": [\r\n                \"MB-intj\",\r\n                \"EN-8\",\r\n                \"CS-strategic\",\r\n                \"CS-ideation\",\r\n                \"CS-activator\",\r\n                \"CS-relator\",\r\n                \"CS-analytical\"\r\n            ],\r\n            \"superpowers\": [\r\n                \"Creative brainstorming and innovative solutions (Ideation)\",\r\n                \"Creative, imaginative; strategic, efficient problem-solving (INTJ: Octopus)\",\r\n                \"Finding the best path forward; overcoming obstacles (Strategic)\",\r\n                \"Poking holes in ideas and strategies (Analytical)\"\r\n            ],\r\n            \"kryptonite\": [\r\n                \"\\\"One-way-only\\\" thinking; outdated systems (Strategic)\",\r\n                \"All talk and no action (Activator)\",\r\n                \"Cog in the machine; too much outside world (INTJ: Octopus)\",\r\n                \"Indirectness, inefficiency, injustice, and irresponsibility (8: Challenger)\",\r\n                \"Lack of data and facts; emotional decisions (Analytical)\"\r\n            ],\r\n            \"superpowerAssessmentResultIds\": [\r\n                \"CS-ideation\",\r\n                \"MB-intj\",\r\n                \"CS-strategic\",\r\n                \"CS-analytical\"\r\n            ],\r\n            \"kryptoniteAssessmentResultIds\": [\r\n                \"CS-strategic\",\r\n                \"CS-activator\",\r\n                \"MB-intj\",\r\n                \"EN-8\",\r\n                \"CS-analytical\"\r\n            ],\r\n            \"playfullPractices\": [\r\n                \"Speak up more in meetings\",\r\n                \"Create a daily plan each morning\"\r\n            ],\r\n            \"active\": true\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/addcompany?sessionid=1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false&corpusversion=1.0",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"addcompany"
+					],
+					"query": [
+						{
+							"key": "sessionid",
+							"value": "1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false"
+						},
+						{
+							"key": "corpusversion",
+							"value": "1.0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add corpus",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"version\" : \"1.0\",\r\n  \"terms\" : [ {\r\n    \"id\" : \"TM-superpower\",\r\n    \"entityType\" : \"TERM\",\r\n    \"name\" : \"superpower\",\r\n    \"description\" : \"Innate talents, motivations and personality patterns that consistently produce superior results.\"\r\n  }, {\r\n    \"id\" : \"TM-kryptonite\",\r\n    \"entityType\" : \"TERM\",\r\n    \"name\" : \"kryptonite\",\r\n    \"description\" : \"Tasks, duties, and communication styles that disempower us, fueling avoidance, mediocrity, and silos on our teams.\"\r\n  } ],\r\n  \"assessmentCategoryTypes\" : [ {\r\n    \"id\" : \"ACT-leadershipstyle\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY_TYPE\",\r\n    \"name\" : \"Leadership Style\",\r\n    \"description\" : \"Leadership Style description goes here TJMTJM\"\r\n  }, {\r\n    \"id\" : \"ACT-leadershiptheme\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY_TYPE\",\r\n    \"name\" : \"Leadership Theme\",\r\n    \"description\" : \"Leadership Theme description goes here TJMTJM\"\r\n  }, {\r\n    \"id\" : \"ACT-culturecategory\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY_TYPE\",\r\n    \"name\" : \"Culture Category\",\r\n    \"description\" : \"Culture Category description goes here TJMTJM\"\r\n  }, {\r\n    \"id\" : \"ACT-socialstance\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY_TYPE\",\r\n    \"name\" : \"Social Stance\",\r\n    \"description\" : \"Social Stance description goes here TJMTJM\"\r\n  } ],\r\n  \"assessmentCategories\" : [ {\r\n    \"id\" : \"LS-strategic\",\r\n    \"name\" : \"Strategic\",\r\n    \"description\" : \"People with Strategic strengths are energized by possibilities and forging the best path forward. They generate, or fine-tune, new ideas and creative solutions. Make sure you include your Strategic types during the formative stages of a project.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershipstyle\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Strategic Style superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Strategic Style kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"LeadershipStyle\"\r\n  }, {\r\n    \"id\" : \"LS-influencing\",\r\n    \"name\" : \"Influencing\",\r\n    \"description\" : \"Need to sell an idea, internally or externally? Influencers help spread the word and gain buy-in. Once you've strategized a plan, empower your Influencers to gather the people that will make it happen.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershipstyle\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Influencing Style superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Influencing Style kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"LeadershipStyle\"\r\n  }, {\r\n    \"id\" : \"LS-executing\",\r\n    \"name\" : \"Executing\",\r\n    \"description\" : \"Lean on Executors to drive a project forward and get it across the finish line. Give your executing team members the concrete info they need to get ?er done, and then get out of their way.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershipstyle\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Executing Style superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Executing Style kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"LeadershipStyle\"\r\n  }, {\r\n    \"id\" : \"LS-relationshipbuilding\",\r\n    \"name\" : \"Relationship-Building\",\r\n    \"description\" : \"Throughout the course of a project, leverage Relationship Builders to keep the team bonded: They?ll read the room to ensure everyone feels seen, heard, valued and supported.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershipstyle\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"RelationshipBuilding Style superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"RelationshipBuilding Style kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"LeadershipStyle\"\r\n  }, {\r\n    \"id\" : \"LT-yesand\",\r\n    \"name\" : \"Yes, And\",\r\n    \"description\" : \"Need some out-of-the-box ideas? Look to the 'YES, AND' strengths.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershiptheme\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"YesAnd Theme superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"YesAnd Theme kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"LeadershipTheme\"\r\n  }, {\r\n    \"id\" : \"LT-tellmemore\",\r\n    \"name\" : \"Tell Me More\",\r\n    \"description\" : \"Already have an idea, but need to ground it with data? The 'TELL ME MORE' types will help.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershiptheme\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"TellMeMore Theme superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"TellMeMore Theme kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"LeadershipTheme\"\r\n  }, {\r\n    \"id\" : \"LT-butwait\",\r\n    \"name\" : \"But, Wait\",\r\n    \"description\" : \"Want to test the strength of an idea? Ask the 'BUT, WAIT' team members.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershiptheme\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"ButWait Theme superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"ButWait Theme kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"LeadershipTheme\"\r\n  }, {\r\n    \"id\" : \"LT-letsgo\",\r\n    \"name\" : \"Let's Go\",\r\n    \"description\" : \"'LET'S GO!' types are powerful communicators and activators.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershiptheme\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"LetsGo Theme superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"LetsGo Theme kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"LeadershipTheme\"\r\n  }, {\r\n    \"id\" : \"LT-letsconnect\",\r\n    \"name\" : \"Let's Connect\",\r\n    \"description\" : \"'LET'S CONNECT' people create instant rapport and inspiring stories.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershiptheme\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"LetsConnect Theme superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"LetsConnect Theme kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"LeadershipTheme\"\r\n  }, {\r\n    \"id\" : \"LT-makeitmatter\",\r\n    \"name\" : \"Make It Matter\",\r\n    \"description\" : \"'MAKE IT MATTER' types commit to an ideal and bring others along.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershiptheme\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"MakeItMatter Theme superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"MakeItMatter Theme kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"LeadershipTheme\"\r\n  }, {\r\n    \"id\" : \"LT-structure\",\r\n    \"name\" : \"Structure\",\r\n    \"description\" : \"'STRUCTURE' types are great organizers.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershiptheme\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Structure Theme superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Structure Theme kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"LeadershipTheme\"\r\n  }, {\r\n    \"id\" : \"LT-calibrate\",\r\n    \"name\" : \"Calibrate\",\r\n    \"description\" : \"'CALIBRATE' strengths clarify and refine the process.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershiptheme\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Calibrate Theme superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Calibrate Theme kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"LeadershipTheme\"\r\n  }, {\r\n    \"id\" : \"LT-complete\",\r\n    \"name\" : \"Complete\",\r\n    \"description\" : \"'COMPLETE' types make sure you cross the finish line.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershiptheme\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Complete Theme superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Complete Theme kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"LeadershipTheme\"\r\n  }, {\r\n    \"id\" : \"LT-weareone\",\r\n    \"name\" : \"We Are One\",\r\n    \"description\" : \"'WE ARE ONE' types create harmony and connection.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershiptheme\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"WeAreOne Theme superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"WeAreOne Theme kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"LeadershipTheme\"\r\n  }, {\r\n    \"id\" : \"LT-elevateandcelebrate\",\r\n    \"name\" : \"Elevate and Celebrate\",\r\n    \"description\" : \"\\\"ELEVATE & CELEBRATE\\\" types bring out the best in others.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershiptheme\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"ElevateAndCelebrate Theme superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"ElevateAndCelebrate Theme kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"LeadershipTheme\"\r\n  }, {\r\n    \"id\" : \"LT-openArms\",\r\n    \"name\" : \"Open Arms\",\r\n    \"description\" : \"'OPEN ARMS' people integrate and unify a diverse team.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershiptheme\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"OpenArms Theme superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"OpenArms Theme kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"LeadershipTheme\"\r\n  }, {\r\n    \"id\" : \"LT-wannaplay\",\r\n    \"name\" : \"Wanna Play?\",\r\n    \"description\" : \"These vibrant Extroverts (E) thrive in an environment of adventure, innovation, connection, and forward momentum. And they wilt when steeped in conflict, rigidity, and seriousness.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-culturecategory\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"WannaPlay superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"WannaPlay kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"CultureCategory\"\r\n  }, {\r\n    \"id\" : \"LT-tenstepsahead\",\r\n    \"name\" : \"Ten Steps Ahead\",\r\n    \"description\" : \"These Intuitive Thinkers (NT) are quick-thinking, analytical, and highly rational. They love a good debate and want time and space to create. They shrink from emotional processing, people drama and personal vulnerability.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-culturecategory\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"TenStepsAhead superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"TenStepsAhead kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"CultureCategory\"\r\n  }, {\r\n    \"id\" : \"LT-allforone\",\r\n    \"name\" : \"All for One & One for All\",\r\n    \"description\" : \"These Sensory Judging (SJ) types are committed, hard working, organized and dutiful. Cavalier leadership, inefficiency, unnecessary risk and constant customization are kryptonite to them.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-culturecategory\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"AllForOne superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"AllForOne kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"CultureCategory\"\r\n  }, {\r\n    \"id\" : \"LT-theresmoreinside\",\r\n    \"name\" : \"There's More Inside\",\r\n    \"description\" : \"These quieter, creative Introverts (I) need space to create and re-energize on their own terms. Instability, drama, workaholism and stress can hit them harder than most, especially if there?s no end in sight or time to reset.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-culturecategory\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"TheresMoreInside superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"TheresMoreInside kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"CultureCategory\"\r\n  }, {\r\n    \"id\" : \"SS-assertive\",\r\n    \"name\" : \"Assertive\",\r\n    \"description\" : \"Assertive types create what they want in the world to get their needs met.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-socialstance\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Assertive superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Assertive kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"SocialStance\"\r\n  }, {\r\n    \"id\" : \"SS-aligning\",\r\n    \"name\" : \"Aligning\",\r\n    \"description\" : \"Aligning types adapt to the world to get their needs met.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-socialstance\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Aligning superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Aligning kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"SocialStance\"\r\n  }, {\r\n    \"id\" : \"SS-withdrawing\",\r\n    \"name\" : \"Withdrawing\",\r\n    \"description\" : \"Withdrawing types disengage from the world to get their needs met.\",\r\n    \"entityType\" : \"ASSESSMENT_CATEGORY\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-socialstance\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Withdrawing superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Withdrawing kryptonite goes here TJMTJM\"\r\n    },\r\n    \"type\" : \"SocialStance\"\r\n  } ],\r\n  \"assessments\" : [ {\r\n    \"id\" : \"CS-assessment\",\r\n    \"type\" : \"CSAssessment\",\r\n    \"entityType\" : \"ASSESSMENT\",\r\n    \"trademarkRightsSymbol\" : \"®\",\r\n    \"disclaimer\" : \"This material contains trademarks of GALLUP®. The non-Gallup information you are receiving has not been approved and is not sanctioned or endorsed by Gallup in any way. Opinions, views and interpretations of CliftonStrengths® are solely the beliefs of Parillume®.\",\r\n    \"description\" : \"The CS description goes here\"\r\n  }, {\r\n    \"id\" : \"EN-assessment\",\r\n    \"type\" : \"EnnAssessment\",\r\n    \"entityType\" : \"ASSESSMENT\",\r\n    \"trademarkRightsSymbol\" : \"\",\r\n    \"disclaimer\" : \"\",\r\n    \"description\" : \"The Enneagram description goes here\"\r\n  }, {\r\n    \"id\" : \"MB-assessment\",\r\n    \"type\" : \"MBAssessment\",\r\n    \"entityType\" : \"ASSESSMENT\",\r\n    \"trademarkRightsSymbol\" : \"®\",\r\n    \"disclaimer\" : \"Myers-Briggs® is a registered trademark of Myers & Briggs Foundation in the United States and other countries.\",\r\n    \"description\" : \"The MB description goes here\"\r\n  } ],\r\n  \"assessmentResults\" : [ {\r\n    \"id\" : \"CS-futuristic\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Futuristic\",\r\n    \"description\" : \"Futuristic strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-strategic\", \"LT-yesand\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Futuristic Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Futuristic Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-ideation\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Ideation\",\r\n    \"description\" : \"Ideation strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-strategic\", \"LT-yesand\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Ideation Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Ideation Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-strategic\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Strategic\",\r\n    \"description\" : \"Strategic strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-strategic\", \"LT-yesand\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Strategic Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Strategic Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-context\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Context\",\r\n    \"description\" : \"Context strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-strategic\", \"LT-tellmemore\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Context Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Context Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-input\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Input\",\r\n    \"description\" : \"Input strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-strategic\", \"LT-tellmemore\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Input Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Input Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-learner\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Learner\",\r\n    \"description\" : \"Learner strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-strategic\", \"LT-tellmemore\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Learner Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Learner Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-analytical\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Analytical\",\r\n    \"description\" : \"Analytical strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-strategic\", \"LT-butwait\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Analytical Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Analytical Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-intellection\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Intellection\",\r\n    \"description\" : \"Intellection strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-strategic\", \"LT-butwait\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Intellection Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Intellection Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-activator\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Activator\",\r\n    \"description\" : \"Activator strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-influencing\", \"LT-letsgo\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Activator Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Activator Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-command\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Command\",\r\n    \"description\" : \"Command strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-influencing\", \"LT-letsgo\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Command Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Command Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-competition\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Competition\",\r\n    \"description\" : \"Competition strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-influencing\", \"LT-letsgo\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Competition Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Competition Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-self-assurance\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Self-Assurance\",\r\n    \"description\" : \"Self-Assurance strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-influencing\", \"LT-letsgo\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Self-Assurance Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Self-Assurance Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-communication\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Communication\",\r\n    \"description\" : \"Communication strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-influencing\", \"LT-letsconnect\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Communication Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Communication Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-woo\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Woo\",\r\n    \"description\" : \"Woo strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-influencing\", \"LT-letsconnect\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Woo Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Woo Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-maximizer\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Maximizer\",\r\n    \"description\" : \"Maximizer strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-influencing\", \"LT-makeitmatter\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Maximizer Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Maximizer Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-significance\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Significance\",\r\n    \"description\" : \"Significance strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-influencing\", \"LT-makeitmatter\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Significance Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Significance Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-arranger\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Arranger\",\r\n    \"description\" : \"Arranger strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-structure\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Arranger Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Arranger Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-consistency\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Consistency\",\r\n    \"description\" : \"Consistency strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-structure\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Consistency Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Consistency Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-discipline\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Discipline\",\r\n    \"description\" : \"Discipline strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-structure\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Discipline Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Discipline Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-belief\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Belief\",\r\n    \"description\" : \"Belief strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-calibrate\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Belief Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Belief Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-deliberative\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Deliberative\",\r\n    \"description\" : \"Deliberative strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-calibrate\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Deliberative Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Deliberative Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-restorative\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Restorative\",\r\n    \"description\" : \"Restorative strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-calibrate\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Restorative Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Restorative Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-achiever\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Achiever\",\r\n    \"description\" : \"Achiever strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-complete\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Achiever Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Achiever Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-focus\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Focus\",\r\n    \"description\" : \"Focus strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-complete\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Focus Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Focus Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-responsibility\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Responsibility\",\r\n    \"description\" : \"Responsibility strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-complete\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Responsibility Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Responsibility Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-connectedness\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Connectedness\",\r\n    \"description\" : \"Connectedness strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-weareone\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Connectedness Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Connectedness Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-empathy\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Empathy\",\r\n    \"description\" : \"Empathy strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-weareone\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Empathy Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Empathy Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-harmony\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Harmony\",\r\n    \"description\" : \"Harmony strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-weareone\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Harmony Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Harmony Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-developer\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Developer\",\r\n    \"description\" : \"Developer strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-elevateandcelebrate\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Developer Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Developer Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-includer\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Includer\",\r\n    \"description\" : \"Includer strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-elevateandcelebrate\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Includer Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Includer Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-positivity\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Positivity\",\r\n    \"description\" : \"Positivity strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-elevateandcelebrate\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Positivity Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Positivity Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-adaptability\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Adaptability\",\r\n    \"description\" : \"Adaptability strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-openArms\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Adaptability Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Adaptability Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-individualization\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Individualization\",\r\n    \"description\" : \"Individualization strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-openArms\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Individualization Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Individualization Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"CS-relator\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Relator\",\r\n    \"description\" : \"Relator strength description goes here TJMTJM\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-openArms\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Relator Strength superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Relator Strength kryptonite goes here TJMTJM\"\r\n    }\r\n  }, {\r\n    \"id\" : \"EN-1\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"1\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"SS-aligning\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Enneagram 1 superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Enneagram 1 kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Reformer\",\r\n    \"leadershipStyle\" : null\r\n  }, {\r\n    \"id\" : \"EN-2\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"2\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"SS-aligning\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Enneagram 2 superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Enneagram 2 kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Helper\",\r\n    \"leadershipStyle\" : null\r\n  }, {\r\n    \"id\" : \"EN-3\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"3\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"SS-assertive\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Enneagram 3 superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Enneagram 3 kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Achiever\",\r\n    \"leadershipStyle\" : null\r\n  }, {\r\n    \"id\" : \"EN-4\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"4\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"SS-withdrawing\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Enneagram 4 superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Enneagram 4 kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Individualist\",\r\n    \"leadershipStyle\" : null\r\n  }, {\r\n    \"id\" : \"EN-5\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"5\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"SS-withdrawing\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Enneagram 5 superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Enneagram 5 kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Investigator\",\r\n    \"leadershipStyle\" : null\r\n  }, {\r\n    \"id\" : \"EN-6\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"6\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"SS-aligning\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Enneagram 6 superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Enneagram 6 kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Loyalist\",\r\n    \"leadershipStyle\" : null\r\n  }, {\r\n    \"id\" : \"EN-7\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"7\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"SS-assertive\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Enneagram 7 superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Enneagram 7 kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Enthusiast\",\r\n    \"leadershipStyle\" : null\r\n  }, {\r\n    \"id\" : \"EN-8\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"8\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"SS-assertive\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Enneagram 8 superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Enneagram 8 kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Challenger\",\r\n    \"leadershipStyle\" : null\r\n  }, {\r\n    \"id\" : \"EN-9\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"9\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"SS-withdrawing\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Enneagram 9 superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"Enneagram 9 kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Peacemaker\",\r\n    \"leadershipStyle\" : null\r\n  }, {\r\n    \"id\" : \"MB-intj\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"INTJ\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-tenstepsahead\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"INTJ superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"INTJ kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Architect\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Structure\" : \"MBPREF-judging\",\r\n      \"Focus\" : \"MBPREF-introvert\",\r\n      \"Input\" : \"MBPREF-intuitive\",\r\n      \"Decisions\" : \"MBPREF-thinking\"\r\n    }\r\n  }, {\r\n    \"id\" : \"MB-entj\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ENTJ\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-tenstepsahead\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"ENTJ superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"ENTJ kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Commander\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Structure\" : \"MBPREF-judging\",\r\n      \"Focus\" : \"MBPREF-extrovert\",\r\n      \"Input\" : \"MBPREF-intuitive\",\r\n      \"Decisions\" : \"MBPREF-thinking\"\r\n    }\r\n  }, {\r\n    \"id\" : \"MB-istj\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ISTJ\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-allforone\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"ISTJ superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"ISTJ kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Examiner\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Structure\" : \"MBPREF-judging\",\r\n      \"Focus\" : \"MBPREF-introvert\",\r\n      \"Input\" : \"MBPREF-sensory\",\r\n      \"Decisions\" : \"MBPREF-thinking\"\r\n    }\r\n  }, {\r\n    \"id\" : \"MB-estj\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ESTJ\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-allforone\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"ESTJ superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"ESTJ kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Executive\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Structure\" : \"MBPREF-judging\",\r\n      \"Focus\" : \"MBPREF-extrovert\",\r\n      \"Input\" : \"MBPREF-sensory\",\r\n      \"Decisions\" : \"MBPREF-thinking\"\r\n    }\r\n  }, {\r\n    \"id\" : \"MB-intp\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"INTP\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-tenstepsahead\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"INTP superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"INTP kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Logician\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Structure\" : \"MBPREF-perceiving\",\r\n      \"Focus\" : \"MBPREF-introvert\",\r\n      \"Input\" : \"MBPREF-intuitive\",\r\n      \"Decisions\" : \"MBPREF-thinking\"\r\n    }\r\n  }, {\r\n    \"id\" : \"MB-entp\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ENTP\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-tenstepsahead\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"ENTP superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"ENTP kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Debater\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Structure\" : \"MBPREF-perceiving\",\r\n      \"Focus\" : \"MBPREF-extrovert\",\r\n      \"Input\" : \"MBPREF-intuitive\",\r\n      \"Decisions\" : \"MBPREF-thinking\"\r\n    }\r\n  }, {\r\n    \"id\" : \"MB-istp\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ISTP\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-theresmoreinside\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"ISTP superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"ISTP kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Virtuoso\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Structure\" : \"MBPREF-perceiving\",\r\n      \"Focus\" : \"MBPREF-introvert\",\r\n      \"Input\" : \"MBPREF-sensory\",\r\n      \"Decisions\" : \"MBPREF-thinking\"\r\n    }\r\n  }, {\r\n    \"id\" : \"MB-estp\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ESTP\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-wannaplay\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"ESTP superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"ESTP kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Entrepreneur\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Structure\" : \"MBPREF-perceiving\",\r\n      \"Focus\" : \"MBPREF-extrovert\",\r\n      \"Input\" : \"MBPREF-sensory\",\r\n      \"Decisions\" : \"MBPREF-thinking\"\r\n    }\r\n  }, {\r\n    \"id\" : \"MB-infj\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"INFJ\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-theresmoreinside\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"INFJ superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"INFJ kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Advocate\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Structure\" : \"MBPREF-judging\",\r\n      \"Focus\" : \"MBPREF-introvert\",\r\n      \"Input\" : \"MBPREF-intuitive\",\r\n      \"Decisions\" : \"MBPREF-feeling\"\r\n    }\r\n  }, {\r\n    \"id\" : \"MB-enfj\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ENFJ\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-wannaplay\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"ENFJ superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"ENFJ kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Protagonist\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Structure\" : \"MBPREF-judging\",\r\n      \"Focus\" : \"MBPREF-extrovert\",\r\n      \"Input\" : \"MBPREF-intuitive\",\r\n      \"Decisions\" : \"MBPREF-feeling\"\r\n    }\r\n  }, {\r\n    \"id\" : \"MB-isfj\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ISFJ\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-allforone\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"ISFJ superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"ISFJ kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Defender\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Structure\" : \"MBPREF-judging\",\r\n      \"Focus\" : \"MBPREF-introvert\",\r\n      \"Input\" : \"MBPREF-sensory\",\r\n      \"Decisions\" : \"MBPREF-feeling\"\r\n    }\r\n  }, {\r\n    \"id\" : \"MB-esfj\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ESFJ\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-allforone\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"ESFJ superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"ESFJ kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Consul\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Structure\" : \"MBPREF-judging\",\r\n      \"Focus\" : \"MBPREF-extrovert\",\r\n      \"Input\" : \"MBPREF-sensory\",\r\n      \"Decisions\" : \"MBPREF-feeling\"\r\n    }\r\n  }, {\r\n    \"id\" : \"MB-infp\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"INFP\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-theresmoreinside\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"INFP superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"INFP kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Mediator\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Structure\" : \"MBPREF-perceiving\",\r\n      \"Focus\" : \"MBPREF-introvert\",\r\n      \"Input\" : \"MBPREF-intuitive\",\r\n      \"Decisions\" : \"MBPREF-feeling\"\r\n    }\r\n  }, {\r\n    \"id\" : \"MB-enfp\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ENFP\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-wannaplay\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"ENFP superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"ENFP kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Campaigner\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Structure\" : \"MBPREF-perceiving\",\r\n      \"Focus\" : \"MBPREF-extrovert\",\r\n      \"Input\" : \"MBPREF-intuitive\",\r\n      \"Decisions\" : \"MBPREF-feeling\"\r\n    }\r\n  }, {\r\n    \"id\" : \"MB-isfp\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ISFP\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-theresmoreinside\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"ISFP superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"ISFP kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Adventurer\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Structure\" : \"MBPREF-perceiving\",\r\n      \"Focus\" : \"MBPREF-introvert\",\r\n      \"Input\" : \"MBPREF-sensory\",\r\n      \"Decisions\" : \"MBPREF-feeling\"\r\n    }\r\n  }, {\r\n    \"id\" : \"MB-esfp\",\r\n    \"entityType\" : \"ASSESSMENT_RESULT\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ESFP\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-wannaplay\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"ESFP superpowers go here TJMTJM\",\r\n      \"TM-kryptonite\" : \"ESFP kryptonite goes here TJMTJM\"\r\n    },\r\n    \"nickname\" : \"Entertainer\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Structure\" : \"MBPREF-perceiving\",\r\n      \"Focus\" : \"MBPREF-extrovert\",\r\n      \"Input\" : \"MBPREF-sensory\",\r\n      \"Decisions\" : \"MBPREF-feeling\"\r\n    }\r\n  } ],\r\n  \"roleTypes\" : [ {\r\n    \"id\" : \"rt-indivcontributor\",\r\n    \"entityType\" : \"ROLE_TYPE\",\r\n    \"name\" : \"Individual Contributor\",\r\n    \"description\" : \"Individual Contributor description goes here TJMTJM\"\r\n  } ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/addcorpus?sessionid",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"addcorpus"
+					],
+					"query": [
+						{
+							"key": "sessionid",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Seed Parillume",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/seedparillume",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"seedparillume"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Seed Corpus",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/seedcorpus?overwrite=true",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"seedcorpus"
+					],
+					"query": [
+						{
+							"key": "overwrite",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update company",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company\": {\r\n        \"id\": \"plume-company\",\r\n        \"name\": \"Parillume\",\r\n        \"chatsPerMonth\": 1000,\r\n        \"googleFolderURL\": \"TJMTJM Google folder URL\",\r\n        \"username\": \"info@parillume.com\",\r\n        \"password\": \"e75cb7ef5f021467f676d93564dee10a\",\r\n        \"active\": true\r\n    },\r\n    \"managedCompanyIds\": [],\r\n    \"teams\": [\r\n        {\r\n            \"id\": \"plume-devteam\",\r\n            \"name\": \"Development\",\r\n            \"description\": \"Parillume Dev Team description goes here TJMTJM\",\r\n            \"companyIds\": [\r\n                \"plume-company\"\r\n            ],\r\n            \"active\": true\r\n        },\r\n        {\r\n            \"id\": \"plume-opsteam\",\r\n            \"name\": \"Operations\",\r\n            \"description\": \"Parillume Operations Team description goes here TJMTJM\",\r\n            \"companyIds\": [\r\n                \"plume-company\"\r\n            ],\r\n            \"active\": true\r\n        }\r\n    ],\r\n    \"roles\": [\r\n        {\r\n            \"id\": \"plume-fndr-role\",\r\n            \"name\": \"Founder\",\r\n            \"description\": \"Founder description goes here TJMTJM\",\r\n            \"roleTypeId\": \"rt-executive\",\r\n            \"active\": true\r\n        },\r\n        {\r\n            \"id\": \"plume-ed-role\",\r\n            \"name\": \"Educational Designer\",\r\n            \"description\": \"Educational Designer description goes here TJMTJM\",\r\n            \"roleTypeId\": \"rt-indivcontributor\",\r\n            \"active\": true\r\n        },\r\n        {\r\n            \"id\": \"plume-opsmgr-role\",\r\n            \"name\": \"Operations Manager\",\r\n            \"description\": \"Operations Manager description goes here TJMTJM\",\r\n            \"roleTypeId\": \"rt-indivcontributor\",\r\n            \"active\": true\r\n        }\r\n    ],\r\n    \"users\": [\r\n        {\r\n            \"id\": \"10f3a9d8ffb64c4cab68767931b76fd8\",\r\n            \"nameFirst\": \"Ren\",\r\n            \"nameLast\": \"Margolis\",\r\n            \"emailAddress\": \"avid.inventor@gmail.com\",\r\n            \"phoneNumber\": null,\r\n            \"calendarType\": \"GOOGLE\",\r\n            \"emailSchedule\": \"WEEKDAYS\",\r\n            \"password\": \"8e7b947c70c6d89f\",\r\n            \"percentageInSuperpowersHistory\": {},\r\n            \"excludedChatUserIds\": [],\r\n            \"teamIdToRoleId\": {\r\n                \"plume-opsteam\": \"\",\r\n                \"plume-devteam\": \"\"\r\n            },\r\n            \"teamIdToManagerId\": {\r\n                \"plume-devteam\": \"U-LisaId\"\r\n            },\r\n            \"assessmentResultIds\": [\r\n                \"MB-intp\",\r\n                \"EN-5\",\r\n                \"CS-individualization\",\r\n                \"CS-ideation\",\r\n                \"CS-relator\",\r\n                \"CS-deliberative\",\r\n                \"CS-strategic\"\r\n            ],\r\n            \"superpowers\": [\r\n                \"Creative brainstorming and innovative solutions (Ideation)\",\r\n                \"Deep, authentic personal connection (Relator)\",\r\n                \"Innovative, pioneering, studious, and masterful (5: Investigator)\"\r\n            ],\r\n            \"kryptonite\": [\r\n                \"One-size-fits-all approaches for people and projects (Individualization)\",\r\n                \"Superficial small talk; impersonal hierarchy (Relator)\"\r\n            ],\r\n            \"superpowerAssessmentResultIds\": [\r\n                \"CS-ideation\",\r\n                \"CS-relator\",\r\n                \"EN-5\"\r\n            ],\r\n            \"kryptoniteAssessmentResultIds\": [\r\n                \"CS-individualization\",\r\n                \"CS-relator\"\r\n            ],\r\n            \"playfullPractices\": [],\r\n            \"active\": true\r\n        },\r\n        {\r\n            \"id\": \"U-ReneeId\",\r\n            \"nameFirst\": \"Renee\",\r\n            \"nameLast\": \"Marino\",\r\n            \"emailAddress\": \"renee@parillume.com\",\r\n            \"phoneNumber\": \"123-456-7890\",\r\n            \"calendarType\": \"MICROSOFT\",\r\n            \"emailSchedule\": \"NEVER\",\r\n            \"password\": \"c208ff4980fbef7b\",\r\n            \"percentageInSuperpowersHistory\": {\r\n                \"1736521052647\": 75,\r\n                \"1736721292355\": 75,\r\n                \"1737377237231\": 75,\r\n                \"1749045384706\": 75\r\n            },\r\n            \"excludedChatUserIds\": [\r\n                \"10f3a9d8ffb64c4cab68767931b76fd8\",\r\n                \"U-LisaId\",\r\n                \"U-TomId\"\r\n            ],\r\n            \"teamIdToRoleId\": {\r\n                \"plume-opsteam\": \"plume-opsmgr-role\",\r\n                \"plume-devteam\": \"\"\r\n            },\r\n            \"teamIdToManagerId\": {\r\n                \"plume-opsteam\": \"U-LisaId\"\r\n            },\r\n            \"assessmentResultIds\": [\r\n                \"MB-infj\",\r\n                \"EN-6\",\r\n                \"CS-achiever\",\r\n                \"CS-activator\",\r\n                \"CS-adaptability\",\r\n                \"CS-analytical\",\r\n                \"CS-arranger\"\r\n            ],\r\n            \"superpowers\": [\r\n                \"Calm in a crisis; flexible and readily supportive (Adaptability)\",\r\n                \"Healthy skepticism; team cohesion; supportive leadership (6: Loyalist)\"\r\n            ],\r\n            \"kryptonite\": [\r\n                \"Risk, instability, and neglect; lack of clear expectations (6: Loyalist)\",\r\n                \"Static environment; others' resistance to change (Arranger)\",\r\n                \"Too much outside world; dry data and facts; conflict, negativity, and lack of planning (INFJ: Wolf)\"\r\n            ],\r\n            \"superpowerAssessmentResultIds\": [\r\n                \"CS-adaptability\",\r\n                \"EN-6\"\r\n            ],\r\n            \"kryptoniteAssessmentResultIds\": [\r\n                \"EN-6\",\r\n                \"CS-arranger\",\r\n                \"MB-infj\"\r\n            ],\r\n            \"playfullPractices\": [\r\n                \"Listen more and speak less\",\r\n                \"Take notes during meetings\"\r\n            ],\r\n            \"active\": true\r\n        },\r\n        {\r\n            \"id\": \"U-LisaId\",\r\n            \"nameFirst\": \"Lisa\",\r\n            \"nameLast\": \"Foster\",\r\n            \"emailAddress\": \"lisa@parillume.com\",\r\n            \"phoneNumber\": \"720-481-8505\",\r\n            \"calendarType\": \"GOOGLE\",\r\n            \"emailSchedule\": \"WEEKLY\",\r\n            \"password\": \"e75cb7ef5f021467f676d93564dee10a\",\r\n            \"percentageInSuperpowersHistory\": {},\r\n            \"excludedChatUserIds\": [\r\n                \"10f3a9d8ffb64c4cab68767931b76fd8\",\r\n                \"U-TomId\",\r\n                \"U-ReneeId\"\r\n            ],\r\n            \"teamIdToRoleId\": {\r\n                \"plume-opsteam\": \"plume-fndr-role\"\r\n            },\r\n            \"teamIdToManagerId\": {},\r\n            \"assessmentResultIds\": [\r\n                \"MB-enfj\",\r\n                \"EN-3\",\r\n                \"CS-empathy\",\r\n                \"CS-maximizer\",\r\n                \"CS-woo\",\r\n                \"CS-positivity\",\r\n                \"CS-ideation\"\r\n            ],\r\n            \"superpowers\": [\r\n                \"Contagious enthusiasm and encouragement (Positivity)\",\r\n                \"Creating rapport and positive energy (Woo)\",\r\n                \"Creative brainstorming and innovative solutions (Ideation)\"\r\n            ],\r\n            \"kryptonite\": [\r\n                \"Being unliked; a shrinking network (Woo)\",\r\n                \"Debbie Downers; no space for joy and celebration (Positivity)\",\r\n                \"Status quo; lack of innovation (Ideation)\"\r\n            ],\r\n            \"superpowerAssessmentResultIds\": [\r\n                \"CS-positivity\",\r\n                \"CS-woo\",\r\n                \"CS-ideation\"\r\n            ],\r\n            \"kryptoniteAssessmentResultIds\": [\r\n                \"CS-woo\",\r\n                \"CS-positivity\",\r\n                \"CS-ideation\"\r\n            ],\r\n            \"playfullPractices\": [\r\n                \"Work out regularly\",\r\n                \"Put less food on plate\"\r\n            ],\r\n            \"active\": true\r\n        },\r\n        {\r\n            \"id\": \"U-TomId\",\r\n            \"nameFirst\": \"Tom\",\r\n            \"nameLast\": \"Margolis\",\r\n            \"emailAddress\": \"tom@parillume.com\",\r\n            \"phoneNumber\": \"720-346-4897\",\r\n            \"calendarType\": \"GOOGLE\",\r\n            \"emailSchedule\": \"WEEKDAYS\",\r\n            \"password\": \"8d4b7ff76566346251c264ccf3af75a7\",\r\n            \"percentageInSuperpowersHistory\": {\r\n                \"1736470875002\": 80,\r\n                \"1736712464657\": 80,\r\n                \"1736958736779\": 80,\r\n                \"1737126882515\": 100,\r\n                \"1737802641468\": 100,\r\n                \"1738959934368\": 100,\r\n                \"1739114246855\": 90,\r\n                \"1739882999265\": 90,\r\n                \"1749045373335\": 90,\r\n                \"1752159450246\": 80\r\n            },\r\n            \"excludedChatUserIds\": [\r\n                \"U-ReneeId\"\r\n            ],\r\n            \"teamIdToRoleId\": {\r\n                \"plume-devteam\": \"plume-ed-role\"\r\n            },\r\n            \"teamIdToManagerId\": {\r\n                \"plume-devteam\": \"U-LisaId\"\r\n            },\r\n            \"assessmentResultIds\": [\r\n                \"MB-intj\",\r\n                \"EN-8\",\r\n                \"CS-strategic\",\r\n                \"CS-ideation\",\r\n                \"CS-activator\",\r\n                \"CS-relator\",\r\n                \"CS-analytical\"\r\n            ],\r\n            \"superpowers\": [\r\n                \"Creative brainstorming and innovative solutions (Ideation)\",\r\n                \"Creative, imaginative; strategic, efficient problem-solving (INTJ: Octopus)\",\r\n                \"Finding the best path forward; overcoming obstacles (Strategic)\",\r\n                \"Poking holes in ideas and strategies (Analytical)\"\r\n            ],\r\n            \"kryptonite\": [\r\n                \"\\\"One-way-only\\\" thinking; outdated systems (Strategic)\",\r\n                \"All talk and no action (Activator)\",\r\n                \"Cog in the machine; too much outside world (INTJ: Octopus)\",\r\n                \"Indirectness, inefficiency, injustice, and irresponsibility (8: Challenger)\",\r\n                \"Lack of data and facts; emotional decisions (Analytical)\"\r\n            ],\r\n            \"superpowerAssessmentResultIds\": [\r\n                \"CS-ideation\",\r\n                \"MB-intj\",\r\n                \"CS-strategic\",\r\n                \"CS-analytical\"\r\n            ],\r\n            \"kryptoniteAssessmentResultIds\": [\r\n                \"CS-strategic\",\r\n                \"CS-activator\",\r\n                \"MB-intj\",\r\n                \"EN-8\",\r\n                \"CS-analytical\"\r\n            ],\r\n            \"playfullPractices\": [\r\n                \"Speak up more in meetings\",\r\n                \"Create a daily plan each morning\"\r\n            ],\r\n            \"active\": true\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/updatecompany?corpusversion=1.0&sessionid=1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"updatecompany"
+					],
+					"query": [
+						{
+							"key": "corpusversion",
+							"value": "1.0"
+						},
+						{
+							"key": "sessionid",
+							"value": "1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update corpus",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"version\" : \"1.0\",\r\n  \"terms\" : [ {\r\n    \"id\" : \"TM-superpower\",\r\n    \"name\" : \"superpower\",\r\n    \"description\" : \"Innate talents, motivations and personality patterns that consistently produce superior results.\"\r\n  }, {\r\n    \"id\" : \"TM-kryptonite\",\r\n    \"name\" : \"kryptonite\",\r\n    \"description\" : \"Tasks, duties, and communication themes that disempower us, fueling avoidance, mediocrity, and silos on our teams.\"\r\n  } ],\r\n  \"assessmentCategoryTypes\" : [ {\r\n    \"id\" : \"ACT-socialstance\",\r\n    \"name\" : \"Social Stance\",\r\n    \"description\" : \"TJMTJM Social Stance description.\",\r\n    \"order\" : 1,\r\n    \"parentCategoryTypeId\" : null\r\n  }, {\r\n    \"id\" : \"ACT-culturecategory\",\r\n    \"name\" : \"Culture Category\",\r\n    \"description\" : \"TJMTJM Culture Category description.\",\r\n    \"order\" : 2,\r\n    \"parentCategoryTypeId\" : null\r\n  }, {\r\n    \"id\" : \"ACT-leadershiptheme\",\r\n    \"name\" : \"Leadership Theme\",\r\n    \"description\" : \"TJMTJM Leadership Theme description.\",\r\n    \"order\" : 3,\r\n    \"parentCategoryTypeId\" : null\r\n  }, {\r\n    \"id\" : \"ACT-leadershipstyle\",\r\n    \"name\" : \"Leadership Style\",\r\n    \"description\" : \"Each CliftonStrengths� Leadership Theme (Strategic, Influencing, Executing, Relationship-Building) comprises three Leadership Styles that manifest the theme in different ways\",\r\n    \"order\" : 4,\r\n    \"parentCategoryTypeId\" : \"ACT-leadershiptheme\"\r\n  } ],\r\n  \"assessmentCategories\" : [ {\r\n    \"id\" : \"LS-strategic\",\r\n    \"name\" : \"Strategic\",\r\n    \"description\" : \"People with Strategic strengths are energized by possibilities and forging the best path forward. They generate, or fine-tune, new ideas and creative solutions. Make sure you include your Strategic types during the formative stages of a project.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershiptheme\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 1,\r\n    \"type\" : \"LeadershipTheme\"\r\n  }, {\r\n    \"id\" : \"LS-influencing\",\r\n    \"name\" : \"Influencing\",\r\n    \"description\" : \"Need to sell an idea, internally or externally? Influencers help spread the word and gain buy-in. Once you've strategized a plan, empower your Influencers to gather the people that will make it happen.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershiptheme\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 2,\r\n    \"type\" : \"LeadershipTheme\"\r\n  }, {\r\n    \"id\" : \"LS-executing\",\r\n    \"name\" : \"Executing\",\r\n    \"description\" : \"Lean on Executors to drive a project forward and get it across the finish line. Give your executing team members the concrete info they need to get 'er done, and then get out of their way.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershiptheme\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 3,\r\n    \"type\" : \"LeadershipTheme\"\r\n  }, {\r\n    \"id\" : \"LS-relationshipbuilding\",\r\n    \"name\" : \"Relationship-Building\",\r\n    \"description\" : \"Throughout the course of a project, leverage Relationship Builders to keep the team bonded: They'll read the room to ensure everyone feels seen, heard, valued and supported.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershiptheme\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 4,\r\n    \"type\" : \"LeadershipTheme\"\r\n  }, {\r\n    \"id\" : \"LT-yesand\",\r\n    \"name\" : \"Yes, And\",\r\n    \"description\" : \"Need some out-of-the-box ideas? Look to the 'YES, AND' strengths.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershipstyle\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 1,\r\n    \"type\" : \"LeadershipStyle\"\r\n  }, {\r\n    \"id\" : \"LT-tellmemore\",\r\n    \"name\" : \"Tell Me More\",\r\n    \"description\" : \"Already have an idea, but need to ground it with data? The 'TELL ME MORE' types will help.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershipstyle\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 2,\r\n    \"type\" : \"LeadershipStyle\"\r\n  }, {\r\n    \"id\" : \"LT-butwait\",\r\n    \"name\" : \"But, Wait\",\r\n    \"description\" : \"Want to test the strength of an idea? Ask the 'BUT, WAIT' team members.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershipstyle\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 3,\r\n    \"type\" : \"LeadershipStyle\"\r\n  }, {\r\n    \"id\" : \"LT-letsgo\",\r\n    \"name\" : \"Let's Go\",\r\n    \"description\" : \"'LET'S GO!' types are powerful communicators and activators.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershipstyle\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 4,\r\n    \"type\" : \"LeadershipStyle\"\r\n  }, {\r\n    \"id\" : \"LT-letsconnect\",\r\n    \"name\" : \"Let's Connect\",\r\n    \"description\" : \"'LET'S CONNECT' people create instant rapport and inspiring stories.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershipstyle\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 5,\r\n    \"type\" : \"LeadershipStyle\"\r\n  }, {\r\n    \"id\" : \"LT-makeitmatter\",\r\n    \"name\" : \"Make It Matter\",\r\n    \"description\" : \"'MAKE IT MATTER' types commit to an ideal and bring others along.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershipstyle\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 6,\r\n    \"type\" : \"LeadershipStyle\"\r\n  }, {\r\n    \"id\" : \"LT-structure\",\r\n    \"name\" : \"Structure\",\r\n    \"description\" : \"'STRUCTURE' types are great organizers.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershipstyle\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 7,\r\n    \"type\" : \"LeadershipStyle\"\r\n  }, {\r\n    \"id\" : \"LT-calibrate\",\r\n    \"name\" : \"Calibrate\",\r\n    \"description\" : \"'CALIBRATE' strengths clarify and refine the process.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershipstyle\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 8,\r\n    \"type\" : \"LeadershipStyle\"\r\n  }, {\r\n    \"id\" : \"LT-complete\",\r\n    \"name\" : \"Complete\",\r\n    \"description\" : \"'COMPLETE' types make sure you cross the finish line.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershipstyle\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 9,\r\n    \"type\" : \"LeadershipStyle\"\r\n  }, {\r\n    \"id\" : \"LT-weareone\",\r\n    \"name\" : \"We Are One\",\r\n    \"description\" : \"'WE ARE ONE' types create harmony and connection.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershipstyle\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 10,\r\n    \"type\" : \"LeadershipStyle\"\r\n  }, {\r\n    \"id\" : \"LT-elevateandcelebrate\",\r\n    \"name\" : \"Elevate and Celebrate\",\r\n    \"description\" : \"\\\"ELEVATE & CELEBRATE\\\" types bring out the best in others.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershipstyle\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 11,\r\n    \"type\" : \"LeadershipStyle\"\r\n  }, {\r\n    \"id\" : \"LT-openArms\",\r\n    \"name\" : \"Open Arms\",\r\n    \"description\" : \"'OPEN ARMS' people integrate and unify a diverse team.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-leadershipstyle\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 12,\r\n    \"type\" : \"LeadershipStyle\"\r\n  }, {\r\n    \"id\" : \"LT-wannaplay\",\r\n    \"name\" : \"Wanna Play?\",\r\n    \"description\" : \"These vibrant Extroverts (E) thrive in an environment of adventure, innovation, connection, and forward momentum. And they wilt when steeped in conflict, rigidity, and seriousness.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-culturecategory\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Adventurous, innovative, and forward-moving\",\r\n      \"TM-kryptonite\" : \"Conflict, rigidity, and unabated seriousness\"\r\n    },\r\n    \"order\" : 1,\r\n    \"type\" : \"CultureCategory\"\r\n  }, {\r\n    \"id\" : \"LT-tenstepsahead\",\r\n    \"name\" : \"Ten Steps Ahead\",\r\n    \"description\" : \"These Intuitive Thinkers (NT) are quick-thinking, analytical, and highly rational. They love a good debate and want time and space to create. They shrink from emotional processing, people drama and personal vulnerability.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-culturecategory\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Quick-thinking, analytical, and highly rational\",\r\n      \"TM-kryptonite\" : \"Emotional processing, people drama, and personal vulnerability\"\r\n    },\r\n    \"order\" : 2,\r\n    \"type\" : \"CultureCategory\"\r\n  }, {\r\n    \"id\" : \"LT-allforone\",\r\n    \"name\" : \"All for One & One for All\",\r\n    \"description\" : \"These Sensory Judging (SJ) types are committed, hard working, organized and dutiful. Cavalier leadership, inefficiency, unnecessary risk and constant customization are kryptonite to them.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-culturecategory\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Committed, hard working, organized, and dutiful\",\r\n      \"TM-kryptonite\" : \"Cavalier leadership, inefficiency, unnecessary risk, and constant customization\"\r\n    },\r\n    \"order\" : 3,\r\n    \"type\" : \"CultureCategory\"\r\n  }, {\r\n    \"id\" : \"LT-theresmoreinside\",\r\n    \"name\" : \"There's More Inside\",\r\n    \"description\" : \"These quieter, creative Introverts (I) need space to create and re-energize on their own terms. Instability, drama, workaholism and stress can hit them harder than most, especially if there's no end in sight or time to reset.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-culturecategory\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Creative, introspective, and insightful\",\r\n      \"TM-kryptonite\" : \"Instability, drama, workaholism, and stress\"\r\n    },\r\n    \"order\" : 4,\r\n    \"type\" : \"CultureCategory\"\r\n  }, {\r\n    \"id\" : \"SS-assertive\",\r\n    \"name\" : \"Assertive\",\r\n    \"description\" : \"Assertive types create what they want in the world to get their needs met.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-socialstance\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 1,\r\n    \"type\" : \"SocialStance\"\r\n  }, {\r\n    \"id\" : \"SS-aligning\",\r\n    \"name\" : \"Aligning\",\r\n    \"description\" : \"Aligning types adapt to the world to get their needs met.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-socialstance\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 2,\r\n    \"type\" : \"SocialStance\"\r\n  }, {\r\n    \"id\" : \"SS-withdrawing\",\r\n    \"name\" : \"Withdrawing\",\r\n    \"description\" : \"Withdrawing types disengage from the world to get their needs met.\",\r\n    \"assessmentCategoryTypeId\" : \"ACT-socialstance\",\r\n    \"termId\" : null,\r\n    \"termIdToValue\" : { },\r\n    \"order\" : 3,\r\n    \"type\" : \"SocialStance\"\r\n  } ],\r\n  \"assessments\" : [ {\r\n    \"id\" : \"CS-assessment\",\r\n    \"type\" : \"CSAssessment\",\r\n    \"disclaimer\" : \"This material contains trademarks of GALLUP�. The non-Gallup information you are receiving has not been approved and is not sanctioned or endorsed by Gallup in any way. Opinions, views and interpretations of CliftonStrengths� are solely the beliefs of Parillume�.\",\r\n    \"description\" : \"Invitation to contribute powerfully, effectively, and with confidence\",\r\n    \"summary\" : \"Strengths\"\r\n  }, {\r\n    \"id\" : \"EN-assessment\",\r\n    \"type\" : \"EnnAssessment\",\r\n    \"disclaimer\" : \"\",\r\n    \"description\" : \"Invitation to choose your healthiest expression and shine your brightest\",\r\n    \"summary\" : \"Perspective\"\r\n  }, {\r\n    \"id\" : \"MB-assessment\",\r\n    \"type\" : \"MBAssessment\",\r\n    \"disclaimer\" : \"Myers-Briggs� is a registered trademark of Myers & Briggs Foundation in the United States and other countries.\",\r\n    \"description\" : \"Invitation to create great relationships\",\r\n    \"summary\" : \"Personality\"\r\n  } ],\r\n  \"assessmentResults\" : [ {\r\n    \"id\" : \"CS-futuristic\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Futuristic\",\r\n    \"description\" : \"They are visionary and creative about future possibilities.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-strategic\", \"LT-yesand\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Forecasting & envisioning a better future in detail\",\r\n      \"TM-kryptonite\" : \"Status quo; others not grasping my vision\"\r\n    },\r\n    \"label\" : \"Futuristic\"\r\n  }, {\r\n    \"id\" : \"CS-ideation\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Ideation\",\r\n    \"description\" : \"They excel at generating creative new approaches and connections.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-strategic\", \"LT-yesand\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Creative brainstorming and innovative solutions\",\r\n      \"TM-kryptonite\" : \"Status quo; lack of innovation\"\r\n    },\r\n    \"label\" : \"Ideation\"\r\n  }, {\r\n    \"id\" : \"CS-strategic\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Strategic\",\r\n    \"description\" : \"They find the best path forward and how to overcome obstacles.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-strategic\", \"LT-yesand\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Finding the best path forward; overcoming obstacles\",\r\n      \"TM-kryptonite\" : \"\\\"One-way-only\\\" thinking; outdated systems\"\r\n    },\r\n    \"label\" : \"Strategic\"\r\n  }, {\r\n    \"id\" : \"CS-context\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Context\",\r\n    \"description\" : \"They draw from past patterns and lessons learned.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-strategic\", \"LT-tellmemore\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Post-mortems; using the past to inform the present\",\r\n      \"TM-kryptonite\" : \"Ignorance of, or dismissal of, lessons of the past\"\r\n    },\r\n    \"label\" : \"Context\"\r\n  }, {\r\n    \"id\" : \"CS-input\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Input\",\r\n    \"description\" : \"They are curious collectors of information with a rich library of facts.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-strategic\", \"LT-tellmemore\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Expertise through research, collecting information, and leveraging resources\",\r\n      \"TM-kryptonite\" : \"Lack of relevant resources, information, and expertise; \\\"flying blind\\\"\"\r\n    },\r\n    \"label\" : \"Input\"\r\n  }, {\r\n    \"id\" : \"CS-learner\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Learner\",\r\n    \"description\" : \"They love to explore unfamiliar systems and master new concepts.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-strategic\", \"LT-tellmemore\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Hunger for knowledge and new frontiers\",\r\n      \"TM-kryptonite\" : \"Boredom due to lack of learning opportunities\"\r\n    },\r\n    \"label\" : \"Learner\"\r\n  }, {\r\n    \"id\" : \"CS-analytical\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Analytical\",\r\n    \"description\" : \"They poke holes, find gaps and flaws, and reveal inconsistencies.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-strategic\", \"LT-butwait\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Poking holes in ideas and strategies\",\r\n      \"TM-kryptonite\" : \"Lack of data and facts; emotional decisions\"\r\n    },\r\n    \"label\" : \"Analytical\"\r\n  }, {\r\n    \"id\" : \"CS-intellection\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Intellection\",\r\n    \"description\" : \"They love intellectual challenges and deep cognitive reflection.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-strategic\", \"LT-butwait\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Thinking deeply about an issue or strategy\",\r\n      \"TM-kryptonite\" : \"A thoughtless approach; anxious rumination\"\r\n    },\r\n    \"label\" : \"Intellection\"\r\n  }, {\r\n    \"id\" : \"CS-activator\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Activator\",\r\n    \"description\" : \"They turn thought into action and discover while doing.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-influencing\", \"LT-letsgo\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Turning thoughts into action and momentum\",\r\n      \"TM-kryptonite\" : \"All talk and no action\"\r\n    },\r\n    \"label\" : \"Activator\"\r\n  }, {\r\n    \"id\" : \"CS-command\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Command\",\r\n    \"description\" : \"They are confident leaders with a powerful presence, unafraid to speak up.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-influencing\", \"LT-letsgo\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Bold and decisive\",\r\n      \"TM-kryptonite\" : \"Passivity; lack of clear leadership\"\r\n    },\r\n    \"label\" : \"Command\"\r\n  }, {\r\n    \"id\" : \"CS-competition\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Competition\",\r\n    \"description\" : \"They love clear goals and challenges where success is quantifiable.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-influencing\", \"LT-letsgo\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Working hard to win, every time\",\r\n      \"TM-kryptonite\" : \"Losing the game; no game to play\"\r\n    },\r\n    \"label\" : \"Competition\"\r\n  }, {\r\n    \"id\" : \"CS-self-assurance\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Self-Assurance\",\r\n    \"description\" : \"They know who they are and what they believe, and exude confidence.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-influencing\", \"LT-letsgo\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Confident risk-taking and self-management\",\r\n      \"TM-kryptonite\" : \"Lack of autonomy; hesitancy in others\"\r\n    },\r\n    \"label\" : \"Self-Assurance\"\r\n  }, {\r\n    \"id\" : \"CS-communication\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Communication\",\r\n    \"description\" : \"They are natural educators who clearly voice concepts and systems.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-influencing\", \"LT-letsconnect\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Clear, memorable use of language; storytelling\",\r\n      \"TM-kryptonite\" : \"Lack of an audience; poor communication by others\"\r\n    },\r\n    \"label\" : \"Communication\"\r\n  }, {\r\n    \"id\" : \"CS-woo\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Woo\",\r\n    \"description\" : \"Charming and engaging, they raise the energy and create rapport.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-influencing\", \"LT-letsconnect\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Creating rapport and positive energy\",\r\n      \"TM-kryptonite\" : \"Being unliked; a shrinking network\"\r\n    },\r\n    \"label\" : \"Woo\"\r\n  }, {\r\n    \"id\" : \"CS-maximizer\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Maximizer\",\r\n    \"description\" : \"They focus on positive possibilities to transform good into great.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-influencing\", \"LT-makeitmatter\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Turning good into great; pursuing perfection\",\r\n      \"TM-kryptonite\" : \"Mediocrity; accepting less than the best\"\r\n    },\r\n    \"label\" : \"Maximizer\"\r\n  }, {\r\n    \"id\" : \"CS-significance\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Significance\",\r\n    \"description\" : \"They want work that matters and respect for their contributions.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-influencing\", \"LT-makeitmatter\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Natural performer and contributor\",\r\n      \"TM-kryptonite\" : \"Being a cog in the machine; lack of recognition\"\r\n    },\r\n    \"label\" : \"Significance\"\r\n  }, {\r\n    \"id\" : \"CS-arranger\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Arranger\",\r\n    \"description\" : \"Like orchestra conductors, they know who and what belongs where.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-structure\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Organizing resources for maximum productivity\",\r\n      \"TM-kryptonite\" : \"Static environment; others' resistance to change\"\r\n    },\r\n    \"label\" : \"Arranger\"\r\n  }, {\r\n    \"id\" : \"CS-consistency\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Consistency\",\r\n    \"description\" : \"They crave, and create, clear standards, rules, and processes.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-structure\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Creating and sticking to SOPs and fair practices\",\r\n      \"TM-kryptonite\" : \"Broken rules; excessive customization\"\r\n    },\r\n    \"label\" : \"Consistency\"\r\n  }, {\r\n    \"id\" : \"CS-discipline\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Discipline\",\r\n    \"description\" : \"They commit to a goal and push through adversity to reach it.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-structure\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Structuring and managing project details\",\r\n      \"TM-kryptonite\" : \"Last-minute chaos; not respecting a plan\"\r\n    },\r\n    \"label\" : \"Discipline\"\r\n  }, {\r\n    \"id\" : \"CS-belief\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Belief\",\r\n    \"description\" : \"They live and work from their core values and internal integrity.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-calibrate\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Living by core values; altruistic and trustworthy\",\r\n      \"TM-kryptonite\" : \"Lacking or compromising values\"\r\n    },\r\n    \"label\" : \"Belief\"\r\n  }, {\r\n    \"id\" : \"CS-deliberative\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Deliberative\",\r\n    \"description\" : \"Careful, thorough planners, they need to time to consider an issue.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-calibrate\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Conscientious, rational decision-making\",\r\n      \"TM-kryptonite\" : \"Cavalier and last-minute decision-making\"\r\n    },\r\n    \"label\" : \"Deliberative\"\r\n  }, {\r\n    \"id\" : \"CS-restorative\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Restorative\",\r\n    \"description\" : \"They right wrongs, repair what's broken, and fill in what's missing.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-calibrate\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Getting to the root of problems and solving them\",\r\n      \"TM-kryptonite\" : \"Ignoring or dismissing problems\"\r\n    },\r\n    \"label\" : \"Restorative\"\r\n  }, {\r\n    \"id\" : \"CS-achiever\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Achiever\",\r\n    \"description\" : \"High-energy and focused, they tackle a goal and move on to the next.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-complete\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Hard work and stamina to achieve goals efficiently\",\r\n      \"TM-kryptonite\" : \"Others' lack of diligence; lack of forward movement\"\r\n    },\r\n    \"label\" : \"Achiever\"\r\n  }, {\r\n    \"id\" : \"CS-focus\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Focus\",\r\n    \"description\" : \"They avoid tangents and distractions to hone in on achieving a goal.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-complete\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Ability to prioritize and commit to goals\",\r\n      \"TM-kryptonite\" : \"Tangents; lack of clear goals\"\r\n    },\r\n    \"label\" : \"Focus\"\r\n  }, {\r\n    \"id\" : \"CS-responsibility\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Responsibility\",\r\n    \"description\" : \"They take ownership and accept obligation and culpability.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-executing\", \"LT-complete\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Dependability, loyalty, and teamwork\",\r\n      \"TM-kryptonite\" : \"Disappointing others; others' lack of integrity\"\r\n    },\r\n    \"label\" : \"Responsibility\"\r\n  }, {\r\n    \"id\" : \"CS-connectedness\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Connectedness\",\r\n    \"description\" : \"They see hidden relationships and clarify system dependencies.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-weareone\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Holistic, global perspective; creating connections between people\",\r\n      \"TM-kryptonite\" : \"An \\\"us vs. them\\\" or short-sighted mentality\"\r\n    },\r\n    \"label\" : \"Connectedness\"\r\n  }, {\r\n    \"id\" : \"CS-empathy\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Empathy\",\r\n    \"description\" : \"Highly intuitive, they create a space of acceptance and trust.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-weareone\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Creating a safe space for all to express themselves\",\r\n      \"TM-kryptonite\" : \"Taking on others' feelings; feeling being ignored\"\r\n    },\r\n    \"label\" : \"Empathy\"\r\n  }, {\r\n    \"id\" : \"CS-harmony\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Harmony\",\r\n    \"description\" : \"They see all sides of an issue and build bridges during conflict.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-weareone\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Calm mediation; bridging different perspectives\",\r\n      \"TM-kryptonite\" : \"Conflict; lack of collaboration\"\r\n    },\r\n    \"label\" : \"Harmony\"\r\n  }, {\r\n    \"id\" : \"CS-developer\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Developer\",\r\n    \"description\" : \"They see potential in others and know how to help people grow.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-elevateandcelebrate\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Seeing and nurturing potential in others\",\r\n      \"TM-kryptonite\" : \"Unfulfilled potential left unaddressed\"\r\n    },\r\n    \"label\" : \"Developer\"\r\n  }, {\r\n    \"id\" : \"CS-includer\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Includer\",\r\n    \"description\" : \"They invite all to the table, encouraging and celebrating diversity.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-elevateandcelebrate\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Embracing and promoting diversity, equity, and inclusion\",\r\n      \"TM-kryptonite\" : \"Cliques, hierarchy, and injustice\"\r\n    },\r\n    \"label\" : \"Includer\"\r\n  }, {\r\n    \"id\" : \"CS-positivity\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Positivity\",\r\n    \"description\" : \"They see the glass as half-full; they bring hope and possibilities.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-elevateandcelebrate\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Contagious enthusiasm and encouragement\",\r\n      \"TM-kryptonite\" : \"Debbie Downers; no space for joy and celebration\"\r\n    },\r\n    \"label\" : \"Positivity\"\r\n  }, {\r\n    \"id\" : \"CS-adaptability\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Adaptability\",\r\n    \"description\" : \"They remain calm and adjust to change in a crisis.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-openArms\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Calm in a crisis; flexible and readily supportive\",\r\n      \"TM-kryptonite\" : \"A static, predictable environment\"\r\n    },\r\n    \"label\" : \"Adaptability\"\r\n  }, {\r\n    \"id\" : \"CS-individualization\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Individualization\",\r\n    \"description\" : \"They see, value, and celebrate the unique nature of each person.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-openArms\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Customizing solutions and opportunities to leverage what's unique in people\",\r\n      \"TM-kryptonite\" : \"One-size-fits-all approaches for people and projects\"\r\n    },\r\n    \"label\" : \"Individualization\"\r\n  }, {\r\n    \"id\" : \"CS-relator\",\r\n    \"assessmentId\" : \"CS-assessment\",\r\n    \"type\" : \"CSResult\",\r\n    \"name\" : \"Relator\",\r\n    \"description\" : \"They value deep, genuine relationships, and create equal footing.\",\r\n    \"assessmentCategoryIds\" : [ \"LS-relationshipbuilding\", \"LT-openArms\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Deep, authentic personal connection\",\r\n      \"TM-kryptonite\" : \"Superficial small talk; impersonal hierarchy\"\r\n    },\r\n    \"label\" : \"Relator\"\r\n  }, {\r\n    \"id\" : \"EN-1\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"1\",\r\n    \"description\" : \"'Am I in integrity?' Aligns with the rules. Avoid harsh criticism and blame, and make mistakes safe. Empower them to repair and improve systems, so they feel principled.\",\r\n    \"assessmentCategoryIds\" : [ \"SS-aligning\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Consistent excellence; optimizing systems; growth mindset\",\r\n      \"TM-kryptonite\" : \"Mistakes, mediocrity; lack of integrity and accountability\"\r\n    },\r\n    \"nickname\" : \"Reformer\",\r\n    \"leadershipStyle\" : null,\r\n    \"label\" : \"1: Reformer\"\r\n  }, {\r\n    \"id\" : \"EN-2\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"2\",\r\n    \"description\" : \"'Am I loved?' Aligns with relationships. Provide room for them to be build personal relationships. Explicitly communicate your appreciation through words, gifts and tangible actions so they feel connected.\",\r\n    \"assessmentCategoryIds\" : [ \"SS-aligning\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Generous, supportive, and kind; community-builder\",\r\n      \"TM-kryptonite\" : \"Criticism; feeling overwhelmed by expectations\"\r\n    },\r\n    \"nickname\" : \"Helper\",\r\n    \"leadershipStyle\" : null,\r\n    \"label\" : \"2: Helper\"\r\n  }, {\r\n    \"id\" : \"EN-3\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"3\",\r\n    \"description\" : \"'Am I worthy and accepted?' Assertive about success. Give them clear goals and tangible rewards for their hard work. Gold stars keep them motivated and moving forward.\",\r\n    \"assessmentCategoryIds\" : [ \"SS-assertive\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Goal-driven; public face; people skills\",\r\n      \"TM-kryptonite\" : \"Criticism; looking bad; conflict; lack of goals\"\r\n    },\r\n    \"nickname\" : \"Achiever\",\r\n    \"leadershipStyle\" : null,\r\n    \"label\" : \"3: Achiever\"\r\n  }, {\r\n    \"id\" : \"EN-4\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"4\",\r\n    \"description\" : \"'Am I unique and significant?' Withdraws from the present. Create structure around their creativity, and then value and garner their insights. Give their work vision and substance so they feel meaningful.\",\r\n    \"assessmentCategoryIds\" : [ \"SS-withdrawing\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Insight, emotional intelligence, and unique perspectives\",\r\n      \"TM-kryptonite\" : \"Cog in the machine; inauthenticity; lack of aestheticism\"\r\n    },\r\n    \"nickname\" : \"Individualist\",\r\n    \"leadershipStyle\" : null,\r\n    \"label\" : \"4: Individualist\"\r\n  }, {\r\n    \"id\" : \"EN-5\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"5\",\r\n    \"description\" : \"'Am I capable and competent?' Withdraws from people. Allow them 'lab time' to explore a challenge so they can show up prepared-but keep them to deadlines. Value their timely results, even if incomplete, so they feel masterful.\",\r\n    \"assessmentCategoryIds\" : [ \"SS-withdrawing\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Innovative, pioneering, studious, and masterful\",\r\n      \"TM-kryptonite\" : \"Improvisation; risk-taking; violation of personal space/time\"\r\n    },\r\n    \"nickname\" : \"Investigator\",\r\n    \"leadershipStyle\" : null,\r\n    \"label\" : \"5: Investigator\"\r\n  }, {\r\n    \"id\" : \"EN-6\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"6\",\r\n    \"description\" : \"'Am I secure and supported?' Aligns with expectations. Clearly communicate what you need, give them the support to do it, and reinforce that they are on the right track to keep them centered.\",\r\n    \"assessmentCategoryIds\" : [ \"SS-aligning\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Healthy skepticism; team cohesion; supportive leadership\",\r\n      \"TM-kryptonite\" : \"Risk, instability, and neglect; lack of clear expectations\"\r\n    },\r\n    \"nickname\" : \"Loyalist\",\r\n    \"leadershipStyle\" : null,\r\n    \"label\" : \"6: Loyalist\"\r\n  }, {\r\n    \"id\" : \"EN-7\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"7\",\r\n    \"description\" : \"'Am I satisfied and happy?' Assertive about freedom. Avoid micromanagement and give them new adventures to keep them engaged and happy.\",\r\n    \"assessmentCategoryIds\" : [ \"SS-assertive\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Fun, positive energy; inventive and adventurous\",\r\n      \"TM-kryptonite\" : \"Routine, restriction and micromanagement; boredom\"\r\n    },\r\n    \"nickname\" : \"Enthusiast\",\r\n    \"leadershipStyle\" : null,\r\n    \"label\" : \"7: Enthusiast\"\r\n  }, {\r\n    \"id\" : \"EN-8\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"8\",\r\n    \"description\" : \"'Am I safe and in control?' Assertive about the truth. Keep them up-to-date about issues, challenges or performance breakdowns. Be direct and honest to maintain their trust.\",\r\n    \"assessmentCategoryIds\" : [ \"SS-assertive\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Heroic leadership; efficient resolution; standing up for others\",\r\n      \"TM-kryptonite\" : \"Indirectness, inefficiency, injustice, and irresponsibility\"\r\n    },\r\n    \"nickname\" : \"Challenger\",\r\n    \"leadershipStyle\" : null,\r\n    \"label\" : \"8: Challenger\"\r\n  }, {\r\n    \"id\" : \"EN-9\",\r\n    \"assessmentId\" : \"EN-assessment\",\r\n    \"type\" : \"EnnResult\",\r\n    \"name\" : \"9\",\r\n    \"description\" : \"'Am I at peace?' Withdraws from conflict. Encourage them to speak up, even if they feel uncomfortable doing so. Model respectfully rocking the boat, and then leverage their insights to reestablish stability, so they feel grounded.\",\r\n    \"assessmentCategoryIds\" : [ \"SS-withdrawing\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Grounded leadership; mediation and holistic bridge-building\",\r\n      \"TM-kryptonite\" : \"Conflict and disconnection; being put on the spot\"\r\n    },\r\n    \"nickname\" : \"Peacemaker\",\r\n    \"leadershipStyle\" : null,\r\n    \"label\" : \"9: Peacemaker\"\r\n  }, {\r\n    \"id\" : \"MB-intj\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"INTJ\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-tenstepsahead\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Creative, imaginative; strategic, efficient problem-solving\",\r\n      \"TM-kryptonite\" : \"Cog in the machine; too much outside world\"\r\n    },\r\n    \"nickname\" : \"Octopus\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Focus\" : \"MBPREF-introvert\",\r\n      \"Input\" : \"MBPREF-intuitive\",\r\n      \"Structure\" : \"MBPREF-judging\",\r\n      \"Decisions\" : \"MBPREF-thinking\"\r\n    },\r\n    \"label\" : \"INTJ: Octopus\"\r\n  }, {\r\n    \"id\" : \"MB-entj\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ENTJ\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-tenstepsahead\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Strong, charismatic leadership; quick, strategic thinking; creativitiy; organization and structured expression\",\r\n      \"TM-kryptonite\" : \"Vulnerability and emotional expression\"\r\n    },\r\n    \"nickname\" : \"Bear\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Focus\" : \"MBPREF-extrovert\",\r\n      \"Input\" : \"MBPREF-intuitive\",\r\n      \"Structure\" : \"MBPREF-judging\",\r\n      \"Decisions\" : \"MBPREF-thinking\"\r\n    },\r\n    \"label\" : \"ENTJ: Bear\"\r\n  }, {\r\n    \"id\" : \"MB-istj\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ISTJ\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-allforone\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Hardworking and dutiful; Jack of all trades\",\r\n      \"TM-kryptonite\" : \"Thinking creatively, on the spot\"\r\n    },\r\n    \"nickname\" : \"Beaver\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Focus\" : \"MBPREF-introvert\",\r\n      \"Input\" : \"MBPREF-sensory\",\r\n      \"Structure\" : \"MBPREF-judging\",\r\n      \"Decisions\" : \"MBPREF-thinking\"\r\n    },\r\n    \"label\" : \"ISTJ: Beaver\"\r\n  }, {\r\n    \"id\" : \"MB-estj\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ESTJ\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-allforone\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Strong, loyal leadership; organization; strategic, efficient planning\",\r\n      \"TM-kryptonite\" : \"People drama and emotional outbursts; unconventional situations; constant customization\"\r\n    },\r\n    \"nickname\" : \"Lion\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Focus\" : \"MBPREF-extrovert\",\r\n      \"Input\" : \"MBPREF-sensory\",\r\n      \"Structure\" : \"MBPREF-judging\",\r\n      \"Decisions\" : \"MBPREF-thinking\"\r\n    },\r\n    \"label\" : \"ESTJ: Lion\"\r\n  }, {\r\n    \"id\" : \"MB-intp\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"INTP\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-tenstepsahead\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Imaginative, original, open-minded, and analytical\",\r\n      \"TM-kryptonite\" : \"Micromanagement; emotional processing\"\r\n    },\r\n    \"nickname\" : \"Owl\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Focus\" : \"MBPREF-introvert\",\r\n      \"Input\" : \"MBPREF-intuitive\",\r\n      \"Structure\" : \"MBPREF-perceiving\",\r\n      \"Decisions\" : \"MBPREF-thinking\"\r\n    },\r\n    \"label\" : \"INTP: Owl\"\r\n  }, {\r\n    \"id\" : \"MB-entp\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ENTP\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-tenstepsahead\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Creative communication and brainstorming; original and strategic; devil's advocate\",\r\n      \"TM-kryptonite\" : \"Practical matters; boredom\"\r\n    },\r\n    \"nickname\" : \"Fox\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Focus\" : \"MBPREF-extrovert\",\r\n      \"Input\" : \"MBPREF-intuitive\",\r\n      \"Structure\" : \"MBPREF-perceiving\",\r\n      \"Decisions\" : \"MBPREF-thinking\"\r\n    },\r\n    \"label\" : \"ENTP: Fox\"\r\n  }, {\r\n    \"id\" : \"MB-istp\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ISTP\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-theresmoreinside\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Creative, practical, and mechanical; calm in a crisis\",\r\n      \"TM-kryptonite\" : \"Emotional processing; adhering to social norms\"\r\n    },\r\n    \"nickname\" : \"Cat\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Focus\" : \"MBPREF-introvert\",\r\n      \"Input\" : \"MBPREF-sensory\",\r\n      \"Structure\" : \"MBPREF-perceiving\",\r\n      \"Decisions\" : \"MBPREF-thinking\"\r\n    },\r\n    \"label\" : \"ISTP: Cat\"\r\n  }, {\r\n    \"id\" : \"MB-estp\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ESTP\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-wannaplay\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Enterpreneurial; social-and action-oriented; creative thinking and problem-solving\",\r\n      \"TM-kryptonite\" : \"Long-term planning; too much structure\"\r\n    },\r\n    \"nickname\" : \"Cheetah\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Focus\" : \"MBPREF-extrovert\",\r\n      \"Input\" : \"MBPREF-sensory\",\r\n      \"Structure\" : \"MBPREF-perceiving\",\r\n      \"Decisions\" : \"MBPREF-thinking\"\r\n    },\r\n    \"label\" : \"ESTP: Cheetah\"\r\n  }, {\r\n    \"id\" : \"MB-infj\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"INFJ\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-theresmoreinside\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Creative, insightful; kind, helpful, loyal and altruistic\",\r\n      \"TM-kryptonite\" : \"Too much outside world; dry data and facts; conflict, negativity, and lack of planning\"\r\n    },\r\n    \"nickname\" : \"Wolf\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Focus\" : \"MBPREF-introvert\",\r\n      \"Input\" : \"MBPREF-intuitive\",\r\n      \"Structure\" : \"MBPREF-judging\",\r\n      \"Decisions\" : \"MBPREF-feeling\"\r\n    },\r\n    \"label\" : \"INFJ: Wolf\"\r\n  }, {\r\n    \"id\" : \"MB-enfj\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ENFJ\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-wannaplay\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Friendly and charismatic; leadership and social skills; creativity; creating structure\",\r\n      \"TM-kryptonite\" : \"Impersonal reasoning and logical thinking; conflict, negativity; lack of planning\"\r\n    },\r\n    \"nickname\" : \"Dog\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Focus\" : \"MBPREF-extrovert\",\r\n      \"Input\" : \"MBPREF-intuitive\",\r\n      \"Structure\" : \"MBPREF-judging\",\r\n      \"Decisions\" : \"MBPREF-feeling\"\r\n    },\r\n    \"label\" : \"ENFJ: Dog\"\r\n  }, {\r\n    \"id\" : \"MB-isfj\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ISFJ\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-allforone\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Kind, helpful, loyal, altruistic; high standards; consistent systems\",\r\n      \"TM-kryptonite\" : \"Speaking up and requesting what's needed; improvisation; breaking the rules\"\r\n    },\r\n    \"nickname\" : \"Deer\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Focus\" : \"MBPREF-introvert\",\r\n      \"Input\" : \"MBPREF-sensory\",\r\n      \"Structure\" : \"MBPREF-judging\",\r\n      \"Decisions\" : \"MBPREF-feeling\"\r\n    },\r\n    \"label\" : \"ISFJ: Deer\"\r\n  }, {\r\n    \"id\" : \"MB-esfj\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ESFJ\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-allforone\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Warm and friendly; excellent social skills; organization, planning, and administration\",\r\n      \"TM-kryptonite\" : \"Impersonal reasoning and logical thinking; conflict, negativity; lack of planning\"\r\n    },\r\n    \"nickname\" : \"Horse\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Focus\" : \"MBPREF-extrovert\",\r\n      \"Input\" : \"MBPREF-sensory\",\r\n      \"Structure\" : \"MBPREF-judging\",\r\n      \"Decisions\" : \"MBPREF-feeling\"\r\n    },\r\n    \"label\" : \"ESFJ: Horse\"\r\n  }, {\r\n    \"id\" : \"MB-infp\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"INFP\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-theresmoreinside\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Creative collaboration and brainstorming; clear beliefs, core values, and decisions\",\r\n      \"TM-kryptonite\" : \"Too much structure and time management; conflict\"\r\n    },\r\n    \"nickname\" : \"Swan\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Focus\" : \"MBPREF-introvert\",\r\n      \"Input\" : \"MBPREF-intuitive\",\r\n      \"Structure\" : \"MBPREF-perceiving\",\r\n      \"Decisions\" : \"MBPREF-feeling\"\r\n    },\r\n    \"label\" : \"INFP: Swan\"\r\n  }, {\r\n    \"id\" : \"MB-enfp\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ENFP\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-wannaplay\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Creative communication and brainstorming; clear beliefs, core values, and decisions\",\r\n      \"TM-kryptonite\" : \"Administrative details; micromanagement\"\r\n    },\r\n    \"nickname\" : \"Dolphin\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Focus\" : \"MBPREF-extrovert\",\r\n      \"Input\" : \"MBPREF-intuitive\",\r\n      \"Structure\" : \"MBPREF-perceiving\",\r\n      \"Decisions\" : \"MBPREF-feeling\"\r\n    },\r\n    \"label\" : \"ENFP: Dolphin\"\r\n  }, {\r\n    \"id\" : \"MB-isfp\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ISFP\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-theresmoreinside\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Artistic and imaginative; charming and sensitive\",\r\n      \"TM-kryptonite\" : \"Too much structure and time management; long-term planning\"\r\n    },\r\n    \"nickname\" : \"Panda\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Focus\" : \"MBPREF-introvert\",\r\n      \"Input\" : \"MBPREF-sensory\",\r\n      \"Structure\" : \"MBPREF-perceiving\",\r\n      \"Decisions\" : \"MBPREF-feeling\"\r\n    },\r\n    \"label\" : \"ISFP: Panda\"\r\n  }, {\r\n    \"id\" : \"MB-esfp\",\r\n    \"assessmentId\" : \"MB-assessment\",\r\n    \"type\" : \"MBResult\",\r\n    \"name\" : \"ESFP\",\r\n    \"description\" : null,\r\n    \"assessmentCategoryIds\" : [ \"LT-wannaplay\" ],\r\n    \"termIdToValue\" : {\r\n      \"TM-superpower\" : \"Bold, original, and entertaining; people skills; clear beliefs, core values, and decisions\",\r\n      \"TM-kryptonite\" : \"Long-term planning; conflict\"\r\n    },\r\n    \"nickname\" : \"Seal\",\r\n    \"themeToPreferenceId\" : {\r\n      \"Focus\" : \"MBPREF-extrovert\",\r\n      \"Input\" : \"MBPREF-sensory\",\r\n      \"Structure\" : \"MBPREF-perceiving\",\r\n      \"Decisions\" : \"MBPREF-feeling\"\r\n    },\r\n    \"label\" : \"ESFP: Seal\"\r\n  } ],\r\n  \"roleTypes\" : [ {\r\n    \"id\" : \"rt-indivcontributor\",\r\n    \"name\" : \"Individual Contributor\",\r\n    \"description\" : \"Individual Contributor description goes here TJMTJM\"\r\n  } ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/updatecorpus?sessionid=1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"updatecorpus"
+					],
+					"query": [
+						{
+							"key": "sessionid",
+							"value": "1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get logs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/getlogs?sessionid=1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"getlogs"
+					],
+					"query": [
+						{
+							"key": "sessionid",
+							"value": "1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get company",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/getcompany?companyid=cf1f14f9657e4ee6a94095163a1e23f4&sessionid=1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"getcompany"
+					],
+					"query": [
+						{
+							"key": "companyid",
+							"value": "cf1f14f9657e4ee6a94095163a1e23f4"
+						},
+						{
+							"key": "sessionid",
+							"value": "1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get company DTO",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/getcompanydto?companyid=plume-company&sessionid=1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"getcompanydto"
+					],
+					"query": [
+						{
+							"key": "companyid",
+							"value": "plume-company"
+						},
+						{
+							"key": "sessionid",
+							"value": "1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete company",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/deletecompany?companyid=test-company&sessionid",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"deletecompany"
+					],
+					"query": [
+						{
+							"key": "companyid",
+							"value": "test-company"
+						},
+						{
+							"key": "sessionid",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get corpus",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/getcorpus?corpusversion=1.0&sessionid=1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"getcorpus"
+					],
+					"query": [
+						{
+							"key": "corpusversion",
+							"value": "1.0"
+						},
+						{
+							"key": "sessionid",
+							"value": "1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete corpus",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/deletecorpus?corpusversion=1.0&managingcompanyid&sessionid",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"deletecorpus"
+					],
+					"query": [
+						{
+							"key": "corpusversion",
+							"value": "1.0"
+						},
+						{
+							"key": "managingcompanyid",
+							"value": null
+						},
+						{
+							"key": "sessionid",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate table",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"enneagram\":\"true\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/generatecompanytable?companyid=plume-company&corpusversion=1.0&sessionid=cfecefe1658839deb86af50090b48a260e09d0070270b089-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"generatecompanytable"
+					],
+					"query": [
+						{
+							"key": "companyid",
+							"value": "plume-company"
+						},
+						{
+							"key": "corpusversion",
+							"value": "1.0"
+						},
+						{
+							"key": "sessionid",
+							"value": "cfecefe1658839deb86af50090b48a260e09d0070270b089-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get assessment types",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/getassessmenttypes?corpusversion=1.0&sessionid=cfecefe1658839deb86af50090b48a260e09d0070270b089-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"getassessmenttypes"
+					],
+					"query": [
+						{
+							"key": "corpusversion",
+							"value": "1.0"
+						},
+						{
+							"key": "sessionid",
+							"value": "cfecefe1658839deb86af50090b48a260e09d0070270b089-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get assessments",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/getassessments?corpusversion=1.0&assessmenttype=Enneagram&sessionid=cfecefe1658839deb86af50090b48a260e09d0070270b089-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"getassessments"
+					],
+					"query": [
+						{
+							"key": "corpusversion",
+							"value": "1.0"
+						},
+						{
+							"key": "assessmenttype",
+							"value": "Enneagram"
+						},
+						{
+							"key": "sessionid",
+							"value": "cfecefe1658839deb86af50090b48a260e09d0070270b089-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Import users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/importusers?corpusversion=1.0&companyid=test-company&sessionid",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"importusers"
+					],
+					"query": [
+						{
+							"key": "corpusversion",
+							"value": "1.0"
+						},
+						{
+							"key": "companyid",
+							"value": "test-company"
+						},
+						{
+							"key": "sessionid",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/deleteusers?corpusversion=1.0&companyid=test-company&sessionid&userid&userid",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"deleteusers"
+					],
+					"query": [
+						{
+							"key": "corpusversion",
+							"value": "1.0"
+						},
+						{
+							"key": "companyid",
+							"value": "test-company"
+						},
+						{
+							"key": "sessionid",
+							"value": null
+						},
+						{
+							"key": "userid",
+							"value": null
+						},
+						{
+							"key": "userid",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upsert users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\r\n  \"playfullPractices\": [\r\n    \"Speak up more in meetings\",\r\n    \"Create a daily plan each morning\"\r\n  ],\r\n  \"nameFirst\": \"Tom\",\r\n  \"calendarType\": \"GOOGLE\",\r\n  \"teamIdToManagerId\": {\r\n    \"plume-devteam\": \"U-LisaId\",\r\n    \"bt-team\": \"some_managerId\"\r\n  },\r\n  \"superpowers\": [\r\n    \"My first superpower\",\r\n    \"My second superpower\"\r\n  ],\r\n  \"emailSchedule\": \"WEEKDAYS\",\r\n  \"active\": true,\r\n  \"nameLast\": \"Margolis\",\r\n  \"kryptonite\": [\r\n    \"My first kryptonite\",\r\n    \"My second kryptonite\"\r\n  ],\r\n  \"emailAddress\": \"tom@billtrust.com\",\r\n  \"phoneNumber\": \"720-346-4897\",\r\n  \"assessmentResultIds\": [\r\n    \"CS-ideation\",\r\n    \"CS-communication\",\r\n    \"EN-8\",\r\n    \"MB-intj\"\r\n  ],\r\n  \"id\": \"U-TomId\",\r\n  \"teamIdToRoleId\": {\r\n    \"plume-devteam\": \"plume-ed-role\",\r\n    \"bt-team\": \"bt-sd-role\"\r\n  }\r\n}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/upsertusers?sessionid=cfecefe1658839deb86af50090b48a260e09d0070270b089-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0&companyid=plume-company&corpusversion=1.0",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"upsertusers"
+					],
+					"query": [
+						{
+							"key": "sessionid",
+							"value": "cfecefe1658839deb86af50090b48a260e09d0070270b089-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0"
+						},
+						{
+							"key": "companyid",
+							"value": "plume-company"
+						},
+						{
+							"key": "corpusversion",
+							"value": "1.0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create one-sheets",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/createonesheets?companyid=plume-company&userid=U-LisaId&sessionid=cfecefe1658839deb86af50090b48a260e09d0070270b089-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0&userid=U-TomId",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"createonesheets"
+					],
+					"query": [
+						{
+							"key": "companyid",
+							"value": "plume-company"
+						},
+						{
+							"key": "userid",
+							"value": "U-LisaId"
+						},
+						{
+							"key": "sessionid",
+							"value": "cfecefe1658839deb86af50090b48a260e09d0070270b089-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0"
+						},
+						{
+							"key": "userid",
+							"value": "U-TomId"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create multisheets",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/createmultisheets?companyid=plume-company&userid=U-LisaId&sessionid=cfecefe1658839deb86af50090b48a260e09d0070270b089-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0&userid=U-TomId",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"createmultisheets"
+					],
+					"query": [
+						{
+							"key": "companyid",
+							"value": "plume-company"
+						},
+						{
+							"key": "userid",
+							"value": "U-LisaId"
+						},
+						{
+							"key": "sessionid",
+							"value": "cfecefe1658839deb86af50090b48a260e09d0070270b089-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0"
+						},
+						{
+							"key": "userid",
+							"value": "U-TomId"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create team chart",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "clientlogo",
+							"type": "file",
+							"src": "/C:/Users/tmargolis/Downloads/google_logo.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:8443/createteamchart?companyid=plume-company&teamid=plume-opsteam&sessionid=cfecefe1658839deb86af50090b48a260e09d0070270b089-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"createteamchart"
+					],
+					"query": [
+						{
+							"key": "companyid",
+							"value": "plume-company"
+						},
+						{
+							"key": "teamid",
+							"value": "plume-opsteam"
+						},
+						{
+							"key": "sessionid",
+							"value": "cfecefe1658839deb86af50090b48a260e09d0070270b089-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get team chart bytes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "clientlogo",
+							"type": "file",
+							"src": "/C:/Users/tmargolis/Downloads/google_logo.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:8443/getteamchartbytes?companyid=plume-company&teamid=plume-opsteam",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"getteamchartbytes"
+					],
+					"query": [
+						{
+							"key": "companyid",
+							"value": "plume-company"
+						},
+						{
+							"key": "teamid",
+							"value": "plume-opsteam"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Submit structured chat",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/submitstructuredchat?chattopic=COMMUNICATION&subjectuserid=U-LisaId&userid=U-ReneeId&userid=U-EricId&corpusversion=1.0&companyid=plume-company&sessionid=1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"submitstructuredchat"
+					],
+					"query": [
+						{
+							"key": "chattopic",
+							"value": "COMMUNICATION"
+						},
+						{
+							"key": "subjectuserid",
+							"value": "U-LisaId"
+						},
+						{
+							"key": "userid",
+							"value": "U-ReneeId"
+						},
+						{
+							"key": "userid",
+							"value": "U-EricId"
+						},
+						{
+							"key": "corpusversion",
+							"value": "1.0"
+						},
+						{
+							"key": "companyid",
+							"value": "plume-company"
+						},
+						{
+							"key": "sessionid",
+							"value": "1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get automated chat",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "clientlogo",
+							"type": "file",
+							"src": "/C:/Users/tmargolis/Downloads/google_logo.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:8443/automatedchat?chatteruserid=U-LisaId&corpusversion=1.0&companyid=plume-company&sessionid=1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"automatedchat"
+					],
+					"query": [
+						{
+							"key": "chatteruserid",
+							"value": "U-LisaId"
+						},
+						{
+							"key": "corpusversion",
+							"value": "1.0"
+						},
+						{
+							"key": "companyid",
+							"value": "plume-company"
+						},
+						{
+							"key": "sessionid",
+							"value": "1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get automated chat metadata",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "clientlogo",
+							"type": "file",
+							"src": "/C:/Users/tmargolis/Downloads/google_logo.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:8443/automatedchatmetadata?chatteruserid=U-TomId&corpusversion=1.0&companyid=plume-company&sessionid=1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"automatedchatmetadata"
+					],
+					"query": [
+						{
+							"key": "chatteruserid",
+							"value": "U-TomId"
+						},
+						{
+							"key": "corpusversion",
+							"value": "1.0"
+						},
+						{
+							"key": "companyid",
+							"value": "plume-company"
+						},
+						{
+							"key": "sessionid",
+							"value": "1cc30d4e7c1a994432524d7c3b7502c89061611f88669cc0-__-e75cb7ef5f021467f676d93564dee10a-__-26e5dbf2b6fd105f313dd780d9ddd5c0-__-false"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
