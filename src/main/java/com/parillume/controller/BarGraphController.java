@@ -1,8 +1,9 @@
 /*
  * Copyright(c) 2024, Parillume, All rights reserved worldwide
  */
-package com.parillume.print.bargraph;
+package com.parillume.controller;
 
+import com.parillume.print.bargraph.BarGraphWriter;
 import com.parillume.print.input.BarGraphDataImporter;
 import com.parillume.util.FileUtil;
 import java.io.File;
