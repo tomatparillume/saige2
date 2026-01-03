@@ -78,7 +78,7 @@ To convert one-sheets to PNGs, so you can insert them in PowerPoints:
 
 =========== WEB APPLICATION IN A BROWSER =======================================
 Download the project from github.com onto your machine; this will create a saige/ directory.
-    - On your machine, on a command line, execute: https://github.com/tomatparillume/saige.git
+    - On your machine, on a command line, execute: git clone https://github.com/tomatparillume/saige.git
     - This will download the github project into a saige/ directory
 
 The application must have access to a MySQL DB; see the spring.datasource.* parameters in saige/src/main/resources/application.properties file.
