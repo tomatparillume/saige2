@@ -77,7 +77,7 @@ To convert one-sheets to PNGs, so you can insert them in PowerPoints:
     2.) Drag the generated bar graph images into your survey PowerPoint.
 
 =========== WEB APPLICATION IN A BROWSER =======================================
-Download the project from github.com onto your machine; this will create a saige/ directory.
+Download the project from github.com onto your machine:
     - On your machine, on a command line, execute: git clone https://github.com/tomatparillume/saige.git
     - This will download the github project into a saige/ directory
 
