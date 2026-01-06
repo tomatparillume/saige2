@@ -127,31 +127,31 @@ Re-enter new password: LSFAbundance
 
 What is your first and last name?
 
-  [Unknown]:  Thomas Margolis
+  \[Unknown]:  Thomas Margolis
 
 What is the name of your organizational unit?
 
-  [Unknown]:  Parillume
+  \[Unknown]:  Parillume
 
 What is the name of your organization?
 
-  [Unknown]:  Parillume
+  \[Unknown]:  Parillume
 
 What is the name of your City or Locality?
 
-  [Unknown]:  Boulder
+  \[Unknown]:  Boulder
 
 What is the name of your State or Province?
 
-  [Unknown]:  Colorado
+  \[Unknown]:  Colorado
 
 What is the two-letter country code for this unit?
 
-  [Unknown]:  US
+  \[Unknown]:  US
 
 Is CN=Thomas Margolis, OU=Parillume, O=Parillume, L=Boulder, ST=Colorado, C=US correct?
 
-  [no]:  yes
+  \[no]:  yes
 
 Generating 2,048 bit RSA key pair and self-signed certificate (SHA256withRSA) with a validity of 7,300 days
         for: CN=Thomas Margolis, OU=Parillume, O=Parillume, L=Boulder, ST=Colorado, C=US
